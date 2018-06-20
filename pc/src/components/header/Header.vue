@@ -36,14 +36,14 @@ export default {}
 }
 
 .nav-content {
-  width: 1206px;
+  width: 1205px;
   height: 56px;
   margin: 0 auto;
   padding: 32px 0;
 }
 
 .nav-left {
-  width: 531px;
+  width: 530px;
   height: 56px;
 }
 

@@ -33,8 +33,6 @@ export default {}
 
 <style>
 .footer-wrapper {
-  position: fixed;
-  bottom: 0;
   width: 100%;
   background: #000000;
 }
