@@ -4,7 +4,15 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
+import iview from 'iview'
+import 'iview/dist/styles/iview.css'
+import '@/assets/styles/base.css'
+
+import '@/assets/iconfont/iconfont.css'
+
 Vue.config.productionTip = false
+
+Vue.use(iview)
 
 /* eslint-disable no-new */
 new Vue({
