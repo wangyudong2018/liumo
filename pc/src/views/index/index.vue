@@ -1,7 +1,5 @@
 <template>
   <div class="content-wrapper">
-    <div class="banner-bg-header"></div>
-	<div class="banner-bg-footer"></div>
 	<div class="banner-wrapper"></div>
     <div class="step-wrapper">
         <div class="step-content">
@@ -85,34 +83,22 @@ export default {
 </script>
 
 <style>
-.banner-bg-header {
-  width: 50%;
-  height: 500px;
-  float: left;
-  background-color:#0F346B;
-}
-
-.banner-bg-footer {
-  width: 50%;
-  height: 500px;
-  float: right;
-  background-color:#0E0347;
-}
-
 .banner-wrapper {
-  width: 100%;
-  height: 500px;
-  position: absolute;
-  background: url("./imgs/index_part01_bg.png") no-repeat;
-  background-position: center center;
+  width:100%; 
+  height:500px; 
+  position:relative; 
+  background:url("./imgs/index_part01_bg.png") center center no-repeat; 
+  overflow:hidden; 
+  background-size:cover;
 }
 
 .step-wrapper {
   width: 100%;
   height: 396px;
-  overflow: hidden;
-  background: url("./imgs/index_part02_bg.png") no-repeat;
-  background-size: 100% 396px;
+  position:relative; 
+  background:url("./imgs/index_part02_bg.png") center center no-repeat; 
+  overflow:hidden; 
+  background-size:cover;
 }
 
 .step-content {
