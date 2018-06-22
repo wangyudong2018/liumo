@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns:shiro="http://www.w3.org/1999/xhtml">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content ">
+    <div class="col-sm-12">
+        <div class="ibox">
+            <div class="ibox-body">
+                <div class="fixed-table-toolbar">
+                    <div class="columns pull-left">
+                        <button shiro:hasPermission="operation:adress:add" type="button" class="btn  btn-primary" onclick="add()">
+                            <i class="fa fa-plus" aria-hidden="true"></i>添加
+                        </button>
+                        <button shiro:hasPermission="operation:adress:batchRemove" type="button" class="btn  btn-danger"
+                                onclick="batchRemove()">
+                            <i class="fa fa-trash" aria-hidden="true"></i>删除
+                        </button>
+                    </div>
+                    <div class="columns pull-right">
+                        <button class="btn btn-success" onclick="reLoad(1)">查询</button>
+                        <button class="btn btn-danger" onclick="pmclear(1)">重置</button>
+                    </div>
+                    <div class="columns pull-right col-md-1">
+                        <select id="status" name="status" class="form-control pmclear">
+                            <option value="" selected="selected">启用状态</option>
+                            <option value="1">启用</option>
+                            <option value="0">失效</option>
+                        </select>
+                    </div>
+                    <div class="columns pull-right col-md-2">
+                        <input id="modifyTime" type="text" class="form-control pmclear"
+                               placeholder="最新更新日期">
+                    </div>
+                    <div class="columns pull-right col-md-2">
+                        <input id="searchTime" type="text" class="form-control pmclear"
+                               placeholder="创建日期">
+                    </div>
+                    <div class="columns pull-right col-md-1">
+                        <select id="area" name="area" class="form-control pmclear">
+                            <option value="" selected="selected">所在区域</option>
+                        </select>
+                    </div>
+                    <div class="columns pull-right col-md-1">
+                        <select id="city" name="city" class="form-control pmclear">
+                            <option value="" selected="selected">所在城市</option>
+                            <option th:each="adressCity : ${cityList}" th:value="${adressCity.name}" th:text="${adressCity.name}" th:attr="cityarea=${adressCity.value}"></option>
+                        </select>
+                    </div>
+                    <div class="columns pull-right col-md-1">
+                        <select id="type" name="type" class="form-control pmclear">
+                            <option value="" selected="selected">地址分类</option>
+                            <option th:each="adressType : ${typeList}" th:value="${adressType.name}" th:text="${adressType.name}"></option>
+                        </select>
+                    </div>
+                    <div class="columns pull-right col-md-1">
+                        <input id="id" type="text" class="form-control pmclear"
+                               placeholder="地址编号">
+                    </div>
+                </div>
+                <table id="exampleTable" data-mobile-responsive="true">
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
+<div>
+    <script type="text/javascript">
+        var s_edit_h = 'hidden';
+        var s_remove_h = 'hidden';
+        var s_resetPwd_h = 'hidden';
+    </script>
+</div>
+<div shiro:hasPermission="operation:adress:edit">
+    <script type="text/javascript">
+        s_edit_h = '';
+    </script>
+</div>
+<div shiro:hasPermission="operation:adress:remove">
+    <script type="text/javascript">
+        var s_remove_h = '';
+    </script>
+</div>
+<div shiro:hasPermission="operation:adress:resetPwd">
+    <script type="text/javascript">
+        var s_resetPwd_h = '';
+    </script>
+</div>
+</div>
+<div th:include="include :: footer"></div>
+<script type="text/javascript" src="/js/appjs/operation/adress/adress.js"></script>
+<script type="text/javascript">
+    //执行一个laydate实例
+    laydate.render({
+        elem: '#searchTime' //指定元素
+        , max: 0//只可选已过时间
+    });
+    laydate.render({
+        elem: '#modifyTime' //指定元素
+        , max: 0//只可选已过时间
+    });
+
+    $(function () {
+        /** 城市/区域 二级联动 */
+        $("#city").change(function () {
+            var areaTxt = $("#city :selected").attr("cityarea");
+            $("#area").html('<option value="">所在区域</option>');
+            if (areaTxt) {
+                var areaList = areaTxt.split(",");
+                if (areaList) {
+                    for (var i = 0; i < areaList.length; i++) {
+                        var area = areaList[i].trim();
+                        if (area) {
+                            $("#area").append('<option value="' + area + '">' + area + '</option>');
+                        }
+                    }
+                }
+            }
+        });
+    });
+</script>
+</body>
+</html>

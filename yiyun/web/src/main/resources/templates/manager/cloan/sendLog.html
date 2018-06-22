@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<link href="/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+<link href="/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+<link href="/css/animate.css" rel="stylesheet">
+<link href="/css/layui.css" rel="stylesheet">
+<link href="/css/style.css?v=4.1.0" rel="stylesheet">
+<body class="gray-bg">
+<div class="wrapper wrapper-content ">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t" id="signupForm">
+                        <input id="id" name="id" th:value="${id}" type="hidden">
+                        <div class="bootstrap-table">
+                            <table data-mobile-responsive="true" id="exampleTable" class="table table-bordered table-hover table-striped">
+                                <thead>
+                                    <tr>
+                                        <td>
+                                            发送内容
+                                        </td>
+                                        <td>发送时间</td>
+                                        <td>发送状态</td>
+                                        <td>发送人</td>
+                                    </tr>
+                                </thead>
+                                <tbody id="msgTbody">
+                                <tr th:each="log : ${logs }">
+                                    <td th:text="${log.content}"></td>
+                                    <td th:text="${log.createTimeStr}"></td>
+                                    <td th:text="${log.status == 1 ? '成功' : '失败'}"></td>
+                                    <td th:text="${log.senderName}"></td>
+
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:include="include::footer"></div>
+<script src="/js/content.js?v=1.0.0"></script>
+<script src="/js/layui.js"></script>
+<script src="/js/plugins/clipboard/clipboard.min.js"></script>
+<script src="/js/plugins/layer/layer.min.js"></script>
+<script src="/js/vue.min.js"></script>
+</body>
+</html>

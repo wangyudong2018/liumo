@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content ">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t" id="signupForm">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">预约类型 . 1:客户贷款预约;2合伙人预约;：</label>
+                            <div class="col-sm-8">
+                                <input id="type" name="type" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">预约状态 .
+                                -1:用户取消;1:已提交;2:已受理待沟通;3:需要进一步沟通;4:成功;5:失败：</label>
+                            <div class="col-sm-8">
+                                <input id="reserveStauts" name="reserveStauts" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">区域：</label>
+                            <div class="col-sm-8">
+                                <input id="area" name="area" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">产品类别：</label>
+                            <div class="col-sm-8">
+                                <input id="productType" name="productType" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">产品id , 若无则空：</label>
+                            <div class="col-sm-8">
+                                <input id="productId" name="productId" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">用户姓名：</label>
+                            <div class="col-sm-8">
+                                <input id="userName" name="userName" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">联系电话：</label>
+                            <div class="col-sm-8">
+                                <input id="userPhone" name="userPhone" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">预约意向：</label>
+                            <div class="col-sm-8">
+                                <input id="intention" name="intention" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">预约时间：</label>
+                            <div class="col-sm-8">
+                                <input id="reserveTime" name="reserveTime" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">预约地址(经办人接收后提供)：</label>
+                            <div class="col-sm-8">
+                                <input id="reserveAdress" name="reserveAdress" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">业务员(经办人)ID：</label>
+                            <div class="col-sm-8">
+                                <input id="salesmanId" name="salesmanId" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">受理时间：</label>
+                            <div class="col-sm-8">
+                                <input id="acceptTime" name="acceptTime" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">结果：</label>
+                            <div class="col-sm-8">
+                                <input id="result" name="result" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">评价：</label>
+                            <div class="col-sm-8">
+                                <input id="comment" name="comment" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">评价时间：</label>
+                            <div class="col-sm-8">
+                                <input id="commentTime" name="commentTime" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">备注：</label>
+                            <div class="col-sm-8">
+                                <input id="remark" name="remark" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">创建时间：</label>
+                            <div class="col-sm-8">
+                                <input id="createTime" name="createTime" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">预留字段1：</label>
+                            <div class="col-sm-8">
+                                <input id="column1" name="column1" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">预留字段2：</label>
+                            <div class="col-sm-8">
+                                <input id="column2" name="column2" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">预留字段3：</label>
+                            <div class="col-sm-8">
+                                <input id="column3" name="column3" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-8 col-sm-offset-3">
+                                <button type="submit" class="btn btn-primary">提交</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:include="include::footer"></div>
+<script type="text/javascript" src="/js/appjs/yiyun/oReserve/add.js">
+</script>
+</body>
+</html>

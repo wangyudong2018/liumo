@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yiyun.dao.cluster.ClusterOOrderDao">
+
+    <select id="get" resultType="com.yiyun.domain.OOrder">
+		select `id`,`order_sn`,`product_id`,`loan_member_id`,`order_status`,`loan_amount`,`repay_amount`,`fact_overdue_fine`,`loan_bank_id`,`repay_bank_id`,`rate`,`proce_cost`,`accrual_cost`,`loan_limit`,`next_limit`,`next_time`,`apply_time`,`confirm_time`,`loan_time`,`finish_time`,`apply_count`,`salesman_id`,`source`,`create_time`,`column1`,`column2`,`column3` from o_order where id = #{value}
+	</select>
+
+    <select id="list" resultType="com.yiyun.domain.OOrder">
+        select
+        `id`,`order_sn`,`product_id`,`loan_member_id`,`order_status`,`loan_amount`,`repay_amount`,`fact_overdue_fine`,`loan_bank_id`,`repay_bank_id`,`rate`,`proce_cost`,`accrual_cost`,`loan_limit`,`next_limit`,`next_time`,`apply_time`,`confirm_time`,`loan_time`,`finish_time`,`apply_count`,`salesman_id`,`source`,`create_time`,`column1`,`column2`,`column3`
+        from o_order
+        <where>
+            <if test="id != null and id != ''">and id = #{id}</if>
+            <if test="orderSn != null and orderSn != ''">and order_sn = #{orderSn}</if>
+            <if test="productId != null and productId != ''">and product_id = #{productId}</if>
+            <if test="loanMemberId != null and loanMemberId != ''">and loan_member_id = #{loanMemberId}</if>
+            <if test="orderStatus != null and orderStatus != ''">and order_status = #{orderStatus}</if>
+            <if test="loanAmount != null and loanAmount != ''">and loan_amount = #{loanAmount}</if>
+            <if test="repayAmount != null and repayAmount != ''">and repay_amount = #{repayAmount}</if>
+            <if test="factOverdueFine != null and factOverdueFine != ''">and fact_overdue_fine = #{factOverdueFine}</if>
+            <if test="loanBankId != null and loanBankId != ''">and loan_bank_id = #{loanBankId}</if>
+            <if test="repayBankId != null and repayBankId != ''">and repay_bank_id = #{repayBankId}</if>
+            <if test="rate != null and rate != ''">and rate = #{rate}</if>
+            <if test="proceCost != null and proceCost != ''">and proce_cost = #{proceCost}</if>
+            <if test="accrualCost != null and accrualCost != ''">and accrual_cost = #{accrualCost}</if>
+            <if test="loanLimit != null and loanLimit != ''">and loan_limit = #{loanLimit}</if>
+            <if test="nextLimit != null and nextLimit != ''">and next_limit = #{nextLimit}</if>
+            <if test="nextTime != null and nextTime != ''">and next_time = #{nextTime}</if>
+            <if test="applyTime != null and applyTime != ''">and apply_time = #{applyTime}</if>
+            <if test="confirmTime != null and confirmTime != ''">and confirm_time = #{confirmTime}</if>
+            <if test="loanTime != null and loanTime != ''">and loan_time = #{loanTime}</if>
+            <if test="finishTime != null and finishTime != ''">and finish_time = #{finishTime}</if>
+            <if test="applyCount != null and applyCount != ''">and apply_count = #{applyCount}</if>
+            <if test="salesmanId != null and salesmanId != ''">and salesman_id = #{salesmanId}</if>
+            <if test="source != null and source != ''">and source = #{source}</if>
+            <if test="createTime != null and createTime != ''">and create_time = #{createTime}</if>
+            <if test="column1 != null and column1 != ''">and column1 = #{column1}</if>
+            <if test="column2 != null and column2 != ''">and column2 = #{column2}</if>
+            <if test="column3 != null and column3 != ''">and column3 = #{column3}</if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from o_order
+        <where>
+            <if test="id != null and id != ''">and id = #{id}</if>
+            <if test="orderSn != null and orderSn != ''">and order_sn = #{orderSn}</if>
+            <if test="productId != null and productId != ''">and product_id = #{productId}</if>
+            <if test="loanMemberId != null and loanMemberId != ''">and loan_member_id = #{loanMemberId}</if>
+            <if test="orderStatus != null and orderStatus != ''">and order_status = #{orderStatus}</if>
+            <if test="loanAmount != null and loanAmount != ''">and loan_amount = #{loanAmount}</if>
+            <if test="repayAmount != null and repayAmount != ''">and repay_amount = #{repayAmount}</if>
+            <if test="factOverdueFine != null and factOverdueFine != ''">and fact_overdue_fine = #{factOverdueFine}</if>
+            <if test="loanBankId != null and loanBankId != ''">and loan_bank_id = #{loanBankId}</if>
+            <if test="repayBankId != null and repayBankId != ''">and repay_bank_id = #{repayBankId}</if>
+            <if test="rate != null and rate != ''">and rate = #{rate}</if>
+            <if test="proceCost != null and proceCost != ''">and proce_cost = #{proceCost}</if>
+            <if test="accrualCost != null and accrualCost != ''">and accrual_cost = #{accrualCost}</if>
+            <if test="loanLimit != null and loanLimit != ''">and loan_limit = #{loanLimit}</if>
+            <if test="nextLimit != null and nextLimit != ''">and next_limit = #{nextLimit}</if>
+            <if test="nextTime != null and nextTime != ''">and next_time = #{nextTime}</if>
+            <if test="applyTime != null and applyTime != ''">and apply_time = #{applyTime}</if>
+            <if test="confirmTime != null and confirmTime != ''">and confirm_time = #{confirmTime}</if>
+            <if test="loanTime != null and loanTime != ''">and loan_time = #{loanTime}</if>
+            <if test="finishTime != null and finishTime != ''">and finish_time = #{finishTime}</if>
+            <if test="applyCount != null and applyCount != ''">and apply_count = #{applyCount}</if>
+            <if test="salesmanId != null and salesmanId != ''">and salesman_id = #{salesmanId}</if>
+            <if test="source != null and source != ''">and source = #{source}</if>
+            <if test="createTime != null and createTime != ''">and create_time = #{createTime}</if>
+            <if test="column1 != null and column1 != ''">and column1 = #{column1}</if>
+            <if test="column2 != null and column2 != ''">and column2 = #{column2}</if>
+            <if test="column3 != null and column3 != ''">and column3 = #{column3}</if>
+        </where>
+    </select>
+
+    <select id="listResp" resultType="com.yiyun.domain.OOrder">
+        select
+        o.* , '-' AS loanMemberName , m.phone AS loanMemberPhone
+        from o_order o
+        left join m_member m
+        on o.loan_member_id = m.id
+        <where>
+            <if test="orderSn != null and orderSn != ''">and o.order_sn = #{orderSn}</if>
+            <if test="loanAmount != null and loanAmount != ''">and o.loan_amount = #{loanAmount}</if>
+            <if test="orderStatus != null and orderStatus != ''">and o.order_status = #{orderStatus}</if>
+            <if test="loanMemberPhone != null and loanMemberPhone != ''">and m.phone = #{loanMemberPhone}</if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by o.${sort} ${order}
+            </when>
+            <otherwise>
+                order by o.apply_time
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="countResp" resultType="int">
+        select
+        count(*)
+        from o_order o
+        left join m_member m
+        on o.loan_member_id = m.id
+        <where>
+            <if test="orderSn != null and orderSn != ''">and o.order_sn = #{orderSn}</if>
+            <if test="loanAmount != null and loanAmount != ''">and o.loan_amount = #{loanAmount}</if>
+            <if test="orderStatus != null and orderStatus != ''">and o.order_status = #{orderStatus}</if>
+            <if test="loanMemberPhone != null and loanMemberPhone != ''">and m.phone = #{loanMemberPhone}</if>
+        </where>
+    </select>
+</mapper>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yiyun.dao.master.IdcardDao">
+    <insert id="save" parameterType="com.yiyun.domain.Idcard" useGeneratedKeys="true" keyProperty="id">
+		insert into m_idcard
+		(
+			`member_id`, 
+			`name`, 
+			`idcard`, 
+			`gender`, 
+			`age`, 
+			`adress`, 
+			`create_time`
+		)
+		values
+		(
+			#{memberId}, 
+			#{name}, 
+			#{idcard}, 
+			#{gender}, 
+			#{age}, 
+			#{adress}, 
+			#{createTime}
+		)
+	</insert>
+
+    <update id="update" parameterType="com.yiyun.domain.Idcard">
+        update m_idcard
+        <set>
+            <if test="memberId != null">`member_id` = #{memberId},</if>
+            <if test="name != null">`name` = #{name},</if>
+            <if test="idcard != null">`idcard` = #{idcard},</if>
+            <if test="gender != null">`gender` = #{gender},</if>
+            <if test="age != null">`age` = #{age},</if>
+            <if test="adress != null">`adress` = #{adress},</if>
+            <if test="createTime != null">`create_time` = #{createTime}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="remove">
+		delete from m_idcard where id = #{value}
+	</delete>
+
+    <delete id="batchRemove">
+        delete from m_idcard where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

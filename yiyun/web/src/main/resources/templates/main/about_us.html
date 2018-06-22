@@ -1,0 +1,109 @@
+<!doctype html>
+<html xmlns:th="">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<link rel="shortcut icon" type="image/x-icon" href="/img/ico/logo.ico"/>
+<title>熠云投资-关于我们</title>
+<link href="/css/main/common/css/reset.css" type="text/css" rel="stylesheet"/>
+<link href="/css/main/common/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
+<link href="/css/main/common/css/head_foot.css" type="text/css" rel="stylesheet"/>
+<link href="/css/main/index.css" type="text/css" rel="stylesheet"/>
+</head>
+<body id="body">
+<!--header-->
+<div class="head_height">
+    <div class="header_fixed">
+        <header th:include="main_include :: main_header" class="header clearfix"></header>
+        <!--#include virtual="/common/include/head.html" -->
+    </div>
+</div>
+<!--header-->
+
+<div class="product_wrap" style="margin-bottom:20px;">
+    <div class="product_three">
+        <h6 class="about_title">关于我们</h6>
+        <div class="about_content">
+        	<p>速贷吧是熠云投资（北京）有限公司旗下的贷款融资平台，为客户提供包括投融资申请、资产评估等在内的“一站式金融服务”。</p>
+            <p>熠云（投资）北京有限公司成立于2014年9月，注册资本5000万元，实缴资本5000万元。公司由一支充满活力、乐观积极、怀揣梦想的团队
+建立，成员有金融、互联网行业多年从业经验。</p>
+            <p>在目前金融贷款行业乱象频出、交易不公开不透明的环境下，公司于2017年8月坚定提出： 只做公开、透明交易，以提供高效专业的金融服务
+为己任，力求解决行业乱象，让小额贷款不再成为难事。
+</p>
+        </div>
+        <div class="about_lr clearfix">
+        	<div>
+            	<p>北京（总部）</p>
+                <p>北京市朝阳区三元桥第三置业大厦2508室</p>
+            </div>
+            <span class="about_line"></span>
+            <div>
+            	<p>上海</p>
+                <p>上海市黄浦区豫园产业园809室</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="product_wrap" style="margin-bottom:20px; margin-top:-20px;">
+    <div class="product_three">
+        <h6 class="about_title">我们的使命</h6>
+        <ul class="shiming clearfix">
+        	<li>
+            	<h5>服务客户</h5>
+                <p>致力于提供客户最满意、专业、高效的金
+融服务。保护客户最大化利益，让贷款不再成为难事。</p>
+            </li>
+            <li>
+            	<h5>成就员工</h5>
+                <p>携手有理想有抱负的员工共同创造并分享
+企业所创造的成就，为志同道合的合作伙伴提供创新平台。</p>
+            </li>
+            <li>
+            	<h5>回报社会</h5>
+                <p>创建有价值的金融服务机构，积极融入当
+地社区，打造一个人尽皆知的金融服务品牌。</p>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+<div class="product_wrap">
+	<div class="index_three">
+        <h5 class="about_title">合作伙伴</h5>
+        <ul class="banks clearfix">
+            <li><img src="/img/main/bank1.png"/></li>
+            <li><img src="/img/main/bank2.png"/></li>
+            <li><img src="/img/main/bank3.png"/></li>
+            <li><img src="/img/main/bank4.png"/></li>
+            <li><img src="/img/main/bank5.png"/></li>
+            <li><img src="/img/main/bank6.png"/></li>
+            <li><img src="/img/main/bank7.png"/></li>
+            <li><img src="/img/main/bank8.png"/></li>
+        </ul>
+    </div>
+</div>
+
+<!--footer-->
+<div class="footer_fixed">
+    <footer th:include="main_include :: main_footer" class="footer_content"></footer>
+    <div th:include="main_include :: main_footer_fix" class="footer_fix"></div>
+	<!--#include virtual="/common/include/footer.html" -->
+</div>
+<!--footer-->
+</body>
+<script src="/js/jquery-1.8.3.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="/js/jquery.select.js"></script>
+<script src="/js/lay/modules/layer.js" type="text/javascript"></script>
+<script type="text/javascript" src="/js/appjs/main/index.js"></script>
+
+<script>
+$(function(){
+	$(".head_right li:eq(2) a").addClass("onit");
+	
+	
+})
+</script>
+</html>

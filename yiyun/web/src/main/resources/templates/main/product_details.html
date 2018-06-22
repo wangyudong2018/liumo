@@ -1,0 +1,91 @@
+<!doctype html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<link rel="shortcut icon" type="image/x-icon" href="logo.ico"/>
+<title>熠云投资-产品详情</title>
+<link href="/css/main/common/css/reset.css" type="text/css" rel="stylesheet"/>
+<link href="/css/main/common/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
+<link href="/css/main/common/css/head_foot.css" type="text/css" rel="stylesheet"/>
+<link href="/css/main/index.css" type="text/css" rel="stylesheet"/>
+</head>
+<body id="body">
+<!--header-->
+<div class="head_height">
+    <div class="header_fixed">
+        <header th:include="main_include :: main_header" class="header clearfix"></header>
+        <!--#include virtual="/common/include/head.html" -->
+    </div>
+</div>
+<!--header-->
+
+<div class="product_wrap" style="margin-bottom:20px;">
+    <div class="product_three">
+        <h5 class="detail_tit" th:text="${product.name}"></h5>
+        <h6 class="title_h" >产品介绍</h6>
+        <p class="detail_product" th:text="${product.introduce}"></p>
+		<i class="line"></i>
+        <div class="detail_information clearfix">
+        	<div>
+                <p>月利率：<span th:text="${product.monthRateLower +'-'+ product.monthRateUpper+'%'}"></span></p>
+                <p>贷款期限：<span th:text="${product.loanLimitLower+'-'+product.loanLimitUpper+'月'}"></span></p>
+                <p>使用身份：<span th:text="${product.client}"></span></p>
+                <p>房产二押：<span th:text="${product.isMortgageAgain==1?'是':'否'}"></span></p>
+                <p>一次性服务费：<span th:text="${product.serverceCharge+'元'}"></span></p>
+            </div>
+            <div>
+            	<p>放款时间：<span th:text="${product.loanTime}"></span></p>
+                <p>放款金额：<span th:text="${product.loanAmountLower+'-'+product.loanAmountUpper+'万元'}"></span></p>
+                <p>还款方式：<span th:text="${product.repayMethod==1?'按月付息':'等额本息'}"></span></p>
+                <p>提前还款：<span th:text="${product.isEarlyRepay==1?'是':'否'}"></span></p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="product_wrap" style="margin-bottom:20px;">
+    <div class="product_three">
+        <h6 class="title_h">申请条件</h6>
+        <div class="detail_information aaa clearfix">
+        	<div>
+            	<p>房龄要求：<span th:text="${product.houseTimeLimit}"></span></p>
+                <p>房产估值要求：<span th:text="${product.houseValueLimit}"></span></p>
+                <p>房产坐落区域：<span th:text="${product.houseArea}"></span></p>
+                <p>抵押物类型：<span th:text="${product.pawnType}"></span></p>
+                <p>经营时间：<span th:text="${product.operatorTime}"></span></p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="product_wrap" style="margin-bottom:20px;">
+    <div class="product_three">
+        <h6 class="title_h">所需材料</h6>
+        <div class="detail_information aaa clearfix">
+        	<div th:each="d:${data}">
+                <p th:text="${d}"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!--footer-->
+<div class="footer_fixed">
+    <footer th:include="main_include :: main_footer" class="footer_content"></footer>
+    <div th:include="main_include :: main_footer_fix" class="footer_fix"></div>
+	<!--#include virtual="/common/include/footer.html" -->
+</div>
+<!--footer-->
+</body>
+<script src="/js/jquery-1.8.3.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="/js/jquery.select.js"></script>
+<script src="/js/lay/modules/layer.js" type="text/javascript"></script>
+<script type="text/javascript" src="/js/appjs/main/index.js"></script>
+<script>
+$(function(){
+	$(".head_right li:eq(1) a").addClass("onit");
+})
+</script>
+</html>

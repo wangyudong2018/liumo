@@ -1,0 +1,25 @@
+package ${package}.dao;
+
+import ${package}.domain.${className};
+
+import java.util.List;
+import java.util.Map;
+        import com.yiyun.common.MyMapper;
+
+import org.apache.ibatis.annotations.Mapper;
+
+/**
+ * ${comments}
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ */
+public interface Cluster${className}Dao extends MyMapper<${className}> {
+
+	${className} get(${pk.attrType} ${pk.attrname});
+	
+	List<${className}> list(Map<String,Object> map);
+	
+	int count(Map<String,Object> map);
+
+}

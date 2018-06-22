@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yiyun.dao.master.SysCommonDao">
+
+
+	<insert id="save" parameterType="com.yiyun.domain.SysCommon" useGeneratedKeys="true" keyProperty="id">
+		insert into sys_common
+		(
+			`member_id`, 
+			`phone`, 
+			`chl_id`, 
+			`device_no`, 
+			`clt_type`, 
+			`imsi`, 
+			`imei`, 
+			`phone_model`, 
+			`phone_brand`, 
+			`os_version`, 
+			`mac_add`, 
+			`cpu_model`, 
+			`cpu_frequency`, 
+			`timestamp`, 
+			`sign`, 
+			`version`, 
+			`token`, 
+			`create_time`
+		)
+		values
+		(
+			#{memberId}, 
+			#{phone}, 
+			#{chlId}, 
+			#{deviceNo}, 
+			#{cltType}, 
+			#{imsi}, 
+			#{imei}, 
+			#{phoneModel}, 
+			#{phoneBrand}, 
+			#{osVersion}, 
+			#{macAdd}, 
+			#{cpuModel}, 
+			#{cpuFrequency}, 
+			#{timestamp}, 
+			#{sign}, 
+			#{version}, 
+			#{token}, 
+			#{createTime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.yiyun.domain.SysCommon">
+		update sys_common
+		<set>
+			<if test="memberId != null">`member_id` = #{memberId}, </if>
+			<if test="phone != null">`phone` = #{phone}, </if>
+			<if test="chlId != null">`chl_id` = #{chlId}, </if>
+			<if test="deviceNo != null">`device_no` = #{deviceNo}, </if>
+			<if test="cltType != null">`clt_type` = #{cltType}, </if>
+			<if test="imsi != null">`imsi` = #{imsi}, </if>
+			<if test="imei != null">`imei` = #{imei}, </if>
+			<if test="phoneModel != null">`phone_model` = #{phoneModel}, </if>
+			<if test="phoneBrand != null">`phone_brand` = #{phoneBrand}, </if>
+			<if test="osVersion != null">`os_version` = #{osVersion}, </if>
+			<if test="macAdd != null">`mac_add` = #{macAdd}, </if>
+			<if test="cpuModel != null">`cpu_model` = #{cpuModel}, </if>
+			<if test="cpuFrequency != null">`cpu_frequency` = #{cpuFrequency}, </if>
+			<if test="timestamp != null">`timestamp` = #{timestamp}, </if>
+			<if test="sign != null">`sign` = #{sign}, </if>
+			<if test="version != null">`version` = #{version}, </if>
+			<if test="token != null">`token` = #{token}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from sys_common where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from sys_common where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

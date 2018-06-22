@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content ">
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="ibox float-e-margins">
+				<div class="ibox-content">
+					<form class="form-horizontal m-t" id="signupForm">
+						<input id="id" name="id" th:value="${sysParam.id}"  type="hidden">
+						<div class="form-group">
+							<label class="col-sm-3 control-label">类型<span class="text-danger">*</span>：</label>
+							<div class="col-sm-8">
+								<input id="type" name="type" th:value="${sysParam.type}" class="form-control" type="text">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">类型描述：</label>
+							<div class="col-sm-8">
+								<input id="description" name="description" th:value="${sysParam.description}" class="form-control" type="text">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">参数名<span class="text-danger">*</span>：</label>
+							<div class="col-sm-8">
+								<input id="name" name="name" th:value="${sysParam.name}" class="form-control" type="text">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">参数代码<span class="text-danger">*</span>：</label>
+							<div class="col-sm-8">
+								<input id="code" name="code" th:value="${sysParam.code}" class="form-control" type="text">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">参数值<span class="text-danger">*</span>：</label>
+							<div class="col-sm-8">
+								<input id="value" name="value" th:value="${sysParam.value}" class="form-control" type="text">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">参数说明：</label>
+							<div class="col-sm-8">
+								<input id="remark" name="remark" th:value="${sysParam.remark}" class="form-control" type="text">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">启用状态：</label>
+                            <div class="switch onoffswitch col-sm-1">
+                                <div class="onoffswitch">
+                                    <input id="status" name="status" checked=""
+                                           type="checkbox" value="1" class="onoffswitch-checkbox"
+                                           th:checked=${sysParam.status==1}> <label
+                                        class="onoffswitch-label" for="status"> <span
+                                        class="onoffswitch-inner"></span> <span
+                                        class="onoffswitch-switch"></span>
+                                </label>
+                                </div>
+                            </div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">排序：</label>
+							<div class="col-sm-8">
+								<input id="sort" name="sort" th:value="${sysParam.sort}" class="form-control" type="text">
+							</div>
+						</div>
+                        <inpu name="creator" th:value="${sysParam.creator}"  type="hidden">
+                        <input name="createTime" th:value="${sysParam.createTime}"  type="hidden">
+						<div class="form-group">
+							<div class="col-sm-8 col-sm-offset-3">
+								<button type="submit" class="btn btn-primary">提交</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div th:include="include::footer"></div>
+<script type="text/javascript" src="/js/appjs/common/sysParam/edit.js">
+</script>
+</body>
+</html>

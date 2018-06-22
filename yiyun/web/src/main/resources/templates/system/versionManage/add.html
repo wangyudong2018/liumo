@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">版本号：</label>
+								<div class="col-sm-8">
+									<input id="versionNo" name="versionNo" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">版本类别：</label>
+								<div class="col-sm-8">
+									<select id="versionType" name="versionType" class="form-control" >
+										<option value="ANDROID">ANDROID</option>
+										<option value="IOS">IOS</option>
+									</select>
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">是否强制更新：</label>
+								<div class="col-sm-8">
+									<select id="isUpdate" name="isUpdate" class="form-control">
+										<option value="0">不强制</option>
+										<option value="1">强制</option>
+									</select>
+								</div>
+							</div>
+														<div class="form-group">
+								<label class="col-sm-3 control-label">下载地址：</label>
+								<div class="col-sm-8">
+									<input id="downloadUrl" name="downloadUrl" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">更新内容：</label>
+								<div class="col-sm-8">
+									<textarea  type="text" class="form-control" id="content" name="content"  style="resize: none;"></textarea>
+								</div>
+							</div>
+																					<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/system/versionManage/add.js">
+	</script>
+</body>
+</html>

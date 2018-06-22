@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yiyun.dao.master.SysHierarchyDictDao">
+    <insert id="save" parameterType="com.yiyun.domain.SysHierarchyDict" useGeneratedKeys="true" keyProperty="id">
+		insert into sys_hierarchy_dict
+		(
+			`self_code`, 
+			`type`, 
+			`level`, 
+			`name`, 
+			`parent_code`, 
+			`sort`, 
+			`create_time`
+		)
+		values
+		(
+			#{selfCode}, 
+			#{type}, 
+			#{level}, 
+			#{name}, 
+			#{parentCode}, 
+			#{sort}, 
+			#{createTime}
+		)
+	</insert>
+
+    <update id="update" parameterType="com.yiyun.domain.SysHierarchyDict">
+        update sys_hierarchy_dict
+        <set>
+            <if test="selfCode != null">`self_code` = #{selfCode},</if>
+            <if test="type != null">`type` = #{type},</if>
+            <if test="level != null">`level` = #{level},</if>
+            <if test="name != null">`name` = #{name},</if>
+            <if test="parentCode != null">`parent_code` = #{parentCode},</if>
+            <if test="sort != null">`sort` = #{sort},</if>
+            <if test="createTime != null">`create_time` = #{createTime}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="remove">
+		delete from sys_hierarchy_dict where id = #{value}
+	</delete>
+
+    <delete id="batchRemove">
+        delete from sys_hierarchy_dict where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

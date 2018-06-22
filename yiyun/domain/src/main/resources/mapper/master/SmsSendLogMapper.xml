@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yiyun.dao.master.SmsSendLogDao">
+    <insert id="save" parameterType="com.yiyun.domain.SmsSendLog" useGeneratedKeys="true" keyProperty="id">
+		insert into sms_send_log
+		(
+			`loan_id`,
+			`to_phone`,
+			`content`,
+			`status`,
+			`sender_id`,
+			`sender_name`,
+			`ret_msg`,
+			`create_time`,
+			`is_show`
+		)
+		values
+		(
+			#{loanId},
+			#{toPhone},
+			#{content},
+			#{status},
+			#{senderId},
+			#{senderName},
+			#{retMsg},
+			#{createTime},
+			#{isShow}
+		)
+	</insert>
+
+    <update id="update" parameterType="com.yiyun.domain.SmsSendLog">
+        update sms_send_log
+        <set>
+            <if test="loanId != null">`loan_id` = #{loanId},</if>
+            <if test="toPhone != null">`to_phone` = #{toPhone},</if>
+            <if test="content != null">`content` = #{content},</if>
+            <if test="status != null">`status` = #{status},</if>
+            <if test="senderId != null">`sender_id` = #{senderId},</if>
+            <if test="senderName != null">`sender_name` = #{senderName},</if>
+            <if test="retMsg != null">`ret_msg` = #{retMsg},</if>
+            <if test="createTime != null">`create_time` = #{createTime},</if>
+            <if test="isShow != null">`is_show` = #{isShow}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="remove">
+		delete from sms_send_log where id = #{value}
+	</delete>
+
+    <delete id="batchRemove">
+        delete from sms_send_log where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yiyun.dao.cluster.ClusterSysHelpDocDao">
+    <select id="get" resultType="com.yiyun.domain.SysHelpDocDO">
+        select `id`,`type`,`description`,`title`,`body`,`icon`,`order_num`,`creator`,`create_time` from sys_help_doc where id = #{value}
+    </select>
+
+    <select id="list" resultType="com.yiyun.domain.SysHelpDocDO">
+        select `id`,`type`,`description`,`title`,`body`,`icon`,`order_num`,`creator`,`create_time` from sys_help_doc
+        <where>
+            <if test="id != null and id != ''"> and id = #{id} </if>
+            <if test="type != null and type != ''"> and type = #{type} </if>
+            <if test="description != null and description != ''"> and description = #{description} </if>
+            <if test="title != null and title != ''"> and title LIKE CONCAT(CONCAT('%', #{title}), '%')</if>
+            <if test="body != null and body != ''"> and body LIKE CONCAT(CONCAT('%', #{body}), '%')</if>
+            <if test="icon != null and icon != ''"> and icon = #{icon}</if>
+            <if test="orderNum != null and orderNum != ''"> and order_num = #{orderNum} </if>
+            <if test="creator != null and creator != ''"> and creator = #{creator} </if>
+            <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="listType" resultType="com.yiyun.domain.SysHelpDocDO">
+        select distinct `type` , `description` from sys_help_doc
+    </select>
+
+    <select id="listByType" resultType="com.yiyun.domain.SysHelpDocDO">
+         select `id`,`type`,`description`,`title`,`body`,`icon`,`order_num`,`creator`,`create_time` from sys_help_doc where type = #{type}
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from sys_help_doc
+        <where>
+            <if test="id != null and id != ''"> and id = #{id} </if>
+            <if test="type != null and type != ''"> and type = #{type} </if>
+            <if test="description != null and description != ''"> and description = #{description} </if>
+            <if test="title != null and title != ''"> and title = #{title} </if>
+            <if test="body != null and body != ''"> and body = #{body} </if>
+            <if test="icon != null and icon != ''"> and icon = #{icon} </if>
+            <if test="orderNum != null and orderNum != ''"> and order_num = #{orderNum} </if>
+            <if test="creator != null and creator != ''"> and creator = #{creator} </if>
+            <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+        </where>
+    </select>
+</mapper>
+
+
+
+

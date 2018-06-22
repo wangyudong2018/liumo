@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yiyun.dao.cluster.ClusterPProductDao">
+
+    <select id="get" resultType="com.yiyun.domain.PProduct">
+		select `id`,`type`,`product_status`,`name`,`logo`,`introduce`,`month_rate_lower`,`month_rate_upper`,`loan_time`,`loan_limit_lower`,`loan_limit_upper`,`loan_amount_lower`,`loan_amount_upper`,`client`,`repay_method`,`is_mortgage_again`,`is_early_repay`,`serverce_charge`,`house_time_limit`,`house_value_limit`,`house_area`,`pawn_type`,`operator_time`,`need_data`,`create_time`,`column1`,`column2`,`column3` from p_product where id = #{value}
+	</select>
+
+    <select id="getProductList" resultType="com.yiyun.domain.PProduct">
+		select `id`,`type`,`product_status`,`name`,`logo`,`introduce`,`month_rate_lower`,`month_rate_upper`,`loan_time`,`loan_limit_lower`,`loan_limit_upper`,`loan_amount_lower`,`loan_amount_upper`,`client`,`repay_method`,`is_mortgage_again`,`is_early_repay`,`serverce_charge`,`house_time_limit`,`house_value_limit`,`house_area`,`pawn_type`,`operator_time`,`need_data`,`create_time`,`column1`,`column2`,`column3` from p_product
+	</select>
+
+    <select id="list" resultType="com.yiyun.domain.PProduct">
+        select
+        `id`,`type`,`product_status`,`name`,`logo`,`introduce`,`month_rate_lower`,`month_rate_upper`,`loan_time`,`loan_limit_lower`,`loan_limit_upper`,`loan_amount_lower`,`loan_amount_upper`,`client`,`repay_method`,`is_mortgage_again`,`is_early_repay`,`serverce_charge`,`house_time_limit`,`house_value_limit`,`house_area`,`pawn_type`,`operator_time`,`need_data`,`create_time`,`column1`,`column2`,`column3`
+        from p_product
+        <where>
+            <if test="id != null and id != ''">and id = #{id}</if>
+            <if test="type != null and type != ''">and type = #{type}</if>
+            <if test="productStatus != null and productStatus != ''">and product_status = #{productStatus}</if>
+            <if test="name != null and name != ''">and name = #{name}</if>
+            <if test="logo != null and logo != ''">and logo = #{logo}</if>
+            <if test="introduce != null and introduce != ''">and introduce = #{introduce}</if>
+            <if test="monthRateLower != null and monthRateLower != ''">and month_rate_lower = #{monthRateLower}</if>
+            <if test="monthRateUpper != null and monthRateUpper != ''">and month_rate_upper = #{monthRateUpper}</if>
+            <if test="loanTime != null and loanTime != ''">and loan_time = #{loanTime}</if>
+            <if test="loanLimitLower != null and loanLimitLower != ''">and loan_limit_lower = #{loanLimitLower}</if>
+            <if test="loanLimitUpper != null and loanLimitUpper != ''">and loan_limit_upper = #{loanLimitUpper}</if>
+            <if test="loanAmountLower != null and loanAmountLower != ''">and loan_amount_lower = #{loanAmountLower}</if>
+            <if test="loanAmountUpper != null and loanAmountUpper != ''">and loan_amount_upper = #{loanAmountUpper}</if>
+            <if test="client != null and client != ''">and client = #{client}</if>
+            <if test="repayMethod != null and repayMethod != ''">and repay_method = #{repayMethod}</if>
+            <if test="isMortgageAgain != null and isMortgageAgain != ''">and is_mortgage_again = #{isMortgageAgain}</if>
+            <if test="isEarlyRepay != null and isEarlyRepay != ''">and is_early_repay = #{isEarlyRepay}</if>
+            <if test="serverceCharge != null and serverceCharge != ''">and serverce_charge = #{serverceCharge}</if>
+            <if test="houseTimeLimit != null and houseTimeLimit != ''">and house_time_limit = #{houseTimeLimit}</if>
+            <if test="houseValueLimit != null and houseValueLimit != ''">and house_value_limit = #{houseValueLimit}</if>
+            <if test="houseArea != null and houseArea != ''">and house_area = #{houseArea}</if>
+            <if test="pawnType != null and pawnType != ''">and pawn_type = #{pawnType}</if>
+            <if test="operatorTime != null and operatorTime != ''">and operator_time = #{operatorTime}</if>
+            <if test="needData != null and needData != ''">and need_data = #{needData}</if>
+            <if test="createTime != null and createTime != ''">and create_time = #{createTime}</if>
+            <if test="column1 != null and column1 != ''">and column1 = #{column1}</if>
+            <if test="column2 != null and column2 != ''">and column2 = #{column2}</if>
+            <if test="column3 != null and column3 != ''">and column3 = #{column3}</if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from p_product
+        <where>
+            <if test="id != null and id != ''">and id = #{id}</if>
+            <if test="type != null and type != ''">and type = #{type}</if>
+            <if test="productStatus != null and productStatus != ''">and product_status = #{productStatus}</if>
+            <if test="name != null and name != ''">and name = #{name}</if>
+            <if test="logo != null and logo != ''">and logo = #{logo}</if>
+            <if test="introduce != null and introduce != ''">and introduce = #{introduce}</if>
+            <if test="monthRateLower != null and monthRateLower != ''">and month_rate_lower = #{monthRateLower}</if>
+            <if test="monthRateUpper != null and monthRateUpper != ''">and month_rate_upper = #{monthRateUpper}</if>
+            <if test="loanTime != null and loanTime != ''">and loan_time = #{loanTime}</if>
+            <if test="loanLimitLower != null and loanLimitLower != ''">and loan_limit_lower = #{loanLimitLower}</if>
+            <if test="loanLimitUpper != null and loanLimitUpper != ''">and loan_limit_upper = #{loanLimitUpper}</if>
+            <if test="loanAmountLower != null and loanAmountLower != ''">and loan_amount_lower = #{loanAmountLower}</if>
+            <if test="loanAmountUpper != null and loanAmountUpper != ''">and loan_amount_upper = #{loanAmountUpper}</if>
+            <if test="client != null and client != ''">and client = #{client}</if>
+            <if test="repayMethod != null and repayMethod != ''">and repay_method = #{repayMethod}</if>
+            <if test="isMortgageAgain != null and isMortgageAgain != ''">and is_mortgage_again = #{isMortgageAgain}</if>
+            <if test="isEarlyRepay != null and isEarlyRepay != ''">and is_early_repay = #{isEarlyRepay}</if>
+            <if test="serverceCharge != null and serverceCharge != ''">and serverce_charge = #{serverceCharge}</if>
+            <if test="houseTimeLimit != null and houseTimeLimit != ''">and house_time_limit = #{houseTimeLimit}</if>
+            <if test="houseValueLimit != null and houseValueLimit != ''">and house_value_limit = #{houseValueLimit}</if>
+            <if test="houseArea != null and houseArea != ''">and house_area = #{houseArea}</if>
+            <if test="pawnType != null and pawnType != ''">and pawn_type = #{pawnType}</if>
+            <if test="operatorTime != null and operatorTime != ''">and operator_time = #{operatorTime}</if>
+            <if test="needData != null and needData != ''">and need_data = #{needData}</if>
+            <if test="createTime != null and createTime != ''">and create_time = #{createTime}</if>
+            <if test="column1 != null and column1 != ''">and column1 = #{column1}</if>
+            <if test="column2 != null and column2 != ''">and column2 = #{column2}</if>
+            <if test="column3 != null and column3 != ''">and column3 = #{column3}</if>
+        </where>
+    </select>
+</mapper>

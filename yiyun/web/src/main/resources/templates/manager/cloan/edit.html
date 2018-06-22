@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<link href="/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+<link href="/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+<link href="/css/animate.css" rel="stylesheet">
+<link href="/css/layui.css" rel="stylesheet">
+<link href="/css/style.css?v=4.1.0" rel="stylesheet">
+<body class="gray-bg">
+<div class="wrapper wrapper-content ">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <label class="control-label">订单编号：<span th:text="${loan.orderSn}"></span></label>
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t" id="signupForm">
+                        <input id="id" name="id" th:value="${loan.id}" type="hidden">
+                        <input id="loanMemberId" name="loanMemberId" th:value="${loan.loanMemberId}" type="hidden">
+                        <input id="orderStatus" name="orderStatus" th:value="${loan.orderStatus}" type="hidden">
+                        <input id="orderStep" name="orderStep" th:value="${loan.orderStep}" type="hidden">
+                        <div class="bootstrap-table">
+                            <table data-mobile-responsive="true" id="exampleTable" class="table table-bordered table-hover table-striped">
+                                <tbody>
+                                <tr>
+                                    <td>订单提交时间：</td>
+                                    <td th:text="${#dates.format(loan.createTime,'yyyy-MM-dd HH:mm:ss')}"></td>
+                                    <td>订单来源：</td>
+                                    <td th:text="${loan.source}"></td>
+                                </tr>
+                                <tr>
+                                    <td>业务区域：</td>
+                                    <td th:text="${loan.city}"></td>
+                                    <td>注册手机号码：</td>
+                                    <td><span th:text="${loan.loanMemberPhone}"></span>
+                                        <a th:if="${loan.orderStatus != 6 && loan.orderStatus != 12}" class="btn btn-primary btn-sm" href="#" mce_href="#" title="发送短信" onclick="sendMsg()"><i class="fa fa-envelope-square"></i></a>
+                                        <!--<button type="button" class="btn btn-primary" onclick="sendMsg()">发送短信</button>-->
+                                        <button type="button" class="btn btn-success" onclick="showLog()">发送记录</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>申请金额：</td>
+                                    <td th:text="${loan.loanAmount != null ? #numbers.formatDecimal(loan.loanAmount ,0, 0) + '万元': ''}"></td>
+                                    <td >订单照片：</td>
+                                    <td th:if="${isSuper == 1 || (loan.orderStatus != 6 && loan.orderStatus != 12)}">
+                                        <button type="button" class="btn btn-success" onclick="showImg(1)">查看</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>评估值：</td>
+                                    <td th:text="${loan.expectAmount != null ? #numbers.formatDecimal(loan.expectAmount ,0, 0) + '万元': ''}"></td>
+                                    <td>运营岗：</td>
+                                    <td th:text="${loan.operator}"></td>
+                                </tr>
+                                <tr>
+                                    <td>待补充材料：</td>
+                                    <td colspan="2" th:if="${loan.orderStatus != 6 && loan.orderStatus != 12}">
+                                        <textarea id="remark" name="remark" class="form-control" type="text" th:text="${loan.remark}"></textarea>
+                                    </td>
+                                    <td colspan="2" th:if="${loan.orderStatus == 6 || loan.orderStatus == 12}">
+                                    </td>
+                                    <td>
+                                        <button th:if="${isSuper == 1 || (loan.orderStatus != 6 && loan.orderStatus != 12)}" type="button" class="btn btn-success" onclick="showImg(2)">查看</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>客户手机号：</td>
+                                    <td th:if="${loan.orderStatus != 6 && loan.orderStatus != 12}">
+                                        <input id="wechatPhone" name="wechatPhone" th:value="${loan.wechatPhone}" class="form-control" type="text">
+                                    </td>
+                                    <td th:if="${loan.orderStatus == 6 || loan.orderStatus == 12}" th:text="${loan.wechatPhone}">
+                                    </td>
+                                    <td>其他补充说明：</td>
+                                    <td colspan="1" th:if="${loan.orderStatus != 6 && loan.orderStatus != 12}">
+                                        <input id="column5" name="column5" th:value="${loan.column5}" class="form-control" type="text">
+                                    </td>
+                                    <td colspan="1" th:if="${loan.orderStatus == 6 || loan.orderStatus == 12}">
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>客户名称：</td>
+                                    <td th:if="${loan.orderStatus != 6 && loan.orderStatus != 12}">
+                                        <input id="name" name="name" th:value="${loan.name}" class="form-control" type="text">
+                                    </td>
+                                    <td th:if="${loan.orderStatus == 6 || loan.orderStatus == 12}" th:text="${loan.name}">
+                                    </td>
+                                    <td>客户身份证号：</td>
+                                    <td th:if="${loan.orderStatus != 6 && loan.orderStatus != 12}">
+                                        <input id="idcard" name="idcard" th:value="${loan.idcard}" class="form-control" type="text">
+                                    </td>
+                                    <td th:if="${loan.orderStatus == 6 || loan.orderStatus == 12}" th:text="${loan.idcard}">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>批复金额：</td>
+                                    <td th:if="${loan.orderStatus != 6 && loan.orderStatus != 12}">
+                                        <input id="realAmount" name="realAmount"
+                                               th:value="${loan.realAmount != null ? #numbers.formatDecimal(loan.realAmount ,0, 0) : ''}"
+                                               type="text">&nbsp;万元
+                                    </td>
+                                    <td th:if="${loan.orderStatus == 6 || loan.orderStatus == 12}"
+                                        th:text="${loan.realAmount != null ? #numbers.formatDecimal(loan.realAmount ,0, 0) + '万元' : ''}">
+                                    </td>
+                                    <td>借款期限(月)：</td>
+                                    <td th:if="${loan.orderStatus != 6 && loan.orderStatus != 12}">
+                                        <input id="loanLimit" name="loanLimit" th:value="${loan.loanLimit}" class="form-control" type="text">
+                                    </td>
+                                    <td th:if="${loan.orderStatus == 6 || loan.orderStatus == 12}" th:text="${loan.loanLimit}">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>借款起始日期：</td>
+                                    <td th:if="${loan.orderStatus != 6 && loan.orderStatus != 12}">
+                                        <input id="loanBeginTimeStr" name="loanBeginTimeStr" th:value="${loan.loanBeginTimeStr}" class="form-control time-scope"
+                                               type="text">
+                                    </td>
+                                    <td th:if="${loan.orderStatus == 6 || loan.orderStatus == 12}" th:text="${loan.loanBeginTimeStr}">
+                                    </td>
+                                    <td>借款到期日期：</td>
+                                    <td th:if="${loan.orderStatus != 6 && loan.orderStatus != 12}">
+                                        <input id="loanEndTimeStr" name="loanEndTimeStr" th:value="${loan.loanEndTimeStr}" class="form-control time-scope"
+                                               type="text">
+                                    </td>
+                                    <td th:if="${loan.orderStatus == 6 || loan.orderStatus == 12}" th:text="${loan.loanEndTimeStr}">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>客户资料上传：</td>
+                                    <td th:if="${loan.orderStatus != 6 && loan.orderStatus != 12}">
+                                        <button type="button" class="layui-btn layui-btn-normal" id="memberDataImg" style="width: 100%;">
+                                            <i class="fa fa-cloud"></i>上传
+                                        </button>
+                                        <div class="image">
+                                            <img id="memberDataUrl" name="memberDataUrl" class="img-responsive" src="">
+                                            <input id="memberData" name="memberData" th:value="${loan.memberData}" type="hidden" />
+                                        </div>
+                                    </td>
+                                    <td th:if="${isSuper == 1 && (loan.orderStatus == 6 || loan.orderStatus == 12)}"><!---->
+                                        <img id="memberDataUrl" name="memberDataUrl" class="img-responsive" src="">
+                                        <input id="memberData" name="memberData" th:value="${loan.memberData}" type="hidden"/>
+                                        <button type="button" class="btn btn-success showimg">查看</button>
+                                    </td>
+                                    <td th:if="${isSuper != 1 && (loan.orderStatus == 6 || loan.orderStatus == 12)}"><!---->
+                                    </td>
+                                    <td>还款计划表上传：</td>
+                                    <td th:if="${loan.orderStatus != 6 && loan.orderStatus != 12}">
+                                        <button type="button" class="layui-btn layui-btn-normal" id="loanPlanImg" style="width: 100%;">
+                                            <i class="fa fa-cloud"></i>上传
+                                        </button>
+                                        <div class="image">
+                                            <img id="loanPlanUrl" name="loanPlanUrl" class="img-responsive" src="">
+                                            <input id="loanPlan" name="loanPlan" th:value="${loan.loanPlan}" type="hidden"/>
+                                    </td>
+                                    <td th:if="${loan.orderStatus == 6 || loan.orderStatus == 12}">
+                                        <input id="loanPlan" name="memberData" th:value="${loan.loanPlan}" type="hidden"/>
+                                        <button type="button" class="btn btn-success showimg">查看</button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div class="form-group" th:if="${loan.orderStatus != 6 && loan.orderStatus != 12}">
+                                <div class="col-sm-8 col-sm-offset-2">
+                                    <button type="button" class="btn btn-primary" onclick="operate(1)">待补充资料</button>
+                                    <button type="button" class="btn btn-danger" onclick="operate(2)">服务进行中</button>
+                                    <button type="button" class="btn btn-primary" onclick="operate(3)">放款成功</button>
+                                    <button type="button" class="btn btn-danger" onclick="operate(4)">放款失败</button>
+                                    <button type="button" class="btn btn-success" onclick="operate(5)">保存</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:include="include::footer"></div>
+<script src="/js/content.js?v=1.0.0"></script>
+<script src="/js/layui.js"></script>
+<script src="/js/plugins/clipboard/clipboard.min.js"></script>
+<script src="/js/plugins/layer/layer.min.js"></script>
+<script src="/js/vue.min.js"></script>
+<script type="text/javascript" src="/js/appjs/manager/cloan/edit.js"></script>
+<script type="text/javascript">
+    //同时绑定多个
+    lay('.time-scope').each(function () {
+        laydate.render({
+            elem: this
+        });
+    });
+
+    layui.use('upload', function () {
+        var upload = layui.upload;
+        //通用图片上传
+        upload.render({
+            elem: '#memberDataImg', //绑定元素
+            url: '/img/upload', //上传接口
+            size: 1000,
+            accept: 'file',
+            exts: 'jpg|jpeg|png|bmp', //只允许上传图片
+            done: function (r) {
+                console.log('上传成功')
+                $("#memberDataUrl").attr("src", r.imgPath);
+                $("#memberData").val(r.imgPath);
+            },
+            error: function (r) {
+                layer.msg(r);
+            }
+        });
+
+        upload.render({
+            elem: '#loanPlanImg', //绑定元素
+            url: '/img/upload', //上传接口
+            size: 1000,
+            accept: 'file',
+            exts: 'jgg|jpeg|png|bmp', //只允许上传图片
+            done: function (r) {
+                $("#loanPlanUrl").attr("src", r.imgPath);
+                $("#loanPlan").val(r.imgPath);
+            },
+            error: function (r) {
+                layer.msg(r);
+            }
+        });
+    });
+
+$(function(){
+    /** 图片预览 */
+    $(document).on('click', ".image", function () {
+        var imgPath = $(this).children("img").first().attr("src");
+        layer.open({
+            type: 0,
+            btn: [],
+            closeBtn: 0,
+            shadeClose: true,
+            title: false,
+            content: '<img class="img-responsive" src="' + imgPath + '"/>'
+        });
+    });
+
+    /** 图片查看 */
+    $(document).on('click', ".showimg", function () {
+        var imgPath = $(this).prev().attr("value");
+        layer.open({
+            type: 0,
+            btn: [],
+            closeBtn: 0,
+            shadeClose: true,
+            title: false,
+            area: '600px',
+            content: '<img class="img-responsive" src="' + imgPath + '"/>'
+        });
+    });
+});
+</script>
+</body>
+</html>

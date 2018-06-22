@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yiyun.dao.cluster.ClusterAdressDao">
+    <select id="get" resultType="com.yiyun.domain.Adress">
+		select `id`,`type`,`city`,`area`,`phone`,`detail_adress`,`status`,`create_time`,`update_time` from p_adress where id = #{value}
+	</select>
+
+    <select id="list" resultType="com.yiyun.domain.Adress">
+        select `id`,`type`,`city`,`area`,`phone`,`detail_adress`,`status`,`create_time`,`update_time` from p_adress
+        <where>
+            <if test="id != null and id != ''">and id = #{id}</if>
+            <if test="type != null and type != ''">and type = #{type}</if>
+            <if test="city != null and city != ''">and city = #{city}</if>
+            <if test="area != null and area != ''">and area = #{area}</if>
+            <if test="phone != null and phone != ''">and phone = #{phone}</if>
+            <if test="detailAdress != null and detailAdress != ''">and detail_adress = #{detailAdress}</if>
+            <if test="status != null and status != ''">and status = #{status}</if>
+            <if test="createTime != null and createTime != ''">and create_time = #{createTime}</if>
+            <if test="updateTime != null and updateTime != ''">and update_time = #{updateTime}</if>
+
+            <if test="createTimeBegin != null and createTimeBegin != ''">and create_time &gt;= #{createTimeBegin}</if>
+            <if test="createTimeEnd != null and createTimeEnd != ''">and create_time &lt; #{createTimeEnd}</if>
+            <if test="updateTimeBegin != null and updateTimeBegin != ''">and update_time &gt;= #{updateTimeBegin}</if>
+            <if test="updateTimeEnd != null and updateTimeEnd != ''">and update_time &lt; #{updateTimeEnd}</if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from p_adress
+        <where>
+            <if test="id != null and id != ''">and id = #{id}</if>
+            <if test="type != null and type != ''">and type = #{type}</if>
+            <if test="city != null and city != ''">and city = #{city}</if>
+            <if test="area != null and area != ''">and area = #{area}</if>
+            <if test="phone != null and phone != ''">and phone = #{phone}</if>
+            <if test="detailAdress != null and detailAdress != ''">and detail_adress = #{detailAdress}</if>
+            <if test="status != null and status != ''">and status = #{status}</if>
+            <if test="createTime != null and createTime != ''">and create_time = #{createTime}</if>
+            <if test="updateTime != null and updateTime != ''">and update_time = #{updateTime}</if>
+
+            <if test="createTimeBegin != null and createTimeBegin != ''">and create_time &gt;= #{createTimeBegin}</if>
+            <if test="createTimeEnd != null and createTimeEnd != ''">and create_time &lt; #{createTimeEnd}</if>
+            <if test="updateTimeBegin != null and updateTimeBegin != ''">and update_time &gt;= #{updateTimeBegin}</if>
+            <if test="updateTimeEnd != null and updateTimeEnd != ''">and update_time &lt; #{updateTimeEnd}</if>
+        </where>
+    </select>
+</mapper>

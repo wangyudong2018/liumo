@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content ">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t" id="signupForm">
+                        <input id="id" name="id" th:value="${feedback.id}" type="hidden">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">用户ID：</label>
+                            <div class="col-sm-8">
+                                <input id="memberId" name="memberId" th:value="${feedback.memberId}"
+                                       class="form-control" type="number">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">姓名：</label>
+                            <div class="col-sm-8">
+                                <input id="name" name="name" th:value="${feedback.name}" class="form-control"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">手机号：</label>
+                            <div class="col-sm-8">
+                                <input id="phone" name="phone" th:value="${feedback.phone}" class="form-control"
+                                       type="number">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">用户反馈信息：</label>
+                            <div class="col-sm-8">
+                                <input id="messageInput" th:value="${feedback.message}" type="hidden"/>
+                                <textarea id="message" name="message" th:value="${feedback.message}"
+                                          class="form-control" type="text"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">处理意见：</label>
+                            <div class="col-sm-8">
+                                <input id="adviceInput" th:value="${feedback.advice}" type="hidden"/>
+                                <textarea id="advice" name="advice" th:value="${feedback.advice}" class="form-control"
+                                          type="text"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">处理状态：</label>
+                            <div class="col-sm-8">
+                                <input id="statusInput" th:value="${feedback.status}" type="hidden"/>
+                                <select id="status" name="status" class="form-control" th:value="${feedback.status}">
+                                    <option value=0>未处理</option>
+                                    <option value=1>已处理</option>
+                                    <option value=2>处理中</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-8 col-sm-offset-3">
+                                <button type="submit" class="btn btn-primary">提交</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:include="include::footer"></div>
+<script type="text/javascript" src="/js/appjs/feedback/edit.js">
+</script>
+</body>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content ">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t" id="signupForm">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">订单号：</label>
+                            <div class="col-sm-8">
+                                <input id="orderSn" name="orderSn" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">产品ID：</label>
+                            <div class="col-sm-8">
+                                <input id="productId" name="productId" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">客户id：</label>
+                            <div class="col-sm-8">
+                                <input id="loanMemberId" name="loanMemberId" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">订单状态：</label>
+                            <div class="col-sm-8">
+                                <input id="orderStatus" name="orderStatus" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">借款金额：</label>
+                            <div class="col-sm-8">
+                                <input id="loanAmount" name="loanAmount" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">已还金额：</label>
+                            <div class="col-sm-8">
+                                <input id="repayAmount" name="repayAmount" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">发生逾期金额：</label>
+                            <div class="col-sm-8">
+                                <input id="factOverdueFine" name="factOverdueFine" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">借款银行ID：</label>
+                            <div class="col-sm-8">
+                                <input id="loanBankId" name="loanBankId" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">还款银行ID：</label>
+                            <div class="col-sm-8">
+                                <input id="repayBankId" name="repayBankId" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">费率：</label>
+                            <div class="col-sm-8">
+                                <input id="rate" name="rate" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">手续费：</label>
+                            <div class="col-sm-8">
+                                <input id="proceCost" name="proceCost" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">利息费：</label>
+                            <div class="col-sm-8">
+                                <input id="accrualCost" name="accrualCost" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">借款期次：</label>
+                            <div class="col-sm-8">
+                                <input id="loanLimit" name="loanLimit" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">最新期次：</label>
+                            <div class="col-sm-8">
+                                <input id="nextLimit" name="nextLimit" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">下次还款时间：</label>
+                            <div class="col-sm-8">
+                                <input id="nextTime" name="nextTime" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">申请时间：</label>
+                            <div class="col-sm-8">
+                                <input id="applyTime" name="applyTime" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">确认时间：</label>
+                            <div class="col-sm-8">
+                                <input id="confirmTime" name="confirmTime" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">放款时间：</label>
+                            <div class="col-sm-8">
+                                <input id="loanTime" name="loanTime" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">借款结清时间：</label>
+                            <div class="col-sm-8">
+                                <input id="finishTime" name="finishTime" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">当前申请次数：</label>
+                            <div class="col-sm-8">
+                                <input id="applyCount" name="applyCount" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">业务员(经办人)ID：</label>
+                            <div class="col-sm-8">
+                                <input id="salesmanId" name="salesmanId" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">来源：</label>
+                            <div class="col-sm-8">
+                                <input id="source" name="source" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">创建时间：</label>
+                            <div class="col-sm-8">
+                                <input id="createTime" name="createTime" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">预留字段1：</label>
+                            <div class="col-sm-8">
+                                <input id="column1" name="column1" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">预留字段2：</label>
+                            <div class="col-sm-8">
+                                <input id="column2" name="column2" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">预留字段3：</label>
+                            <div class="col-sm-8">
+                                <input id="column3" name="column3" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-8 col-sm-offset-3">
+                                <button type="submit" class="btn btn-primary">提交</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:include="include::footer"></div>
+<script type="text/javascript" src="/js/appjs/yiyun/oOrder/add.js">
+</script>
+</body>
+</html>

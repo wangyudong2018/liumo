@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yiyun.dao.master.PProductDao">
+    <insert id="save" parameterType="com.yiyun.domain.PProduct" useGeneratedKeys="true" keyProperty="id">
+		insert into p_product
+		(
+			`type`, 
+			`product_status`, 
+			`name`, 
+			`logo`, 
+			`introduce`, 
+			`month_rate_lower`, 
+			`month_rate_upper`, 
+			`loan_time`, 
+			`loan_limit_lower`, 
+			`loan_limit_upper`, 
+			`loan_amount_lower`, 
+			`loan_amount_upper`, 
+			`client`, 
+			`repay_method`, 
+			`is_mortgage_again`, 
+			`is_early_repay`, 
+			`serverce_charge`, 
+			`house_time_limit`, 
+			`house_value_limit`, 
+			`house_area`, 
+			`pawn_type`, 
+			`operator_time`, 
+			`need_data`, 
+			`create_time`, 
+			`column1`, 
+			`column2`, 
+			`column3`
+		)
+		values
+		(
+			#{type}, 
+			#{productStatus}, 
+			#{name}, 
+			#{logo}, 
+			#{introduce}, 
+			#{monthRateLower}, 
+			#{monthRateUpper}, 
+			#{loanTime}, 
+			#{loanLimitLower}, 
+			#{loanLimitUpper}, 
+			#{loanAmountLower}, 
+			#{loanAmountUpper}, 
+			#{client}, 
+			#{repayMethod}, 
+			#{isMortgageAgain}, 
+			#{isEarlyRepay}, 
+			#{serverceCharge}, 
+			#{houseTimeLimit}, 
+			#{houseValueLimit}, 
+			#{houseArea}, 
+			#{pawnType}, 
+			#{operatorTime}, 
+			#{needData}, 
+			#{createTime}, 
+			#{column1}, 
+			#{column2}, 
+			#{column3}
+		)
+	</insert>
+
+    <update id="update" parameterType="com.yiyun.domain.PProduct">
+        update p_product
+        <set>
+            <if test="type != null">`type` = #{type},</if>
+            <if test="productStatus != null">`product_status` = #{productStatus},</if>
+            <if test="name != null">`name` = #{name},</if>
+            <if test="logo != null">`logo` = #{logo},</if>
+            <if test="introduce != null">`introduce` = #{introduce},</if>
+            <if test="monthRateLower != null">`month_rate_lower` = #{monthRateLower},</if>
+            <if test="monthRateUpper != null">`month_rate_upper` = #{monthRateUpper},</if>
+            <if test="loanTime != null">`loan_time` = #{loanTime},</if>
+            <if test="loanLimitLower != null">`loan_limit_lower` = #{loanLimitLower},</if>
+            <if test="loanLimitUpper != null">`loan_limit_upper` = #{loanLimitUpper},</if>
+            <if test="loanAmountLower != null">`loan_amount_lower` = #{loanAmountLower},</if>
+            <if test="loanAmountUpper != null">`loan_amount_upper` = #{loanAmountUpper},</if>
+            <if test="client != null">`client` = #{client},</if>
+            <if test="repayMethod != null">`repay_method` = #{repayMethod},</if>
+            <if test="isMortgageAgain != null">`is_mortgage_again` = #{isMortgageAgain},</if>
+            <if test="isEarlyRepay != null">`is_early_repay` = #{isEarlyRepay},</if>
+            <if test="serverceCharge != null">`serverce_charge` = #{serverceCharge},</if>
+            <if test="houseTimeLimit != null">`house_time_limit` = #{houseTimeLimit},</if>
+            <if test="houseValueLimit != null">`house_value_limit` = #{houseValueLimit},</if>
+            <if test="houseArea != null">`house_area` = #{houseArea},</if>
+            <if test="pawnType != null">`pawn_type` = #{pawnType},</if>
+            <if test="operatorTime != null">`operator_time` = #{operatorTime},</if>
+            <if test="needData != null">`need_data` = #{needData},</if>
+            <if test="createTime != null">`create_time` = #{createTime},</if>
+            <if test="column1 != null">`column1` = #{column1},</if>
+            <if test="column2 != null">`column2` = #{column2},</if>
+            <if test="column3 != null">`column3` = #{column3}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="remove">
+		delete from p_product where id = #{value}
+	</delete>
+
+    <delete id="batchRemove">
+        delete from p_product where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<link href="/css/layui.css" rel="stylesheet">
+<style>
+    .radio_group .form-control{ width:18px; height:18px;}
+    #isMortgageAgainYes,#isEarlyRepayYes{ margin-left:22px; margin-top:7px;}
+</style>
+<body class="gray-bg">
+<div class="wrapper wrapper-content ">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t" id="signupForm">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">产品名：</label>
+                            <div class="col-sm-8">
+                                <input id="name" name="name" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">类别：</label>
+                            <div class="col-sm-8">
+                                <select id="type" name="type" class="form-control">
+                                    <option value=1>贷款（信贷）</option>
+                                    <option value=2>投资（房贷）</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!--<div class="form-group">
+                            <label class="col-sm-3 control-label">状态：</label>
+                            <div class="col-sm-8">
+                                <input id="productStatus" name="productStatus" class="form-control" type="text">
+                            </div>
+                        </div>-->
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">图片：</label>
+                            <div class="col-sm-4">
+                                <button type="button" class="layui-btn" id="commonImg" style="width: 100%;">
+                                    <i class="fa fa-cloud"></i>上传文件
+                                </button>
+                                <div class="image">
+                                    <img id="logoUrl" name="logo" class="img-responsive" src="">
+                                    <input id="logoInput" name="logo" class="required" hidden/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">介绍：</label>
+                            <div class="col-sm-8">
+                                <textarea id="introduce" name="introduce" class="form-control" type="text"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">放款时间：</label>
+                            <div class="col-sm-8">
+                                <input id="loanTime" name="loanTime" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">月利率：</label>
+                            <div class="col-sm-2">
+                                <input id="monthRateLower" name="monthRateLower" class="form-control" type="text">
+                            </div>
+                            <div class="col-sm-2" style=" width: 7px;border-top: 1px solid black; margin-top: 15px;"></div>
+                            <div class="col-sm-2">
+                                <input id="monthRateUpper" name="monthRateUpper" class="form-control" type="text">
+                            </div>（%）
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">贷款期限：</label>
+                            <div class="col-sm-2">
+                                <input id="loanLimitLower" name="loanLimitLower" class="form-control" type="text">
+                            </div>
+                            <div class="col-sm-2" style=" width: 7px;border-top: 1px solid black; margin-top: 15px;"></div>
+                            <div class="col-sm-2">
+                                <input id="loanLimitUpper" name="loanLimitUpper" class="form-control" type="text">
+                            </div>(月)
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">放款金额：</label>
+                            <div class="col-sm-2">
+                                <input id="loanAmountLower" name="loanAmountLower" class="form-control" type="text">
+                            </div>
+                            <div class="col-sm-2" style=" width: 7px;border-top: 1px solid black; margin-top: 15px;"></div>
+                            <div class="col-sm-2">
+                                <input id="loanAmountUpper" name="loanAmountUpper" class="form-control" type="text">
+                            </div>（万元）
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">使用身份：</label>
+                            <div class="col-sm-8">
+                                <textarea id="client" name="client" class="form-control" type="text"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">还款方式：</label>
+                            <div class="col-sm-8">
+                                <select id="repayMethod" name="repayMethod" class="form-control">
+                                    <option value=1>按月付息</option>
+                                    <option value=2>等额本息</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group radio_group">
+                            <label class="col-sm-3 control-label">房产二押：</label>
+                            <div class="col-sm-2">
+                                <span style="float:left;margin-top:6px;">是</span><input id="isMortgageAgainYes" name="isMortgageAgain" class="form-control" value=1 type="radio">
+                            </div>
+                            <div class="col-sm-2">
+                                <span style="float:left;margin-top:4px; margin-right:10px;">否</span><input id="isMortgageAgainNo" name="isMortgageAgain" class="form-control" value=0 type="radio">
+                            </div>
+                        </div>
+                        <div class="form-group radio_group">
+                            <label class="col-sm-3 control-label">提前还款：</label>
+                            <div class="col-sm-2">
+                                <span style="float:left;margin-top:6px;">是</span><input id="isEarlyRepayYes" name="isEarlyRepay" class="form-control" value=1 type="radio">
+                            </div>
+                            <div class="col-sm-2">
+                                <span style="float:left;margin-top:4px;margin-right:10px;">否</span><input id="isEarlyRepayNo" name="isEarlyRepay" class="form-control" value=0 type="radio">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">一次性服务费：</label>
+                            <div class="col-sm-8">
+                                <input id="serverceCharge" name="serverceCharge" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">房龄要求：</label>
+                            <div class="col-sm-8">
+                                <textarea id="houseTimeLimit" name="houseTimeLimit" class="form-control" type="text"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">房产估值要求：</label>
+                            <div class="col-sm-8">
+                                <textarea id="houseValueLimit" name="houseValueLimit" class="form-control" type="text"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">房产坐落区域：</label>
+                            <div class="col-sm-8">
+                                <textarea id="houseArea" name="houseArea" class="form-control" type="text"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">抵押物类型：</label>
+                            <div class="col-sm-8">
+                                <textarea id="pawnType" name="pawnType" class="form-control" type="text"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">经营时间：</label>
+                            <div class="col-sm-8">
+                                <input id="operatorTime" name="operatorTime" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">所需材料：</label>
+                            <div class="col-sm-8">
+                                <textarea id="needData" name="needData" class="form-control" type="text"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-8 col-sm-offset-3">
+                                <button type="submit" class="btn btn-primary">提交</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:include="include::footer"></div>
+<script type="text/javascript" src="/js/appjs/operation/product/add.js"></script>
+<script src="/js/content.js?v=1.0.0"></script>
+<script src="/js/layui.js"></script>
+<script src="/js/plugins/clipboard/clipboard.min.js"></script>
+<script src="/js/plugins/layer/layer.min.js"></script>
+<script src="/js/vue.min.js"></script>
+<script type="text/javascript">
+
+    layui.use('upload', function () {
+        var upload = layui.upload;
+        //图片上传
+        var common = upload.render({
+            elem: '#commonImg', //绑定元素
+            url: '/img/upload', //上传接口
+            size: 1000,
+            accept: 'file',
+            done: function (r) {
+                $("#logoUrl").attr("src", r.imgPath);
+                $("#logoInput").val(r.imgPath);
+            },
+            error: function (r) {
+                layer.msg(r);
+            }
+
+        });
+    });
+</script>
+
+</body>
+</html>

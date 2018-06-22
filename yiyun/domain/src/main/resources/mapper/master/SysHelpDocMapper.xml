@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yiyun.dao.master.SysHelpDocDao">
+
+	<insert id="save" parameterType="com.yiyun.domain.SysHelpDocDO" useGeneratedKeys="true" keyProperty="id">
+		insert into sys_help_doc
+		(
+			`type`, 
+			`description`,  
+			`title`, 
+			`body`,
+			`icon`,
+			`order_num`, 
+			`creator`, 
+			`create_time`
+		)
+		values
+		(
+			#{type}, 
+			#{description}, 
+			#{title}, 
+			#{body},
+			#{icon},
+			#{orderNum}, 
+			#{creator}, 
+			#{createTime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.yiyun.domain.SysHelpDocDO">
+		update sys_help_doc
+		<set>
+			<if test="type != null">`type` = #{type}, </if>
+			<if test="description != null">`description` = #{description}, </if>
+			<if test="title != null">`title` = #{title}, </if>
+			<if test="body != null">`body` = #{body}, </if>
+			<if test="icon != null">`icon` = #{icon}, </if>
+			<if test="orderNum != null">`order_num` = #{orderNum}, </if>
+			<if test="creator != null">`creator` = #{creator}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}</if>
+		</set>
+		where id = #{id}
+	</update>
+
+
+	<update id="updateIconBatch" parameterType="java.util.List">
+		update sys_help_doc
+		set  icon=
+		<foreach collection="list" item="item" index="index"
+				 separator=" " open="case ID" close="end">
+			when #{item.id} then #{item.icon}
+		</foreach>
+		where id in
+		<foreach collection="list" index="index" item="item"
+				 separator="," open="(" close=")">
+			#{item.id,jdbcType=BIGINT}
+		</foreach>
+	</update>
+
+
+	<delete id="remove">
+		delete from sys_help_doc where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from sys_help_doc where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yiyun.dao.master.OOrderDao">
+    <insert id="save" parameterType="com.yiyun.domain.OOrder" useGeneratedKeys="true" keyProperty="id">
+		insert into o_order
+		(
+			`order_sn`, 
+			`product_id`, 
+			`loan_member_id`, 
+			`order_status`, 
+			`loan_amount`, 
+			`repay_amount`, 
+			`fact_overdue_fine`, 
+			`loan_bank_id`, 
+			`repay_bank_id`, 
+			`rate`, 
+			`proce_cost`, 
+			`accrual_cost`, 
+			`loan_limit`, 
+			`next_limit`, 
+			`next_time`, 
+			`apply_time`, 
+			`confirm_time`, 
+			`loan_time`, 
+			`finish_time`, 
+			`apply_count`, 
+			`salesman_id`, 
+			`source`, 
+			`create_time`, 
+			`column1`, 
+			`column2`, 
+			`column3`
+		)
+		values
+		(
+			#{orderSn}, 
+			#{productId}, 
+			#{loanMemberId}, 
+			#{orderStatus}, 
+			#{loanAmount}, 
+			#{repayAmount}, 
+			#{factOverdueFine}, 
+			#{loanBankId}, 
+			#{repayBankId}, 
+			#{rate}, 
+			#{proceCost}, 
+			#{accrualCost}, 
+			#{loanLimit}, 
+			#{nextLimit}, 
+			#{nextTime}, 
+			#{applyTime}, 
+			#{confirmTime}, 
+			#{loanTime}, 
+			#{finishTime}, 
+			#{applyCount}, 
+			#{salesmanId}, 
+			#{source}, 
+			#{createTime}, 
+			#{column1}, 
+			#{column2}, 
+			#{column3}
+		)
+	</insert>
+
+    <update id="update" parameterType="com.yiyun.domain.OOrder">
+        update o_order
+        <set>
+            <if test="orderSn != null">`order_sn` = #{orderSn},</if>
+            <if test="productId != null">`product_id` = #{productId},</if>
+            <if test="loanMemberId != null">`loan_member_id` = #{loanMemberId},</if>
+            <if test="orderStatus != null">`order_status` = #{orderStatus},</if>
+            <if test="loanAmount != null">`loan_amount` = #{loanAmount},</if>
+            <if test="repayAmount != null">`repay_amount` = #{repayAmount},</if>
+            <if test="factOverdueFine != null">`fact_overdue_fine` = #{factOverdueFine},</if>
+            <if test="loanBankId != null">`loan_bank_id` = #{loanBankId},</if>
+            <if test="repayBankId != null">`repay_bank_id` = #{repayBankId},</if>
+            <if test="rate != null">`rate` = #{rate},</if>
+            <if test="proceCost != null">`proce_cost` = #{proceCost},</if>
+            <if test="accrualCost != null">`accrual_cost` = #{accrualCost},</if>
+            <if test="loanLimit != null">`loan_limit` = #{loanLimit},</if>
+            <if test="nextLimit != null">`next_limit` = #{nextLimit},</if>
+            <if test="nextTime != null">`next_time` = #{nextTime},</if>
+            <if test="applyTime != null">`apply_time` = #{applyTime},</if>
+            <if test="confirmTime != null">`confirm_time` = #{confirmTime},</if>
+            <if test="loanTime != null">`loan_time` = #{loanTime},</if>
+            <if test="finishTime != null">`finish_time` = #{finishTime},</if>
+            <if test="applyCount != null">`apply_count` = #{applyCount},</if>
+            <if test="salesmanId != null">`salesman_id` = #{salesmanId},</if>
+            <if test="source != null">`source` = #{source},</if>
+            <if test="createTime != null">`create_time` = #{createTime},</if>
+            <if test="column1 != null">`column1` = #{column1},</if>
+            <if test="column2 != null">`column2` = #{column2},</if>
+            <if test="column3 != null">`column3` = #{column3}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="remove">
+		delete from o_order where id = #{value}
+	</delete>
+
+    <delete id="batchRemove">
+        delete from o_order where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

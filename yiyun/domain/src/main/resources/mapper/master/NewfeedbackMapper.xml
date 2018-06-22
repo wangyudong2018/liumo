@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yiyun.dao.master.NewfeedbackDao">
+    <insert id="save" parameterType="com.yiyun.domain.Newfeedback" useGeneratedKeys="true" keyProperty="id">
+		insert into u_newfeedback
+		(
+			`member_id`, 
+			`name`, 
+			`phone`, 
+			`type`, 
+			`message`, 
+			`advice`, 
+			`status`, 
+			`operator`, 
+			`create_time`, 
+			`deal_time`,
+			`loan`,
+			`customer_id`,
+			`customer`
+		)
+		values
+		(
+			#{memberId}, 
+			#{name}, 
+			#{phone}, 
+			#{type}, 
+			#{message}, 
+			#{advice}, 
+			#{status}, 
+			#{operator}, 
+			#{createTime}, 
+			#{dealTime},
+			#{loan},
+			#{customerId},
+			#{customer}
+		)
+	</insert>
+
+    <update id="update" parameterType="com.yiyun.domain.Newfeedback">
+        update u_newfeedback
+        <set>
+            <if test="memberId != null">`member_id` = #{memberId},</if>
+            <if test="name != null">`name` = #{name},</if>
+            <if test="phone != null">`phone` = #{phone},</if>
+            <if test="type != null">`type` = #{type},</if>
+            <if test="message != null">`message` = #{message},</if>
+            <if test="advice != null">`advice` = #{advice},</if>
+            <if test="status != null">`status` = #{status},</if>
+            <if test="operator != null">`operator` = #{operator},</if>
+            <if test="createTime != null">`create_time` = #{createTime},</if>
+            <if test="dealTime != null">`deal_time` = #{dealTime}</if>
+            <if test="loan != null">`loan` = #{loan}</if>
+            <if test="customer_id != null">`customer_id` = #{customer_id}</if>
+            <if test="customer != null">`customer` = #{customer}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="remove">
+		delete from u_newfeedback where id = #{value}
+	</delete>
+
+    <delete id="batchRemove">
+        delete from u_newfeedback where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

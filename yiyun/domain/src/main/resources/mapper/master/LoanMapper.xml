@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yiyun.dao.master.LoanDao">
+    <insert id="save" parameterType="com.yiyun.domain.Loan" useGeneratedKeys="true" keyProperty="id">
+		insert into o_loan
+		(
+			`order_sn`,
+			`product_id`,
+			`loan_member_id`,
+			`loan_member_phone`,
+			`order_step`,
+			`order_status`,
+			`expect_amount`,
+			`loan_amount`,
+			`real_amount`,
+			`loan_limit`,
+			`limit_unit`,
+			`loan_begin_time`,
+			`loan_end_time`,
+			`product_type`,
+			`city`,
+			`area`,
+			`source`,
+			`photo`,
+			`report`,
+			`member_data`,
+			`bank_water`,
+			`other_data`,
+			`loan_plan`,
+			`client`,
+			`operator`,
+			`customer`,
+			`create_time`,
+			`client_time`,
+			`operator_time`,
+			`customer_time`,
+			`loan_time`,
+			`pay_plan_time`,
+			`repay_time`,
+			`wechat_phone`,
+			`remark`,
+			`column1`,
+			`column2`,
+			`column3`,
+			`column4`,
+			`column5`,
+			`partner`
+		)
+		values
+		(
+			#{orderSn},
+			#{productId},
+			#{loanMemberId},
+			#{loanMemberPhone},
+			#{orderStep},
+			#{orderStatus},
+			#{expectAmount},
+			#{loanAmount},
+			#{realAmount},
+			#{loanLimit},
+			#{limitUnit},
+			#{loanBeginTime},
+			#{loanEndTime},
+			#{productType},
+			#{city},
+			#{area},
+			#{source},
+			#{photo},
+			#{report},
+			#{memberData},
+			#{bankWater},
+			#{otherData},
+			#{loanPlan},
+			#{client},
+			#{operator},
+			#{customer},
+			#{createTime},
+			#{clientTime},
+			#{operatorTime},
+			#{customerTime},
+			#{loanTime},
+			#{payPlanTime},
+			#{repayTime},
+			#{wechatPhone},
+			#{remark},
+			#{column1},
+			#{column2},
+			#{column3},
+			#{column4},
+			#{column5},
+			#{partner}
+		)
+	</insert>
+
+    <update id="update" parameterType="com.yiyun.domain.Loan">
+        update o_loan
+        <set>
+            <if test="orderSn != null">`order_sn` = #{orderSn},</if>
+            <if test="productId != null">`product_id` = #{productId},</if>
+            <if test="loanMemberId != null">`loan_member_id` = #{loanMemberId},</if>
+            <if test="partner != null">`partner` = #{partner},</if>
+            <if test="loanMemberPhone != null">`loan_member_phone` = #{loanMemberPhone},</if>
+            <if test="orderStep != null">`order_step` = #{orderStep},</if>
+            <if test="orderStatus != null">`order_status` = #{orderStatus},</if>
+            <if test="expectAmount != null">`expect_amount` = #{expectAmount},</if>
+            <if test="loanAmount != null">`loan_amount` = #{loanAmount},</if>
+			<if test="realAmount != null">`real_amount` = #{realAmount},</if>
+            <if test="loanLimit != null">`loan_limit` = #{loanLimit},</if>
+			<if test="limitUnit != null">`limit_unit` = #{limitUnit},</if>
+            <if test="loanBeginTime != null">`loan_begin_time` = #{loanBeginTime},</if>
+            <if test="loanEndTime != null">`loan_end_time` = #{loanEndTime},</if>
+            <if test="productType != null">`product_type` = #{productType},</if>
+            <if test="city != null">`city` = #{city},</if>
+            <if test="area != null">`area` = #{area},</if>
+            <if test="source != null">`source` = #{source},</if>
+            <if test="photo != null">`photo` = #{photo},</if>
+            <if test="report != null">`report` = #{report},</if>
+            <if test="memberData != null">`member_data` = #{memberData},</if>
+            <if test="bankWater != null">`bank_water` = #{bankWater},</if>
+            <if test="otherData != null">`other_data` = #{otherData},</if>
+            <if test="loanPlan != null">`loan_plan` = #{loanPlan},</if>
+            <if test="client != null">`client` = #{client},</if>
+            <if test="operator != null">`operator` = #{operator},</if>
+            <if test="customer != null">`customer` = #{customer},</if>
+            <if test="createTime != null">`create_time` = #{createTime},</if>
+            <if test="clientTime != null">`client_time` = #{clientTime},</if>
+            <if test="operatorTime != null">`operator_time` = #{operatorTime},</if>
+            <if test="customerTime != null">`customer_time` = #{customerTime},</if>
+            <if test="loanTime != null">`loan_time` = #{loanTime},</if>
+            <if test="payPlanTime != null">`pay_plan_time` = #{payPlanTime},</if>
+            <if test="repayTime != null">`repay_time` = #{repayTime},</if>
+            <if test="wechatPhone != null">`wechat_phone` = #{wechatPhone},</if>
+            <if test="remark != null">`remark` = #{remark},</if>
+            <if test="column1 != null">`column1` = #{column1},</if>
+            <if test="column2 != null">`column2` = #{column2},</if>
+            <if test="column3 != null">`column3` = #{column3},</if>
+            <if test="column4 != null">`column4` = #{column4},</if>
+            <if test="column5 != null">`column5` = #{column5}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="remove">
+		delete from o_loan where id = #{value}
+	</delete>
+
+    <delete id="batchRemove">
+        delete from o_loan where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

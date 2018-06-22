@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yiyun.dao.cluster.ClusterSysParamDao">
+
+	<select id="get" resultType="com.yiyun.domain.SysParam">
+		select `id`,`type`,`description`,`code`,`name`,`value`,`remark`,`status`,`sort`,`creator`,`create_time` from sys_param where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.yiyun.domain.SysParam">
+		select `id`,`type`,`description`,`code`,`name`,`value`,`remark`,`status`,`sort`,`creator`,`create_time` from sys_param
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="type != null and type != ''"> and type = #{type} </if>
+		  		  <if test="description != null and description != ''"> and description = #{description} </if>
+		  		  <if test="code != null and code != ''"> and code like CONCAT(CONCAT('%', #{code}), '%') </if>
+		  		  <if test="name != null and name != ''"> and name like CONCAT(CONCAT('%', #{name}), '%') </if>
+		  		  <if test="value != null and value != ''"> and value = #{value} </if>
+		  		  <if test="remark != null and remark != ''"> and remark = #{remark} </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		  <if test="sort != null and sort != ''"> and sort = #{sort} </if>
+		  		  <if test="creator != null and creator != ''"> and creator = #{creator} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from sys_param
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="type != null and type != ''"> and type = #{type} </if>
+		  		  <if test="description != null and description != ''"> and description = #{description} </if>
+			 <if test="code != null and code != ''">and code like CONCAT(CONCAT('%', #{code}), '%')</if>
+			 <if test="name != null and name != ''">and name like CONCAT(CONCAT('%', #{name}), '%')</if>
+		  		  <if test="value != null and value != ''"> and value = #{value} </if>
+		  		  <if test="remark != null and remark != ''"> and remark = #{remark} </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		  <if test="sort != null and sort != ''"> and sort = #{sort} </if>
+		  		  <if test="creator != null and creator != ''"> and creator = #{creator} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		</where>
+	</select>
+
+	<select id="listType" resultType="com.yiyun.domain.SysParam">
+		select distinct `type` , description from sys_param
+	</select>
+</mapper>

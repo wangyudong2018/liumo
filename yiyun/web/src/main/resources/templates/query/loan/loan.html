@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns:shiro="http://www.w3.org/1999/xhtml">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content ">
+    <input id="memberId" th:value="${memberId}" type="hidden">
+    <input id="mtype" th:value="${mtype}" type="hidden">
+    <div class="col-sm-12">
+        <div class="ibox">
+            <div class="ibox-body">
+                <div class="fixed-table-toolbar">
+                    <div class="columns pull-left">
+                        <button class="btn  btn-success" onclick="javascript:history.go(-1)" type="button" th:if="${mtype != null}">
+                            <i aria-hidden="true" class="fa fa-mail-reply"></i>返回
+                        </button>
+                    </div>
+                    <div class="columns pull-right">
+                        <button class="btn btn-success" onclick="reLoad(1)">查询</button>
+                        <button class="btn btn-danger" onclick="pmclear(1)">重置</button>
+                    </div>
+                    <div class="columns pull-right col-md-2">
+                        <select id="orderStatus" name="orderStatus" class="form-control pmclear">
+                            <option value="" selected="selected">订单状态</option>
+                            <option th:each="status : ${statusList}" th:value="${status.value}" th:text="${status.name}"></option>
+                        </select>
+                    </div>
+                    <div class="columns pull-right col-md-2">
+                        <select id="productType" name="productType" class="form-control pmclear">
+                            <option value="" selected="selected">产品名称</option>
+                            <option th:each="type : ${typeList}" th:value="${type.name}" th:text="${type.name}" th:attr="mtype=${type.value}"></option>
+                        </select>
+
+                    </div>
+                    <div class="columns pull-right col-md-2">
+                        <input id="loanMemberPhone" type="text" class="form-control pmclear"
+                               placeholder="注册手机号码">
+                    </div>
+                    <div class="columns pull-right col-md-2">
+                        <input id="column1" type="text" class="form-control pmclear"
+                               placeholder="邀请码">
+                    </div>
+                    <div class="columns pull-right col-md-2">
+                        <input id="orderSn" type="text" class="form-control pmclear"
+                               placeholder="订单编号">
+                    </div>
+                </div>
+                <table id="exampleTable" data-mobile-responsive="true">
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
+<div>
+    <script type="text/javascript">
+        var s_edit_h = 'hidden';
+        var s_remove_h = 'hidden';
+        var s_resetPwd_h = 'hidden';
+    </script>
+</div>
+<div shiro:hasPermission="query:loan:edit">
+    <script type="text/javascript">
+        s_edit_h = '';
+    </script>
+</div>
+<div shiro:hasPermission="query:loan:remove">
+    <script type="text/javascript">
+        var s_remove_h = '';
+    </script>
+</div>
+<div shiro:hasPermission="query:loan:resetPwd">
+    <script type="text/javascript">
+        var s_resetPwd_h = '';
+    </script>
+</div>
+</div>
+<div th:include="include :: footer"></div>
+<script type="text/javascript" src="/js/appjs/query/loan/loan.js"></script>
+</body>
+</html>

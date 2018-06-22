@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content ">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t" id="signupForm">
+                        <input id="id" name="id" th:value="${mMember.id}" type="hidden">
+                        <div class="bootstrap-table">
+                            <table data-mobile-responsive="true" id="exampleTable" class="table table-bordered table-hover table-striped">
+                                <tbody th:if="${type == 1}">
+                                    <tr data-index="0">
+                                        <td style="align:right">手机号：</td>
+                                        <td style="" th:text="${mMember.phone}"></td>
+                                        <td style="">名称：</td>
+                                        <td style="" th:text="${mMember.nickName}"></td>
+                                    </tr>
+                                    <tr data-index="0">
+                                        <td style="">邀请码：</td>
+                                        <td style="" th:text="${mMember.investerCode}"></td>
+                                        <td style="">注册时间：</td>
+                                        <td style="" th:text="${mMember.createTime != null ? #dates.format(mMember.createTime,'yyyy-MM-dd HH:mm:ss') : ''}"></td>
+                                        <!--<td style="">未受理成功：</td>
+                                        <td style="" th:text="${wslcgCount}"></td>-->
+                                    </tr>
+                                    <tr data-index="0">
+                                        <td style="">受理中：</td>
+                                        <td style="" th:text="${slzCount}"></td>
+                                        <td style="">已受理：</td>
+                                        <td style="" th:text="${yslCount}"></td>
+                                    </tr>
+                                    <tr data-index="0">
+                                        <td style="">拒单：</td>
+                                        <td style="" th:text="${jdCount}"></td>
+                                        <td style="">放款成功：</td>
+                                        <td style="" th:text="${fkcgCount}"></td>
+                                    </tr>
+                                </tbody>
+                                <tbody th:if="${type == 2}">
+                                <tr data-index="0">
+                                    <td style="align:right">姓名：</td>
+                                    <td style="" th:text="${mMember.name}"></td>
+                                    <td style="">获客方式：</td>
+                                    <td style="" th:text="${mMember.source}"></td>
+                                </tr>
+                                <tr data-index="0">
+                                    <td style="">身份证号：</td>
+                                    <td style="" th:text="${mMember.idcard}"></td>
+                                    <td style="">手机号：</td>
+                                    <td style="" th:text="${mMember.phone}"></td>
+                                </tr>
+                                <tr data-index="0">
+                                    <td style="">年龄：</td>
+                                    <td style="" th:text="${mMember.age}"></td>
+                                    <td style="">性别：</td>
+                                    <td style="" th:text="${mMember.gender == 1 ? '男' : '女'}"></td>
+                                </tr>
+                                <tr data-index="0">
+                                    <td style="">获客时间：</td>
+                                    <td style="" th:text="${null != mMember.createTime ? #dates.format(mMember.createTime,'yyyy-MM-dd HH:mm:ss') : ''}"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:include="include::footer"></div>
+<script type="text/javascript" src="/js/appjs/system/mMember/edit.js">
+</script>
+</body>
+</html>

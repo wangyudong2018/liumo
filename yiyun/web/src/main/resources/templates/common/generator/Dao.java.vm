@@ -1,0 +1,30 @@
+package ${package}.dao;
+
+        import com.yiyun.domain.${className};
+
+import java.util.List;
+import java.util.Map;
+        import com.yiyun.common.MyMapper;
+
+/**
+ * @title ${comments}
+ * @author ${author}
+## * @email ${email}
+ * @date ${datetime}
+ */
+public interface ${className}Dao extends MyMapper<${className}>{
+
+	${className} get(${pk.attrType} ${pk.attrname});
+
+    List<${className}> list(Map<String,Object> map);
+
+    int count(Map<String,Object> map);
+
+	int save(${className} ${classname});
+	
+	int edit(${className} ${classname});
+	
+	int remove(${pk.attrType} ${pk.columnName});
+	
+	int batchRemove(${pk.attrType}[] ${pk.attrname}s);
+}

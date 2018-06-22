@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yiyun.dao.cluster.ClusterSysAdShareDao">
+
+    <select id="get" resultType="com.yiyun.domain.SysAdShareDO">
+		select `id`,`title`,`summary`,`content`,`common_img`,`wx_img`,`ios_img`,`android_img`,`link`,`open_type`,`category`,`sort_no`,`sys_type`,`status`,`advertiser`,`start_time`,`end_time`,`ad_amount`,`creator`,`create_time`,`remark` from sys_ad_share where id = #{value}
+	</select>
+
+    <select id="list" resultType="com.yiyun.domain.SysAdShareDO">
+        select
+        `id`,`title`,`summary`,`content`,`common_img`,`wx_img`,`ios_img`,`android_img`,`link`,`open_type`,`category`,`sort_no`,`sys_type`,`status`,`advertiser`,`start_time`,`end_time`,`ad_amount`,`creator`,`create_time`,`remark`
+        from sys_ad_share
+        <where>status!=0
+            <if test="id != null and id != ''">and id = #{id}</if>
+            <if test="title != null and title != ''">and title LIKE #{title}</if>
+            <if test="summary != null and summary != ''">and summary = #{summary}</if>
+            <if test="content != null and content != ''">and content = #{content}</if>
+            <if test="commonImg != null and commonImg != ''">and common_img = #{commonImg}</if>
+            <if test="wxImg != null and wxImg != ''">and wx_img = #{wxImg}</if>
+            <if test="iosImg != null and iosImg != ''">and ios_img = #{iosImg}</if>
+            <if test="androidImg != null and androidImg != ''">and android_img = #{androidImg}</if>
+            <if test="link != null and link != ''">and link = #{link}</if>
+            <if test="openType != null and openType != ''">and open_type = #{openType}</if>
+            <if test="category != null and category != ''">and category = #{category}</if>
+            <if test="sortNo != null and sortNo != ''">and sort_no = #{sortNo}</if>
+            <if test="sysType != null and sysType != ''">and sys_type = #{sysType}</if>
+            <if test="advertiser != null and advertiser != ''">and advertiser = #{advertiser}</if>
+            <if test="startTime != null and startTime != ''">and start_time = #{startTime}</if>
+            <if test="endTime != null and endTime != ''">and end_time = #{endTime}</if>
+            <if test="adAmount != null and adAmount != ''">and ad_amount = #{adAmount}</if>
+            <if test="creator != null and creator != ''">and creator = #{creator}</if>
+            <if test="createTime != null and createTime != ''">and create_time = #{createTime}</if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="listAll" resultType="com.yiyun.domain.SysAdShareDO">
+        select
+        `id`,`title`,`summary`,`content`,`common_img`,`wx_img`,`ios_img`,`android_img`,`link`,`open_type`,`category`,`sort_no`,`sys_type`,`status`,`advertiser`,`start_time`,`end_time`,`ad_amount`,`creator`,`create_time`,`remark`
+        from sys_ad_share
+        <where>
+            status!=0
+            <if test="category != null and category != ''">and category = #{category}</if>
+            <if test="sysType != null and sysType != ''">and sys_type = #{sysType}</if>
+        </where>
+        order By create_time ASC
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from sys_ad_share
+        <where>
+            status!=0
+            <if test="id != null and id != ''">and id = #{id}</if>
+            <if test="title != null and title != ''">and title = #{title}</if>
+            <if test="summary != null and summary != ''">and summary = #{summary}</if>
+            <if test="content != null and content != ''">and content = #{content}</if>
+            <if test="commonImg != null and commonImg != ''">and common_img = #{commonImg}</if>
+            <if test="wxImg != null and wxImg != ''">and wx_img = #{wxImg}</if>
+            <if test="iosImg != null and iosImg != ''">and ios_img = #{iosImg}</if>
+            <if test="androidImg != null and androidImg != ''">and android_img = #{androidImg}</if>
+            <if test="link != null and link != ''">and link = #{link}</if>
+            <if test="openType != null and openType != ''">and open_type = #{openType}</if>
+            <if test="category != null and category != ''">and category = #{category}</if>
+            <if test="sortNo != null and sortNo != ''">and sort_no = #{sortNo}</if>
+            <if test="sysType != null and sysType != ''">and sys_type = #{sysType}</if>
+            <if test="status != null and status != ''">and status = #{status}</if>
+            <if test="advertiser != null and advertiser != ''">and advertiser = #{advertiser}</if>
+            <if test="startTime != null and startTime != ''">and start_time = #{startTime}</if>
+            <if test="endTime != null and endTime != ''">and end_time = #{endTime}</if>
+            <if test="adAmount != null and adAmount != ''">and ad_amount = #{adAmount}</if>
+            <if test="creator != null and creator != ''">and creator = #{creator}</if>
+            <if test="createTime != null and createTime != ''">and create_time = #{createTime}</if>
+            <if test="remark != null and remark != ''">and remark = #{remark}</if>
+        </where>
+    </select>
+
+</mapper>

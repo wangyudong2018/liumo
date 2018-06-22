@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yiyun.dao.master.UserDao">
+	<insert id="save" parameterType="com.yiyun.domain.UserDO"
+		useGeneratedKeys="true" keyProperty="userId">
+		insert into sys_user
+		(
+		`username`,
+		`name`,
+		`password`,
+		`dept_id`,
+		`email`,
+		`mobile`,
+		`city`,
+		`status`,
+		`user_id_create`,
+		`gmt_create`,
+		`gmt_modified`,
+		`invest_code`
+		)
+		values
+		(
+		#{username},
+		#{name},
+		#{password},
+		#{deptId},
+		#{email},
+		#{mobile},
+		#{city},
+		#{status},
+		#{userIdCreate},
+		#{gmtCreate},
+		#{gmtModified},
+		#{investCode}
+		)
+	</insert>
+
+	<update id="update" parameterType="com.yiyun.domain.UserDO">
+		update sys_user
+		<set>
+			<if test="username != null">`username` = #{username}, </if>
+			<if test="name != null">`name` = #{name}, </if>
+			<if test="password != null">`password` = #{password}, </if>
+			<if test="deptId != null">`dept_id` = #{deptId}, </if>
+			<if test="email != null">`email` = #{email}, </if>
+			<if test="mobile != null">`mobile` = #{mobile}, </if>
+			<if test="city != null">`city` = #{city}, </if>
+			<if test="status != null">`status` = #{status}, </if>
+			<if test="userIdCreate != null">`user_id_create` = #{userIdCreate}, </if>
+			<if test="gmtCreate != null">`gmt_create` = #{gmtCreate}, </if>
+			<if test="gmtModified != null">`gmt_modified` = #{gmtModified}</if>
+			<if test="investCode != null">`invest_code` = #{investCode}</if>
+		</set>
+		where user_id = #{userId}
+	</update>
+
+	<delete id="remove">
+		delete from sys_user where user_id = #{value}
+	</delete>
+
+	<delete id="batchRemove">
+		delete from sys_user where user_id in
+		<foreach item="userId" collection="array" open="(" separator=","
+			close=")">
+			#{userId}
+		</foreach>
+	</delete>
+
+</mapper>

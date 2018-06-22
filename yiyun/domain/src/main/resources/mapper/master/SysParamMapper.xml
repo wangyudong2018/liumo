@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yiyun.dao.master.SysParamDao">
+
+	<insert id="save" parameterType="com.yiyun.domain.SysParam" useGeneratedKeys="true" keyProperty="id">
+		insert into sys_param
+		(
+			`type`, 
+			`description`, 
+			`code`, 
+			`name`, 
+			`value`, 
+			`remark`, 
+			`status`, 
+			`sort`, 
+			`creator`, 
+			`create_time`
+		)
+		values
+		(
+			#{type}, 
+			#{description}, 
+			#{code}, 
+			#{name}, 
+			#{value}, 
+			#{remark}, 
+			#{status}, 
+			#{sort}, 
+			#{creator}, 
+			#{createTime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.yiyun.domain.SysParam">
+		update sys_param
+		<set>
+			<if test="type != null">`type` = #{type}, </if>
+			<if test="description != null">`description` = #{description}, </if>
+			<if test="code != null">`code` = #{code}, </if>
+			<if test="name != null">`name` = #{name}, </if>
+			<if test="value != null">`value` = #{value}, </if>
+			<if test="remark != null">`remark` = #{remark}, </if>
+			<if test="status != null">`status` = #{status}, </if>
+			<if test="sort != null">`sort` = #{sort}, </if>
+			<if test="creator != null">`creator` = #{creator}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from sys_param where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from sys_param where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yiyun.dao.master.UBlacklistDao">
+    <insert id="save" parameterType="com.yiyun.domain.UBlacklistDO" useGeneratedKeys="true" keyProperty="id">
+		insert into u_blacklist
+		(
+			`user_id`,
+		    `user_name`,
+		    `user_idcard`,
+		    `user_phone`,
+			`add_time`, 
+			`remark`, 
+			`source`, 
+			`opeator`, 
+			`create_time`,
+		    `black_state`,
+		    `Column1`,
+			`Column2`, 
+			`Column3`
+		)
+		values
+		(
+			#{userId},
+		    #{userName},
+		    #{userIdcard},
+		    #{userPhone},
+			#{addTime}, 
+			#{remark}, 
+			#{source}, 
+			#{opeator}, 
+			#{createTime},
+		    #{blackState},
+			#{column1}, 
+			#{column2}, 
+			#{column3}
+		)
+	</insert>
+
+    <update id="update" parameterType="com.yiyun.domain.UBlacklistDO">
+		update u_blacklist
+		<set>
+			<if test="userId != null">`user_id` = #{userId}, </if>
+			<if test="userName != null">`user_name` = #{userName}, </if>
+			<if test="userIdcard != null">`user_idcard` = #{userIdcard}, </if>
+			<if test="userPhone != null">`user_phone` = #{userPhone}, </if>
+			<if test="addTime != null">`add_time` = #{addTime}, </if>
+			<if test="blackState != null">`black_state` = #{blackState}, </if>
+			<if test="remark != null">`remark` = #{remark}, </if>
+			<if test="source != null">`source` = #{source}, </if>
+			<if test="opeator != null">`opeator` = #{opeator}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="column1 != null">`Column1` = #{column1}, </if>
+			<if test="column2 != null">`Column2` = #{column2}, </if>
+			<if test="column3 != null">`Column3` = #{column3}</if>
+		</set>
+		where user_id = #{userId}
+	</update>
+	
+	<delete id="remove">
+		delete from u_blacklist where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from u_blacklist where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

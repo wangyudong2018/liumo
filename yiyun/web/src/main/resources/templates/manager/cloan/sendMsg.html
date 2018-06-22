@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<link href="/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+<link href="/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+<link href="/css/animate.css" rel="stylesheet">
+<link href="/css/layui.css" rel="stylesheet">
+<link href="/css/style.css?v=4.1.0" rel="stylesheet">
+<body class="gray-bg">
+<div class="wrapper wrapper-content ">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t" id="signupForm">
+                        <input id="id" name="id" th:value="${id}" type="hidden">
+                        <div class="bootstrap-table">
+                            <table data-mobile-responsive="true" id="exampleTable" class="table table-bordered table-hover table-striped">
+                                <tbody id="msgTbody">
+                                <tr th:each="msg : ${msgList}">
+                                    <td th:utext="${msg.showMsg}" class="msgTemplate"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <textarea id="msgcontent" class="form-control" type="text"></textarea>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" align="center">
+                                        <button type="button" class="btn btn-danger" onclick="sendConfirm()">确认发送</button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:include="include::footer"></div>
+<script src="/js/content.js?v=1.0.0"></script>
+<script src="/js/layui.js"></script>
+<script src="/js/plugins/clipboard/clipboard.min.js"></script>
+<script src="/js/plugins/layer/layer.min.js"></script>
+<script src="/js/vue.min.js"></script>
+<script type="text/javascript">
+    function sendConfirm() {
+        layer.confirm("确认发送短信吗? 点击确定后不可取消", {
+            btn: ['确定', '取消']
+        }, function () {
+            console.log(">>> 请求发送短信 内容 : " + $("#msgcontent").val());
+            $.ajax({
+                cache: true,
+                type: "POST",
+                url: "/manager/cloan/sendConfirm",
+                data: {"id": $("#id").val(), "content": $("#msgcontent").val()},
+                async: false,
+                error: function (request) {
+                    parent.layer.alert("Connection error");
+                },
+                success: function (data) {
+                    if (data.code == 0) {
+                        parent.layer.msg("发送成功");
+                        // parent.reLoad();
+                        var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+                        parent.layer.close(index);
+
+                    } else {
+                        parent.layer.alert(data.msg)
+                    }
+
+                }
+            });
+        });
+    }
+
+    $(function () {
+        $(document).on('click', '.msgTemplate', function () {
+            $("#msgcontent").val($(this).text());
+        });
+    })
+</script>
+</body>
+</html>

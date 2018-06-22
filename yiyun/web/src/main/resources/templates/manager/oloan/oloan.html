@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns:shiro="http://www.w3.org/1999/xhtml">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content ">
+    <input id="type" th:value="${type}" type="hidden">
+    <div class="col-sm-12">
+        <div class="ibox">
+            <div class="ibox-body">
+                <div class="fixed-table-toolbar">
+                    <div class="columns pull-left">
+                        <button class="btn  btn-success" onclick="javascript:history.go(-1)" type="button" th:if="${mtype != null}">
+                            <i aria-hidden="true" class="fa fa-mail-reply"></i>返回
+                        </button>
+                    </div>
+                    <div class="columns pull-right">
+                        <button class="btn btn-success" onclick="reLoad(1)">查询</button>
+                        <button class="btn btn-danger" onclick="pmclear(1)">重置</button>
+                    </div>
+                    <div class="columns pull-right col-md-1">
+                        <input id="column1" type="text" class="form-control pmclear"
+                               placeholder="邀请码">
+                    </div>
+                    <div class="columns pull-right col-md-1" th:if="${type == 2}">
+                        <select id="orderStatus" name="orderStatus" class="form-control pmclear">
+                            <option value="" selected="selected">订单状态</option>
+                            <option th:each="status : ${statusList}" th:value="${status.value}" th:text="${status.name}"></option>
+                        </select>
+                    </div>
+                    <div class="columns pull-right col-md-2" th:if="${type == 2}">
+                        <input id="operateTime" type="text" class="form-control time-scope pmclear"
+                               placeholder="订单处理时间">
+                    </div>
+                    <div class="columns pull-right col-md-1" th:if="${type == 2}">
+                        <select id="column3" name="column3" class="form-control pmclear">
+                            <option value="" selected="selected">运营岗</option>
+                            <option th:each="ouser : ${userList}" th:value="${ouser.userId}" th:text="${ouser.name}"></option>
+                        </select>
+                    </div>
+                    <div class="columns pull-right col-md-2">
+                        <input id="commitTime" type="text" class="form-control time-scope pmclear"
+                               placeholder="订单提交时间">
+                    </div>
+                    <div class="columns pull-right col-md-1">
+                        <select id="city" name="city" class="form-control pmclear">
+                            <option value="" selected="selected">业务区域</option>
+                            <option th:each="city : ${cityList}" th:value="${city.name}" th:text="${city.name}"></option>
+                        </select>
+                    </div>
+                    <div class="columns pull-right col-md-2">
+                        <input id="loanMemberPhone" type="text" class="form-control pmclear"
+                               placeholder="注册手机号码">
+                    </div>
+                </div>
+                <table id="exampleTable" data-mobile-responsive="true">
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:include="include :: footer"></div>
+<script type="text/javascript" src="/js/appjs/manager/oloan/oloan.js"></script>
+<script type="text/javascript">
+    //同时绑定多个
+    lay('.time-scope').each(function () {
+        laydate.render({
+            elem: this
+            , range: '~'
+        });
+    });
+</script>
+</body>
+</html>

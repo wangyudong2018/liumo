@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yiyun.dao.cluster.ClusterLoanDao">
+
+    <select id="get" resultType="com.yiyun.domain.Loan">
+		select `id`,`order_sn`,`product_id`,`loan_member_id`,`loan_member_phone`,`order_step`,`order_status`,`expect_amount`,`loan_amount`,`real_amount`,`loan_limit`,`limit_unit`,`loan_begin_time`,`loan_end_time`,`product_type`,`city`,`area`,`source`,`photo`,`report`,`member_data`,`bank_water`,`other_data`,`loan_plan`,`client`,`operator`,`customer`,`create_time`,`client_time`,`operator_time`,`customer_time`,`loan_time`,`pay_plan_time`,`repay_time`,`wechat_phone`,`remark`,`column1`,`column2`,`column3`,`column4`,`column5`,`partner` from o_loan where id = #{value}
+	</select>
+
+    <select id="list" resultType="com.yiyun.domain.Loan">
+        select
+        `id`,`order_sn`,`product_id`,`loan_member_id`,`loan_member_phone`,`order_step`,`order_status`,`expect_amount`,`loan_amount`,`real_amount`,`loan_limit`,`limit_unit`,`loan_begin_time`,`loan_end_time`,`product_type`,`city`,`area`,`source`,`photo`,`report`,`member_data`,`bank_water`,`other_data`,`loan_plan`,`client`,`operator`,`customer`,`create_time`,`client_time`,`operator_time`,`customer_time`,`loan_time`,`pay_plan_time`,`repay_time`,`wechat_phone`,`remark`,`column1`,`column2`,`column3`,`column4`,`column5`,`partner`
+        from o_loan
+        <where>
+            <if test="id != null and id != ''">and id = #{id}</if>
+            <if test="orderSn != null and orderSn != ''">and order_sn = #{orderSn}</if>
+            <if test="productId != null and productId != ''">and product_id = #{productId}</if>
+            <if test="loanMemberId != null and loanMemberId != ''">and loan_member_id = #{loanMemberId}</if>
+            <if test="partner != null and partner != ''">and partner = #{partner}</if>
+            <if test="loanMemberPhone != null and loanMemberPhone != ''">and loan_member_phone like CONCAT('%', #{loanMemberPhone})</if>
+            <if test="orderStep != null and orderStep != ''">and order_step = #{orderStep}</if>
+            <if test="orderStatus != null and orderStatus != ''">and order_status = #{orderStatus}</if>
+            <if test="expectAmount != null and expectAmount != ''">and expect_amount = #{expectAmount}</if>
+            <if test="loanAmount != null and loanAmount != ''">and loan_amount = #{loanAmount}</if>
+            <if test="realAmount != null and realAmount != ''">and real_amount = #{realAmount}</if>
+            <if test="loanLimit != null and loanLimit != ''">and loan_limit = #{loanLimit}</if>
+            <if test="limitUnit != null and limitUnit != ''">and limit_unit = #{limitUnit}</if>
+            <if test="loanBeginTime != null and loanBeginTime != ''">and loan_begin_time = #{loanBeginTime}</if>
+            <if test="loanEndTime != null and loanEndTime != ''">and loan_end_time = #{loanEndTime}</if>
+            <if test="productType != null and productType != ''">and product_type = #{productType}</if>
+            <if test="city != null and city != ''">and city = #{city}</if>
+            <if test="area != null and area != ''">and area = #{area}</if>
+            <if test="source != null and source != ''">and source = #{source}</if>
+            <if test="photo != null and photo != ''">and photo = #{photo}</if>
+            <if test="report != null and report != ''">and report = #{report}</if>
+            <if test="memberData != null and memberData != ''">and member_data = #{memberData}</if>
+            <if test="bankWater != null and bankWater != ''">and bank_water = #{bankWater}</if>
+            <if test="otherData != null and otherData != ''">and other_data = #{otherData}</if>
+            <if test="loanPlan != null and loanPlan != ''">and loan_plan = #{loanPlan}</if>
+            <if test="client != null and client != ''">and client = #{client}</if>
+            <if test="operator != null and operator != ''">and operator = #{operator}</if>
+            <if test="customer != null and customer != ''">and customer = #{customer}</if>
+            <if test="createTime != null and createTime != ''">and create_time = #{createTime}</if>
+
+            <if test="timeLow != null and timeLow != ''">and create_time &gt;= #{timeLow}</if>
+            <if test="timeUp != null and timeUp != ''">and create_time &lt; #{timeUp}</if>
+            <if test="operateTimeBegin != null and operateTimeBegin != ''">and operator_time &gt;= #{operateTimeBegin}</if>
+            <if test="operateTimeEnd != null and operateTimeEnd != ''">and operator_time &lt; #{operateTimeEnd}</if>
+
+            <if test="orderStatusList != null">
+                and order_status in
+                <foreach item="oStatus" collection="orderStatusList" open="(" separator="," close=")">
+                    #{oStatus}
+                </foreach>
+            </if>
+
+            <if test="clientTime != null and clientTime != ''">and client_time = #{clientTime}</if>
+            <if test="operatorTime != null and operatorTime != ''">and operator_time = #{operatorTime}</if>
+            <if test="customerTime != null and customerTime != ''">and customer_time = #{customerTime}</if>
+            <if test="loanTime != null and loanTime != ''">and loan_time = #{loanTime}</if>
+            <if test="payPlanTime != null and payPlanTime != ''">and pay_plan_time = #{payPlanTime}</if>
+            <if test="repayTime != null and repayTime != ''">and repay_time = #{repayTime}</if>
+            <if test="wechatPhone != null and wechatPhone != ''">and wechat_phone = #{wechatPhone}</if>
+            <if test="remark != null and remark != ''">and remark = #{remark}</if>
+            <if test="column1 != null and column1 != ''">and column1 = #{column1}</if>
+            <if test="column2 != null and column2 != ''">and column2 = #{column2}</if>
+            <if test="column3 != null and column3 != ''">and column3 = #{column3}</if>
+            <if test="column4 != null and column4 != ''">and column4 = #{column4}</if>
+            <if test="column5 != null and column5 != ''">and column5 = #{column5}</if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from o_loan
+        <where>
+            <if test="id != null and id != ''">and id = #{id}</if>
+            <if test="orderSn != null and orderSn != ''">and order_sn = #{orderSn}</if>
+            <if test="productId != null and productId != ''">and product_id = #{productId}</if>
+            <if test="loanMemberId != null and loanMemberId != ''">and loan_member_id = #{loanMemberId}</if>
+            <if test="partner != null and partner != ''">and partner = #{partner}</if>
+            <if test="loanMemberPhone != null and loanMemberPhone != ''">and loan_member_phone like CONCAT('%', #{loanMemberPhone})</if>
+            <if test="orderStep != null and orderStep != ''">and order_step = #{orderStep}</if>
+            <if test="orderStatus != null and orderStatus != ''">and order_status = #{orderStatus}</if>
+            <if test="expectAmount != null and expectAmount != ''">and expect_amount = #{expectAmount}</if>
+            <if test="loanAmount != null and loanAmount != ''">and loan_amount = #{loanAmount}</if>
+            <if test="realAmount != null and realAmount != ''">and real_amount = #{realAmount}</if>
+            <if test="loanLimit != null and loanLimit != ''">and loan_limit = #{loanLimit}</if>
+            <if test="limitUnit != null and limitUnit != ''">and limit_unit = #{limitUnit}</if>
+            <if test="loanBeginTime != null and loanBeginTime != ''">and loan_begin_time = #{loanBeginTime}</if>
+            <if test="loanEndTime != null and loanEndTime != ''">and loan_end_time = #{loanEndTime}</if>
+            <if test="productType != null and productType != ''">and product_type = #{productType}</if>
+            <if test="city != null and city != ''">and city = #{city}</if>
+            <if test="area != null and area != ''">and area = #{area}</if>
+            <if test="source != null and source != ''">and source = #{source}</if>
+            <if test="photo != null and photo != ''">and photo = #{photo}</if>
+            <if test="report != null and report != ''">and report = #{report}</if>
+            <if test="memberData != null and memberData != ''">and member_data = #{memberData}</if>
+            <if test="bankWater != null and bankWater != ''">and bank_water = #{bankWater}</if>
+            <if test="otherData != null and otherData != ''">and other_data = #{otherData}</if>
+            <if test="loanPlan != null and loanPlan != ''">and loan_plan = #{loanPlan}</if>
+            <if test="client != null and client != ''">and client = #{client}</if>
+            <if test="operator != null and operator != ''">and operator = #{operator}</if>
+            <if test="customer != null and customer != ''">and customer = #{customer}</if>
+            <if test="createTime != null and createTime != ''">and create_time = #{createTime}</if>
+
+            <if test="timeLow != null and timeLow != ''">and create_time &gt;= #{timeLow}</if>
+            <if test="timeUp != null and timeUp != ''">and create_time &lt; #{timeUp}</if>
+            <if test="operateTimeBegin != null and operateTimeBegin != ''">and operator_time &gt;= #{operateTimeBegin}</if>
+            <if test="operateTimeEnd != null and operateTimeEnd != ''">and operator_time &lt; #{operateTimeEnd}</if>
+            <if test="orderStatusList != null">
+                and order_status in
+                <foreach item="oStatus" collection="orderStatusList" open="(" separator="," close=")">
+                    #{oStatus}
+                </foreach>
+            </if>
+
+            <if test="clientTime != null and clientTime != ''">and client_time = #{clientTime}</if>
+            <if test="operatorTime != null and operatorTime != ''">and operator_time = #{operatorTime}</if>
+            <if test="customerTime != null and customerTime != ''">and customer_time = #{customerTime}</if>
+            <if test="loanTime != null and loanTime != ''">and loan_time = #{loanTime}</if>
+            <if test="payPlanTime != null and payPlanTime != ''">and pay_plan_time = #{payPlanTime}</if>
+            <if test="repayTime != null and repayTime != ''">and repay_time = #{repayTime}</if>
+            <if test="wechatPhone != null and wechatPhone != ''">and wechat_phone = #{wechatPhone}</if>
+            <if test="remark != null and remark != ''">and remark = #{remark}</if>
+            <if test="column1 != null and column1 != ''">and column1 = #{column1}</if>
+            <if test="column2 != null and column2 != ''">and column2 = #{column2}</if>
+            <if test="column3 != null and column3 != ''">and column3 = #{column3}</if>
+            <if test="column4 != null and column4 != ''">and column4 = #{column4}</if>
+            <if test="column5 != null and column5 != ''">and column5 = #{column5}</if>
+        </where>
+    </select>
+
+    <select id="selectMaxSn" resultType="string">
+      select max(order_sn) from o_loan
+      where order_sn like CONCAT(#{pref} , '%')
+      order by order_sn desc
+    </select>
+</mapper>

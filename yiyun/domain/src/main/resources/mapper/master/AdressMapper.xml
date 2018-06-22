@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yiyun.dao.master.AdressDao">
+    <insert id="save" parameterType="com.yiyun.domain.Adress"            useGeneratedKeys="true" keyProperty="id">
+		insert into p_adress
+		(
+			`type`, 
+			`city`, 
+			`area`, 
+			`phone`, 
+			`detail_adress`, 
+			`status`, 
+			`create_time`, 
+			`update_time`
+		)
+		values
+		(
+			#{type}, 
+			#{city}, 
+			#{area}, 
+			#{phone}, 
+			#{detailAdress}, 
+			#{status}, 
+			#{createTime}, 
+			#{updateTime}
+		)
+	</insert>
+
+    <update id="update" parameterType="com.yiyun.domain.Adress">
+		update p_adress
+		<set>
+			<if test="type != null">`type` = #{type}, </if>
+			<if test="city != null">`city` = #{city}, </if>
+			<if test="area != null">`area` = #{area}, </if>
+			<if test="phone != null">`phone` = #{phone}, </if>
+			<if test="detailAdress != null">`detail_adress` = #{detailAdress}, </if>
+			<if test="status != null">`status` = #{status}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from p_adress where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from p_adress where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

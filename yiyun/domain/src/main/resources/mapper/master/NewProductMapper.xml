@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yiyun.dao.master.NewProductDao">
+    <insert id="save" parameterType="com.yiyun.domain.NewProduct" useGeneratedKeys="true" keyProperty="id">
+		insert into p_new_product
+		(
+			`name`,
+			`content`,
+			`advantage`,
+			`inferiority`,
+			`position`,
+			`type1`,
+			`type2`,
+			`status`,
+			`create_time`,
+			`update_time`
+		)
+		values
+		(
+			#{name},
+			#{content},
+			#{advantage},
+			#{inferiority},
+			#{position},
+			#{type1},
+			#{type2},
+			#{status},
+			#{createTime}, 
+			#{updateTime}
+		)
+	</insert>
+
+    <update id="update" parameterType="com.yiyun.domain.NewProduct">
+        update p_new_product
+        <set>
+            <if test="name != null">`name` = #{name},</if>
+            <if test="content != null">`content` = #{content},</if>
+            <if test="advantage != null">`advantage` = #{advantage},</if>
+            <if test="inferiority != null">`inferiority` = #{inferiority},</if>
+            <if test="position != null">`position` = #{position},</if>
+            <if test="type1 != null">`type1` = #{type1},</if>
+            <if test="type2 != null">`type2` = #{type2},</if>
+            <if test="status != null">`status` = #{status},</if>
+            <if test="createTime != null">`create_time` = #{createTime},</if>
+            <if test="updateTime != null">`update_time` = #{updateTime}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="remove">
+		delete from p_new_product where id = #{value}
+	</delete>
+
+    <delete id="batchRemove">
+        delete from p_new_product where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

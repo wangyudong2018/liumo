@@ -1,0 +1,28 @@
+spring:
+  thymeleaf:
+    mode: LEGACYHTML5
+    cache: false
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+  profiles: 
+    active: dev
+  http:
+    multipart:
+      max-file-size: 30Mb
+      max-request-size: 30Mb
+  devtools:
+    restart:
+      enabled: true
+    additional-paths: src/main/java
+    exclude: static/**,templates/**,**.html
+  resources:
+    static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/
+  logging:
+    level:
+      root: info
+
+server:
+  port: 80
+  tomcat:
+    uri-encoding: utf-8

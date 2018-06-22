@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns:shiro="http://www.w3.org/1999/xhtml">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content ">
+    <input id="type" th:value="${type}" type="hidden">
+    <div class="col-sm-12">
+        <div class="ibox">
+            <div class="ibox-body">
+                <div class="fixed-table-toolbar">
+                    <div class="columns pull-left">
+                    </div>
+                    <div class="columns pull-right">
+                        <button class="btn btn-success" onclick="reLoad(1)">查询</button>
+                        <button class="btn btn-danger" onclick="pmclear(1)">重置</button>
+                    </div>
+                    <div class="columns pull-right col-md-2">
+                        <input id="searchTime" type="text" class="form-control pmclear"
+                               placeholder="注册时间">
+                    </div>
+                    <div class="columns pull-right col-md-2">
+                        <input id="phone" type="text" class="form-control pmclear"
+                               placeholder="手机号码">
+                    </div>
+                    <div class="columns pull-right col-md-2">
+                        <input id="investerCode" type="text" class="form-control pmclear"
+                               placeholder="邀请码">
+                    </div>
+                    <div class="columns pull-right col-md-2">
+                        <input id="id" type="text" class="form-control pmclear"
+                               placeholder="合伙人编号">
+                    </div>
+                </div>
+                <table id="exampleTable" data-mobile-responsive="true">
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
+<div>
+    <script type="text/javascript">
+        var s_edit_h = 'hidden';
+        var s_remove_h = 'hidden';
+        var s_resetPwd_h = 'hidden';
+    </script>
+</div>
+<div shiro:hasPermission="query:member:edit">
+    <script type="text/javascript">
+        s_edit_h = '';
+    </script>
+</div>
+<div th:include="include :: footer"></div>
+<script type="text/javascript" src="/js/appjs/query/member/member1.js"></script>
+<script type="text/javascript">
+    //执行一个laydate实例
+    laydate.render({
+        elem: '#searchTime' //指定元素
+        ,max: 0//只可选已过时间
+    });
+</script>
+</body>
+</html>

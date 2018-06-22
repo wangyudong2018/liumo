@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yiyun.dao.master.UFeedbackDao">
+
+    <insert id="save" parameterType="com.yiyun.domain.UFeedbackDO" useGeneratedKeys="true" keyProperty="id">
+		insert into u_feedback
+		(
+			`member_id`, 
+			`name`, 
+			`phone`,
+			`type`,
+			`message`, 
+			`advice`, 
+			`status`,
+			`phone_model`,
+			`operating_system`,
+			`phone_imei`,
+			`operator`, 
+			`create_time`, 
+			`deal_time`
+		)
+		values
+		(
+			#{memberId}, 
+			#{name}, 
+			#{phone}, 
+			#{type},
+			#{message},
+			#{advice}, 
+			#{status},
+			#{phoneModel},
+			#{operatingSystem},
+			#{phoneImei},
+			#{operator}, 
+			#{createTime}, 
+			#{dealTime}
+		)
+	</insert>
+
+    <update id="update" parameterType="com.yiyun.domain.UFeedbackDO">
+        update u_feedback
+        <set>
+            <if test="memberId != null">`member_id` = #{memberId},</if>
+            <if test="name != null">`name` = #{name},</if>
+            <if test="phone != null">`phone` = #{phone},</if>
+            <if test="message != null">`message` = #{message},</if>
+            <if test="advice != null">`advice` = #{advice},</if>
+            <if test="status != null">`status` = #{status},</if>
+            <if test="phoneModel != null">and phoneModel = #{phoneModel}</if>
+            <if test="operatingSystem != null">and operatingSystem = #{operator}</if>
+            <if test="phoneImei != null">and phoneImei = #{phoneImei}</if>
+            <if test="operator != null">`operator` = #{operator},</if>
+            <if test="createTime != null">`create_time` = #{createTime},</if>
+            <if test="dealTime != null">`deal_time` = #{dealTime}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="remove">
+		delete from u_feedback where id = #{value}
+	</delete>
+
+    <delete id="batchRemove">
+        delete from u_feedback where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

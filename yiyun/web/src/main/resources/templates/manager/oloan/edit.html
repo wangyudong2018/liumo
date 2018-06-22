@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<link href="/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+<link href="/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+<link href="/css/animate.css" rel="stylesheet">
+<link href="/css/layui.css" rel="stylesheet">
+<link href="/css/style.css?v=4.1.0" rel="stylesheet">
+<body class="gray-bg">
+<div class="wrapper wrapper-content ">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <label class="control-label">订单编号：<span th:text="${loan.orderSn}"></span></label>
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t" id="signupForm">
+                        <input id="id" name="id" th:value="${loan.id}" type="hidden">
+                        <input id="loanMemberId" name="loanMemberId" th:value="${loan.loanMemberId}" type="hidden">
+                        <input id="orderStatus" name="orderStatus" th:value="${loan.orderStatus}" type="hidden">
+                        <input id="orderStep" name="orderStep" th:value="${loan.orderStep}" type="hidden">
+                        <div class="bootstrap-table">
+                            <table data-mobile-responsive="true" id="exampleTable" class="table table-bordered table-hover table-striped">
+                                <tbody>
+                                <tr>
+                                    <td>订单提交时间：</td>
+                                    <td th:text="${#dates.format(loan.createTime,'yyyy-MM-dd HH:mm:ss')}"></td>
+                                    <td>订单来源：</td>
+                                    <td th:text="${loan.source}"></td>
+                                </tr>
+                                <tr>
+                                    <td>业务区域：</td>
+                                    <td th:text="${loan.city}"></td>
+                                    <td>注册手机号码：</td>
+                                    <td th:text="${loan.loanMemberPhone}"></td>
+                                </tr>
+                                <tr>
+                                    <td>申请金额：</td>
+                                    <td th:text="${loan.loanAmount != null ? #numbers.formatInteger(loan.loanAmount , 0) : ''}"></td>
+                                    <td>订单照片：</td>
+                                    <td th:if="${isSuper == 1 ||  loan.orderStatus == 1}">
+                                        <input id="photo" name="memberData" th:value="${loan.photo}" hidden/>
+                                        <button type="button" class="btn btn-success" onclick="showImg(1)">查看</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>评估值：</td>
+                                    <td th:if="${loan.orderStatus == 1}">
+                                        <input id="expectAmount" name="expectAmount"
+                                               th:value="${loan.expectAmount != null ? #numbers.formatInteger(loan.expectAmount , 0) : ''}" type="text">&nbsp;万元
+                                    </td>
+                                    <td th:if="${loan.orderStatus != 1}"
+                                        th:text="${loan.expectAmount != null ? (#numbers.formatInteger(loan.expectAmount , 0) + '万元') : ''}">
+                                    </td>
+                                    <td>商务岗：</td>
+                                    <td th:if="${loan.orderStatus == 1}">
+                                        <input id="customer" name="customer" th:value="${loan.customer}" type="hidden">
+                                        <select id="column4" name="column4" class="form-control pmclear">
+                                            <option value="" selected="selected">商务岗</option>
+                                            <option th:each="ouser : ${userList}" th:value="${ouser.userId}" th:text="${ouser.name}"
+                                                    th:selected="${ouser.name == loan.customer}"></option>
+                                        </select></td>
+                                    <td th:if="${loan.orderStatus != 1}" th:text="${loan.customer}"></td>
+                                </tr>
+                                <tr>
+                                    <td>下载客户信息：</td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary" th:if="${isSuper == 1 || loan.orderStatus == 1}">Excel下载</button>
+                                    </td>
+                                    <td>操作员：</td>
+                                    <td th:text="${loginUserName}"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div class="form-group" th:if="${loan.orderStatus == 1}">
+                                <div class="col-sm-8 col-sm-offset-4">
+                                    <button type="button" class="btn btn-primary" onclick="operate(1)">受理成功</button>
+                                    <button type="button" class="btn btn-danger" onclick="operate(2)">受理失败</button>
+                                    <button type="button" class="btn btn-success" onclick="operate(3)">保存</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:include="include::footer"></div>
+<script src="/js/content.js?v=1.0.0"></script>
+<script src="/js/layui.js"></script>
+<script src="/js/plugins/clipboard/clipboard.min.js"></script>
+<script src="/js/plugins/layer/layer.min.js"></script>
+<script src="/js/vue.min.js"></script>
+<script type="text/javascript" src="/js/appjs/manager/oloan/edit.js">
+</script>
+<script type="text/javascript">
+    $(function () {
+        /** 图片预览 */
+        $(document).on('click', ".image", function () {
+            var imgPath = $(this).children("img").first().attr("src");
+            layer.open({
+                type: 0,
+                btn: [],
+                closeBtn: 0,
+                shadeClose: true,
+                title: false,
+                content: '<img class="img-responsive" src="' + imgPath + '"/>'
+            });
+        });
+
+        /** 图片查看 */
+        $(document).on('click', ".showimg", function () {
+            var imgPath = $(this).prev().attr("value");
+            layer.open({
+                type: 0,
+                btn: [],
+                closeBtn: 0,
+                shadeClose: true,
+                title: false,
+                area: '600px',
+                content: '<img class="img-responsive" src="' + imgPath + '"/>'
+            });
+        });
+    });
+</script>
+</body>
+</html>

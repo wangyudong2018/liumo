@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns:shiro="http://www.w3.org/1999/xhtml">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content ">
+    <div class="col-sm-12">
+        <div class="ibox">
+            <div class="ibox-body">
+                <div class="fixed-table-toolbar">
+                    <div class="columns pull-left">
+                        <button shiro:hasPermission="oReserve:add"
+                                type="button" class="btn btn-primary" onclick="add()">
+                            <i class="fa fa-hand-paper-o" aria-hidden="true"></i> 领取任务
+                        </button>
+                    </div>
+                    <div class="columns pull-right">
+                        <button class="btn btn-success" onclick="reLoad(1)">查询</button>
+                    </div>
+                    <div class="columns pull-right col-md-2">
+                        <select data-placeholder="预约状态" class="form-control chosen-select" id="reserveStauts"
+                                tabindex="3" style="width: 100%">
+                            <option value="" selected="selected">请选择状态</option>
+                            <option value="1">新申请</option>
+                            <option value="2">已受理</option>
+                        </select>
+                    </div>
+                    <div class="columns pull-right col-md-2">
+                        <input id="userPhone" type="text" class="form-control"
+                               placeholder="联系电话">
+                    </div>
+                    <div class="columns pull-right col-md-2">
+                        <input id="userName" type="text" class="form-control"
+                               placeholder="姓名">
+                    </div>
+                </div>
+                <table id="exampleTable" data-mobile-responsive="true">
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 商家核对审核 -->
+<div class="modal fade" id="reserveCheck" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content border-none">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true">&times;
+                </button>
+                <h3 class="modal-title" id="modalTitle">面谈结果</h3>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="commitId">
+                <table class="table table-primary table-vertical-center">
+                    <tr>
+                        <td class="col-md-3 text-right">洽谈结果：</td>
+                        <td>
+                            <select id="commitStauts" class="selectpicker bla bla bli" data-live-search="true">
+                                <option value="4">成功</option>
+                                <option value="5">失败</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-3 text-right">订单备注：</td>
+                        <td>
+								<textarea type="text" class="form-control" name="content"
+                                          id="commitRemark" style="resize: none;" rows="6"></textarea>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button id="reserveCommit" type="submit" class="btn btn-primary">
+                    <i class="fa fa-check-circle"></i>确定
+                </button>
+                <a href="#" class="btn btn-default" data-dismiss="modal"><i
+                        class="fa fa-times"></i>&nbsp;取消</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
+<div>
+    <script type="text/javascript">
+        var s_edit_h = 'hidden';
+        var s_cancel_h = 'hidden';
+        var s_check_h = 'hidden';
+    </script>
+</div>
+<div shiro:hasPermission="oReserve:edit">
+    <script type="text/javascript">
+        s_edit_h = '';
+    </script>
+</div>
+<div shiro:hasPermission="oReserve:cancel">
+    <script type="text/javascript">
+        s_cancel_h = '';
+    </script>
+</div>
+<div shiro:hasPermission="oReserve:check">
+    <script type="text/javascript">
+        s_check_h = '';
+    </script>
+</div>
+<div th:include="include :: footer"></div>
+<script type="text/javascript" src="/js/appjs/order/oReserve/oReserve.js"></script>
+</body>
+</html>

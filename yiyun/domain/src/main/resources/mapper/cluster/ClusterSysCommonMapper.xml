@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yiyun.dao.cluster.ClusterSysCommonDao">
+
+	<select id="get" resultType="com.yiyun.domain.SysCommon">
+		select `id`,`member_id`,`phone`,`chl_id`,`device_no`,`clt_type`,`imsi`,`imei`,`phone_model`,`phone_brand`,`os_version`,`mac_add`,`cpu_model`,`cpu_frequency`,`timestamp`,`sign`,`version`,`token`,`create_time` from sys_common where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.yiyun.domain.SysCommon">
+		select `id`,`member_id`,`phone`,`chl_id`,`device_no`,`clt_type`,`imsi`,`imei`,`phone_model`,`phone_brand`,`os_version`,`mac_add`,`cpu_model`,`cpu_frequency`,`timestamp`,`sign`,`version`,`token`,`create_time` from sys_common
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="memberId != null and memberId != ''"> and member_id = #{memberId} </if>
+		  		  <if test="phone != null and phone != ''"> and phone = #{phone} </if>
+		  		  <if test="chlId != null and chlId != ''"> and chl_id = #{chlId} </if>
+		  		  <if test="deviceNo != null and deviceNo != ''"> and device_no = #{deviceNo} </if>
+		  		  <if test="cltType != null and cltType != ''"> and clt_type = #{cltType} </if>
+		  		  <if test="imsi != null and imsi != ''"> and imsi = #{imsi} </if>
+		  		  <if test="imei != null and imei != ''"> and imei = #{imei} </if>
+		  		  <if test="phoneModel != null and phoneModel != ''"> and phone_model = #{phoneModel} </if>
+		  		  <if test="phoneBrand != null and phoneBrand != ''"> and phone_brand = #{phoneBrand} </if>
+		  		  <if test="osVersion != null and osVersion != ''"> and os_version = #{osVersion} </if>
+		  		  <if test="macAdd != null and macAdd != ''"> and mac_add = #{macAdd} </if>
+		  		  <if test="cpuModel != null and cpuModel != ''"> and cpu_model = #{cpuModel} </if>
+		  		  <if test="cpuFrequency != null and cpuFrequency != ''"> and cpu_frequency = #{cpuFrequency} </if>
+		  		  <if test="timestamp != null and timestamp != ''"> and timestamp = #{timestamp} </if>
+		  		  <if test="sign != null and sign != ''"> and sign = #{sign} </if>
+		  		  <if test="version != null and version != ''"> and version = #{version} </if>
+		  		  <if test="token != null and token != ''"> and token = #{token} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from sys_common
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="memberId != null and memberId != ''"> and member_id = #{memberId} </if>
+		  		  <if test="phone != null and phone != ''"> and phone = #{phone} </if>
+		  		  <if test="chlId != null and chlId != ''"> and chl_id = #{chlId} </if>
+		  		  <if test="deviceNo != null and deviceNo != ''"> and device_no = #{deviceNo} </if>
+		  		  <if test="cltType != null and cltType != ''"> and clt_type = #{cltType} </if>
+		  		  <if test="imsi != null and imsi != ''"> and imsi = #{imsi} </if>
+		  		  <if test="imei != null and imei != ''"> and imei = #{imei} </if>
+		  		  <if test="phoneModel != null and phoneModel != ''"> and phone_model = #{phoneModel} </if>
+		  		  <if test="phoneBrand != null and phoneBrand != ''"> and phone_brand = #{phoneBrand} </if>
+		  		  <if test="osVersion != null and osVersion != ''"> and os_version = #{osVersion} </if>
+		  		  <if test="macAdd != null and macAdd != ''"> and mac_add = #{macAdd} </if>
+		  		  <if test="cpuModel != null and cpuModel != ''"> and cpu_model = #{cpuModel} </if>
+		  		  <if test="cpuFrequency != null and cpuFrequency != ''"> and cpu_frequency = #{cpuFrequency} </if>
+		  		  <if test="timestamp != null and timestamp != ''"> and timestamp = #{timestamp} </if>
+		  		  <if test="sign != null and sign != ''"> and sign = #{sign} </if>
+		  		  <if test="version != null and version != ''"> and version = #{version} </if>
+		  		  <if test="token != null and token != ''"> and token = #{token} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		</where>
+	</select>
+	 
+
+</mapper>

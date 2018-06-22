@@ -1,0 +1,93 @@
+logging:
+  config: classpath:log4j2.yml
+app:
+  basePath: http://images.8818mall.com/
+  uploadPath: D:\\cardImage\\
+  sfimg: cardImg\\
+
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://118.190.76.84:3306/yiyun?useUnicode=true&characterEncoding=utf8
+    username: xiangmall
+    password: xiangmall_2017
+    initialSize: 1
+    minIdle: 3
+    maxActive: 20
+    # 配置获取连接等待超时的时间
+    maxWait: 60000
+    # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+    timeBetweenEvictionRunsMillis: 60000
+    # 配置一个连接在池中最小生存的时间，单位是毫秒
+    minEvictableIdleTimeMillis: 30000
+    validationQuery: select 'x'
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    # 打开PSCache，并且指定每个连接上PSCache的大小
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 20
+    # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+    filters: stat,wall,slf4j
+    # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+    # 合并多个DruidDataSource的监控数据
+    #useGlobalDataSourceStat: true
+
+    url2: jdbc:mysql://118.190.76.84:3306/yiyun?useUnicode=true&characterEncoding=utf8
+    username2: xiangmall
+    password2: xiangmall_2017
+
+  #rabbitmq
+  rabbitmq:
+    host: 118.190.76.84
+    port: 5672
+    username: qjinfo
+    password: qjinfo@2017
+
+  #mongoDb
+  data:
+    mongodb:
+#      uri: mongodb://192.169.1.110:27017/kuaijie
+      host: 118.190.76.84
+      port: 27017
+      username: root
+      password: test123q
+      database: admin
+      #连接超时时间
+      connectTimeout: 10000
+      #等待时间
+      maxWaitTime: 120000
+      #Socket超时时间
+      socketTimeout: 0
+      #用于控制socket保持活动
+      socketKeepAlive: false
+      #可用的最大阻塞数
+      threadsAllowedToBlockForConnectionMultiplier: 5
+      #每个host允许链接的最大链接数
+      connectionsPerHost: 10
+      #当链接空闲时,空闲线程池中最大链接数
+      minPoolsSize: 5
+
+  #redis
+  redis:
+    host: 118.190.76.84
+    port: 6379
+    password: QianJin@2017Bx
+    pool:
+      max-idle: 300
+      min-idle: 1
+      max-active: 600
+      max-wait: 1000
+
+#sms
+sms:
+  smsSwitch: false
+
+#七牛配置
+qiniuParam:
+  ACCESS_KEY: utkn1vI9wojCgNoThIwf5_g5rpNW3rrykoCbqj0a
+  SECRET_KEY: QO4GgCeM1OVAbD2Sxg9dGaA5dYTlIwQnd2VV-Qri
+  bucketname: zyzbootdo
+  qiniuurl: http://p0zf4lksu.bkt.clouddn.com/

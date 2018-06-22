@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns:shiro="http://www.w3.org/1999/xhtml">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content ">
+    <div class="col-sm-12">
+        <div class="ibox">
+            <div class="ibox-body">
+                <div class="fixed-table-toolbar">
+                    <div class="columns pull-left">
+                        <button shiro:hasPermission="operation:newProduct:add" type="button" class="btn  btn-primary" onclick="add()">
+                            <i class="fa fa-plus" aria-hidden="true"></i>添加
+                        </button>
+                        <button shiro:hasPermission="operation:newProduct:batchRemove" type="button" class="btn  btn-danger"
+                                onclick="batchRemove()">
+                            <i class="fa fa-trash" aria-hidden="true"></i>删除
+                        </button>
+                    </div>
+                    <div class="columns pull-right">
+                        <button class="btn btn-success" onclick="reLoad(1)">查询</button>
+                        <button class="btn btn-danger" onclick="pmclear(1)">重置</button>
+                    </div>
+                    <div class="columns pull-right col-md-1">
+                        <select id="status" name="status" class="form-control pmclear">
+                            <option value="" selected="selected">产品状态</option>
+                            <option value="1">启用</option>
+                            <option value="0">失效</option>
+                        </select>
+                    </div>
+                    <div class="columns pull-right col-md-2">
+                        <input id="modifyTime" type="text" class="form-control pmclear"
+                               placeholder="最新更新日期">
+                    </div>
+                    <div class="columns pull-right col-md-2">
+                        <input id="searchTime" type="text" class="form-control pmclear"
+                               placeholder="创建日期">
+                    </div>
+                    <!--<div class="columns pull-right col-md-1">
+                        <select id="type2" name="type2" class="form-control pmclear">
+                            <option value="" selected="selected">产品小类</option>
+                        </select>
+                    </div>-->
+                    <div class="columns pull-right col-md-1">
+                        <select id="type1" name="type1" class="form-control pmclear">
+                            <option value="" selected="selected">产品大类</option>
+                            <option th:each="type : ${typeList}" th:value="${type.name}" th:text="${type.name}" th:attr="mtype=${type.value}"></option>
+                        </select>
+                    </div>
+                    <div class="columns pull-right col-md-2">
+                        <input id="name" type="text" class="form-control pmclear"
+                               placeholder="产品名称">
+                    </div>
+                    <div class="columns pull-right col-md-1">
+                        <input id="id" type="text" class="form-control pmclear"
+                               placeholder="产品编号">
+                    </div>
+                </div>
+                <table id="exampleTable" data-mobile-responsive="true">
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
+<div>
+    <script type="text/javascript">
+        var s_edit_h = 'hidden';
+        var s_remove_h = 'hidden';
+        var s_resetPwd_h = 'hidden';
+    </script>
+</div>
+<div shiro:hasPermission="operation:newProduct:edit">
+    <script type="text/javascript">
+        s_edit_h = '';
+    </script>
+</div>
+<div shiro:hasPermission="operation:newProduct:remove">
+    <script type="text/javascript">
+        var s_remove_h = '';
+    </script>
+</div>
+<div shiro:hasPermission="operation:newProduct:resetPwd">
+    <script type="text/javascript">
+        var s_resetPwd_h = '';
+    </script>
+</div>
+</div>
+<div th:include="include :: footer"></div>
+<script type="text/javascript" src="/js/appjs/operation/newProduct/newProduct.js"></script>
+<script type="text/javascript">
+    //执行一个laydate实例
+    laydate.render({
+        elem: '#searchTime' //指定元素
+        , max: 0//只可选已过时间
+    });
+    laydate.render({
+        elem: '#modifyTime' //指定元素
+        , max: 0//只可选已过时间
+    });
+
+    $(function () {
+        /** 大类/小类 二级联动 */
+        $("#type1").change(function () {
+            var mtype = $("#type1 :selected").attr("mtype");
+            $("#type2").html('<option value="">产品小类</option>');
+            if (mtype) {
+                var mtypeList = mtype.split(",");
+                if (mtypeList) {
+                    for (var i = 0; i < mtypeList.length; i++) {
+                        var type2 = mtypeList[i].trim();
+                        if (type2) {
+                            $("#type2").append('<option value="' + type2 + '">' + type2 + '</option>');
+                        }
+                    }
+                }
+            }
+        });
+    });
+</script>
+</body>
+</html>

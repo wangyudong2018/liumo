@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yiyun.dao.cluster.ClusterMMemberDao">
+
+    <select id="get" resultType="com.yiyun.domain.MMember">
+		select `id`,`type`,`status`,`nick_name`,`phone`,`password`,`head_img`,`open_id`,`source`,`create_time`,`member_invest_code`,
+			`invest_count`,
+			`invest_loan_count`,
+			`invester_member_id`,
+			`invester_code` from m_member where id = #{value}
+	</select>
+
+    <select id="getByPhone" resultType="com.yiyun.domain.MMember">
+		select `id`,`type`,`status`,`nick_name`,`phone`,`password`,`head_img`,`open_id`,`source`,`create_time`,`member_invest_code`,
+			`invest_count`,
+			`invest_loan_count`,
+			`invester_member_id`,
+			`invester_code` from m_member where phone = #{value}
+			limit 1
+	</select>
+
+    <select id="getListByPhone" resultType="com.yiyun.domain.MMember">
+		select `id`,`type`,`status`,`nick_name`,`phone`,`password`,`head_img`,`open_id`,`source`,`create_time`,`member_invest_code`,
+			`invest_count`,
+			`invest_loan_count`,
+			`invester_member_id`,
+			`invester_code` from m_member where phone = #{value}
+	</select>
+
+    <select id="list" resultType="com.yiyun.domain.MMember">
+        select
+        `id`,`type`,`status`,`nick_name`,`phone`,`password`,`head_img`,`open_id`,`source`,`create_time`,`member_invest_code`,
+        `invest_count`,
+        `invest_loan_count`,
+        `invester_member_id`,
+        `invester_code`
+        from m_member
+        <where>
+            status=1
+            <if test="id != null and id != ''">and id = #{id}</if>
+            <if test="type != null and type != ''">and type = #{type}</if>
+            <if test="status != null and status != ''">and status = #{status}</if>
+            <if test="nickName != null and nickName != ''">and nick_name = #{nickName}</if>
+            <if test="phone != null and phone != ''">and phone like CONCAT('%' , #{phone})</if>
+            <if test="password != null and password != ''">and password = #{password}</if>
+            <if test="headImg != null and headImg != ''">and head_img = #{headImg}</if>
+            <if test="openId != null and openId != ''">and open_id = #{openId}</if>
+            <if test="source != null and source != ''">and source = #{source}</if>
+            <if test="createTime != null and createTime != ''">and create_time = #{createTime}</if>
+
+            <if test="memberInvestCode != null and memberInvestCode != ''">and member_invest_code = #{memberInvestCode}</if>
+            <if test="investCount != null and investCount != ''">and invest_count = #{investCount}</if>
+            <if test="investLoanCount != null and investLoanCount != ''">and invest_loan_count = #{investLoanCount}</if>
+            <if test="investerMemberId != null and investerMemberId != ''">and invester_member_id = #{investerMemberId}</if>
+            <if test="investerCode != null and investerCode != ''">and invester_code = #{investerCode}</if>
+
+            <if test="createTimeBegin != null and createTimeBegin != ''">and create_time &gt;= #{createTimeBegin}</if>
+            <if test="createTimeEnd != null and createTimeEnd != ''">and create_time &lt; #{createTimeEnd}</if>
+
+            <if test="ids != null">
+                and id in
+                <foreach item="id" collection="ids" open="(" separator="," close=")">
+                    #{id}
+                </foreach>
+            </if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="blackList" resultType="com.yiyun.domain.MMember">
+        select
+        `id`,`type`,`status`,`nick_name`,`phone`,`password`,`head_img`,`open_id`,`source`,`create_time`,`member_invest_code`,
+        `invest_count`,
+        `invest_loan_count`,
+        `invester_member_id`,
+        `invester_code`
+        from m_member
+        <where>
+            status=0
+            <if test="id != null and id != ''">and id = #{id}</if>
+            <if test="type != null and type != ''">and type = #{type}</if>
+            <if test="status != null and status != ''">and status = #{status}</if>
+            <if test="nickName != null and nickName != ''">and nick_name = #{nickName}</if>
+            <if test="phone != null and phone != ''">and phone like CONCAT('%' , #{phone})</if>
+            <if test="password != null and password != ''">and password = #{password}</if>
+            <if test="headImg != null and headImg != ''">and head_img = #{headImg}</if>
+            <if test="openId != null and openId != ''">and open_id = #{openId}</if>
+            <if test="source != null and source != ''">and source = #{source}</if>
+            <if test="createTime != null and createTime != ''">and create_time = #{createTime}</if>
+            <if test="memberInvestCode != null and memberInvestCode != ''">and member_invest_code = #{memberInvestCode}</if>
+            <if test="investCount != null and investCount != ''">and invest_count = #{investCount}</if>
+            <if test="investLoanCount != null and investLoanCount != ''">and invest_loan_count = #{investLoanCount}</if>
+            <if test="investerMemberId != null and investerMemberId != ''">and invester_member_id = #{investerMemberId}</if>
+            <if test="investerCode != null and investerCode != ''">and invester_code = #{investerCode}</if>
+            <if test="createTimeBegin != null and createTimeBegin != ''">and create_time &gt;= #{createTimeBegin}</if>
+            <if test="createTimeEnd != null and createTimeEnd != ''">and create_time &lt; #{createTimeEnd}</if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from m_member
+        <where>
+            status=1
+            <if test="id != null and id != ''">and id = #{id}</if>
+            <if test="type != null and type != ''">and type = #{type}</if>
+            <if test="status != null and status != ''">and status = #{status}</if>
+            <if test="nickName != null and nickName != ''">and nick_name = #{nickName}</if>
+            <if test="phone != null and phone != ''">and phone like CONCAT('%' , #{phone})</if>
+            <if test="password != null and password != ''">and password = #{password}</if>
+            <if test="headImg != null and headImg != ''">and head_img = #{headImg}</if>
+            <if test="openId != null and openId != ''">and open_id = #{openId}</if>
+            <if test="source != null and source != ''">and source = #{source}</if>
+            <if test="createTime != null and createTime != ''">and create_time = #{createTime}</if>
+            <if test="memberInvestCode != null and memberInvestCode != ''">and member_invest_code = #{memberInvestCode}</if>
+            <if test="investCount != null and investCount != ''">and invest_count = #{investCount}</if>
+            <if test="investLoanCount != null and investLoanCount != ''">and invest_loan_count = #{investLoanCount}</if>
+            <if test="investerMemberId != null and investerMemberId != ''">and invester_member_id = #{investerMemberId}</if>
+            <if test="investerCode != null and investerCode != ''">and invester_code = #{investerCode}</if>
+            <if test="createTimeBegin != null and createTimeBegin != ''">and create_time &gt;= #{createTimeBegin}</if>
+            <if test="createTimeEnd != null and createTimeEnd != ''">and create_time &lt; #{createTimeEnd}</if>
+
+            <if test="ids != null">
+                and id in
+                <foreach item="id" collection="ids" open="(" separator="," close=")">
+                    #{id}
+                </foreach>
+            </if>
+        </where>
+    </select>
+
+
+    <select id="listClient" resultType="com.yiyun.domain.MMember">
+        select
+        m.*,
+        idcard.name , idcard.idcard,idcard.gender,idcard.age,idcard.adress
+        from m_member m
+        left join m_idcard idcard
+        on m.id = idcard.member_id
+        <where>
+            status=1
+            <if test="id != null and id != ''">and m.id = #{id}</if>
+            <if test="type != null and type != ''">and m.type = #{type}</if>
+            <if test="status != null and status != ''">and m.status = #{status}</if>
+            <if test="nickName != null and nickName != ''">and m.nick_name = #{nickName}</if>
+            <if test="phone != null and phone != ''">and m.phone like CONCAT('%' , #{phone})</if>
+            <if test="password != null and password != ''">and m.password = #{password}</if>
+            <if test="headImg != null and headImg != ''">and m.head_img = #{headImg}</if>
+            <if test="openId != null and openId != ''">and m.open_id = #{openId}</if>
+            <if test="source != null and source != ''">and m.source = #{source}</if>
+            <if test="createTime != null and createTime != ''">and m.create_time = #{createTime}</if>
+            <if test="memberInvestCode != null and memberInvestCode != ''">and member_invest_code = #{memberInvestCode}</if>
+            <if test="investCount != null and investCount != ''">and invest_count = #{investCount}</if>
+            <if test="investLoanCount != null and investLoanCount != ''">and invest_loan_count = #{investLoanCount}</if>
+            <if test="investerMemberId != null and investerMemberId != ''">and invester_member_id = #{investerMemberId}</if>
+            <if test="investerCode != null and investerCode != ''">and invester_code = #{investerCode}</if>
+            <if test="createTimeBegin != null and createTimeBegin != ''">and m.create_time &gt;= #{createTimeBegin}</if>
+            <if test="createTimeEnd != null and createTimeEnd != ''">and m.create_time &lt; #{createTimeEnd}</if>
+
+            <if test="name != null and name != ''">and idcard.name LIKE CONCAT(#{name}, '%')</if>
+            <if test="idcard != null and idcard != ''">and idcard.idcard like CONCAT(CONCAT('%', #{idcard}), '%')</if>
+            <if test="gender != null and gender != ''">and idcard.gender = #{gender}</if>
+            <if test="age != null and age != ''">and idcard.age = #{age}</if>
+            <if test="adress != null and adress != ''">and idcard.adress = #{adress}</if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by m.${sort} ${order}
+            </when>
+            <otherwise>
+                order by m.id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="countClient" resultType="int">
+        select
+        count(*)
+        from m_member m
+        left join m_idcard idcard
+        on m.id = idcard.member_id
+        <where>
+            status=1
+            <if test="id != null and id != ''">and m.id = #{id}</if>
+            <if test="type != null and type != ''">and m.type = #{type}</if>
+            <if test="status != null and status != ''">and m.status = #{status}</if>
+            <if test="nickName != null and nickName != ''">and m.nick_name = #{nickName}</if>
+            <if test="phone != null and phone != ''">and m.phone like CONCAT('%' , #{phone})</if>
+            <if test="password != null and password != ''">and m.password = #{password}</if>
+            <if test="headImg != null and headImg != ''">and m.head_img = #{headImg}</if>
+            <if test="openId != null and openId != ''">and m.open_id = #{openId}</if>
+            <if test="source != null and source != ''">and m.source = #{source}</if>
+            <if test="createTime != null and createTime != ''">and m.create_time = #{createTime}</if>
+            <if test="memberInvestCode != null and memberInvestCode != ''">and member_invest_code = #{memberInvestCode}</if>
+            <if test="investCount != null and investCount != ''">and invest_count = #{investCount}</if>
+            <if test="investLoanCount != null and investLoanCount != ''">and invest_loan_count = #{investLoanCount}</if>
+            <if test="investerMemberId != null and investerMemberId != ''">and invester_member_id = #{investerMemberId}</if>
+            <if test="investerCode != null and investerCode != ''">and invester_code = #{investerCode}</if>
+            <if test="createTimeBegin != null and createTimeBegin != ''">and m.create_time &gt;= #{createTimeBegin}</if>
+            <if test="createTimeEnd != null and createTimeEnd != ''">and m.create_time &lt; #{createTimeEnd}</if>
+
+            <if test="name != null and name != ''">and idcard.name LIKE CONCAT(#{name}, '%')</if>
+            <if test="idcard != null and idcard != ''">and idcard.idcard like CONCAT(CONCAT('%', #{idcard}), '%')</if>
+            <if test="gender != null and gender != ''">and idcard.gender = #{gender}</if>
+            <if test="age != null and age != ''">and idcard.age = #{age}</if>
+            <if test="adress != null and adress != ''">and idcard.adress = #{adress}</if>
+        </where>
+    </select>
+</mapper>

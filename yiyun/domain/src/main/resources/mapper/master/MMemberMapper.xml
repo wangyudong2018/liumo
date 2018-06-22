@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yiyun.dao.master.MMemberDao">
+    <insert id="save" parameterType="com.yiyun.domain.MMember" useGeneratedKeys="true" keyProperty="id">
+		insert into m_member
+		(
+			`type`, 
+			`status`, 
+			`nick_name`, 
+			`phone`, 
+			`password`, 
+			`head_img`, 
+			`open_id`, 
+			`source`, 
+			`create_time`, 
+			`member_invest_code`,
+			`invest_count`,
+			`invest_loan_count`,
+			`invester_member_id`,
+			`invester_code`
+		)
+		values
+		(
+			#{type}, 
+			#{status}, 
+			#{nickName}, 
+			#{phone}, 
+			#{password}, 
+			#{headImg}, 
+			#{openId}, 
+			#{source}, 
+			#{createTime},
+			#{memberInvestCode},
+			#{investCount},
+			#{investLoanCount},
+			#{investerMemberId},
+			#{investerCode}
+		)
+	</insert>
+
+    <update id="update" parameterType="com.yiyun.domain.MMember">
+        update m_member
+        <set>
+            <if test="type != null">`type` = #{type},</if>
+            <if test="status != null">`status` = #{status},</if>
+            <if test="nickName != null">`nick_name` = #{nickName},</if>
+            <if test="phone != null">`phone` = #{phone},</if>
+            <if test="password != null">`password` = #{password},</if>
+            <if test="headImg != null">`head_img` = #{headImg},</if>
+            <if test="openId != null">`open_id` = #{openId},</if>
+            <if test="source != null">`source` = #{source},</if>
+            <if test="createTime != null">`create_time` = #{createTime},</if>
+
+			<if test="memberInvestCode != null">`member_invest_code` = #{memberInvestCode},</if>
+			<if test="investCount != null">`invest_count` = #{investCount},</if>
+			<if test="investLoanCount != null">`invest_loan_count` = #{investLoanCount},</if>
+			<if test="investerMemberId != null">`invester_member_id` = #{investerMemberId},</if>
+			<if test="investerCode != null">`invester_code` = #{investerCode}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="remove">
+		delete from m_member where id = #{value}
+	</delete>
+
+    <delete id="batchRemove">
+        delete from m_member where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

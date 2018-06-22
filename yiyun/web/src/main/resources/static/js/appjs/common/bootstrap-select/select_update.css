@@ -1,0 +1,12 @@
+.bootstrap-select .btn-default{
+    background-color:white !important;
+    color:black;
+}
+.open>.dropdown-toggle.btn-default:hover,.open>.dropdown-toggle.btn-default:focus {
+    color: #333;
+    background-color: white !important;
+    border-color: #8c8c8c;
+}
+.open .dropdown-toggle.btn-default{
+    color: black;
+}

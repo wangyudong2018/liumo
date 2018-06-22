@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+						<input id="id" name="id" th:value="${blacklist.id}"  type="hidden">
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">用户id：</label>
+								<div class="col-sm-8">
+									<input id="userId" name="userId" th:value="${blacklist.userId}" class="form-control" type="text" readonly>
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">拉入黑名单时间：</label>
+								<div class="col-sm-8">
+									<input id="addTime" name="addTime" th:value="${blacklist.addTime}" class="form-control" type="text" type="hidden">
+									<input id="showTime"  class="form-control" type="text" readonly>
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">拉入黑名单原因：</label>
+								<div class="col-sm-8">
+									<input id="remark" name="remark" th:value="${blacklist.remark}" class="form-control" type="text" readonly>
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">操作人：</label>
+								<div class="col-sm-8">
+									<input id="opeator" name="opeator" th:value="${blacklist.opeator}" class="form-control" type="text" readonly>
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">创建时间：</label>
+								<div class="col-sm-8">
+									<input id="createTime" name="createTime" th:value="${blacklist.createTime}" class="form-control" type="text" type="hidden">
+									<input id="showCreateTime"  class="form-control" type="text" readonly>
+								</div>
+							</div>
+																					<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/system/blacklist/edit.js">
+	</script>
+	<script>
+        $(function() {
+            var time = $("#addTime").val();
+            var creatime = $("#createTime").val();
+            var date=new Date(parseInt(time));
+            var creadate=new Date(parseInt(creatime));
+            $("#showTime").val(date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds());
+            $("#showCreateTime").val(creadate.getFullYear() + "-" + (creadate.getMonth()+1) + "-" + creadate.getDate() + " " + creadate.getHours() + ":" + creadate.getMinutes() + ":" + creadate.getSeconds());
+        });
+
+	</script>
+</body>
+</html>

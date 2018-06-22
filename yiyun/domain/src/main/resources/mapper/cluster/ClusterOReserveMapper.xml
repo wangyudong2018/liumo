@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yiyun.dao.cluster.ClusterOReserveDao">
+
+    <select id="get" resultType="com.yiyun.domain.OReserve">
+        select
+        `id`,`type`,`reserve_stauts`,`area`,`product_type`,`product_id`,`user_name`,`user_phone`,`intention`,`reserve_time`,`reserve_adress`,`salesman_id`,`accept_time`,`result`,`comment`,`comment_time`,`remark`,`create_time`,`column1`,`column2`,`column3` from o_reserve where id = #{value}
+    </select>
+
+    <select id="isExistCommitOrder" resultType="int">
+        select count(id) from o_reserve where reserve_stauts=1
+        and column1=#{value}
+    </select>
+
+    <select id="getById" resultType="com.yiyun.vo.ReserveDetailResp">
+        SELECT
+	o.product_id productId,
+	o.id orderId,
+	o.area area,
+	o.reserve_stauts status,
+	s. NAME salesman,
+	p. NAME productName,
+	o.user_phone phone,
+	FROM_UNIXTIME(
+		o.reserve_time / 1000,
+		'%Y-%m-%d %h:%i'
+	) reserveTime
+    FROM
+        o_reserve o
+    LEFT JOIN sys_dict p ON p.id = o.product_id and o.type = 2
+    LEFT JOIN sys_user s ON o.salesman_id = s.user_id and s.status=1
+    WHERE
+     o.id = #{value}
+	</select>
+
+    <select id="list" resultType="com.yiyun.domain.OReserve">
+        select
+        `id`,`type`,`reserve_stauts`,`area`,`product_type`,`product_id`,`user_name`,`user_phone`,`intention`,`reserve_time`,`reserve_adress`,`salesman_id`,`accept_time`,`result`,`comment`,`comment_time`,`remark`,`create_time`,`column1`,`column2`,`column3`
+        from o_reserve
+        <where>
+            <if test="id != null and id != ''">and id = #{id}</if>
+            <if test="type != null and type != ''">and type = #{type}</if>
+            <if test="reserveStauts != null and reserveStauts != ''">and reserve_stauts = #{reserveStauts}</if>
+            <if test="area != null and area != ''">and area = #{area}</if>
+            <if test="productType != null and productType != ''">and product_type = #{productType}</if>
+            <if test="productId != null and productId != ''">and product_id = #{productId}</if>
+            <if test="userName != null and userName != ''">and user_name = #{userName}</if>
+            <if test="userPhone != null and userPhone != ''">and user_phone = #{userPhone}</if>
+            <if test="intention != null and intention != ''">and intention = #{intention}</if>
+            <if test="reserveTime != null and reserveTime != ''">and reserve_time = #{reserveTime}</if>
+            <if test="reserveAdress != null and reserveAdress != ''">and reserve_adress = #{reserveAdress}</if>
+            <if test="salesmanId != null and salesmanId != ''">and salesman_id = #{salesmanId}</if>
+            <if test="acceptTime != null and acceptTime != ''">and accept_time = #{acceptTime}</if>
+            <if test="result != null and result != ''">and result = #{result}</if>
+            <if test="comment != null and comment != ''">and comment = #{comment}</if>
+            <if test="commentTime != null and commentTime != ''">and comment_time = #{commentTime}</if>
+            <if test="remark != null and remark != ''">and remark = #{remark}</if>
+            <if test="createTime != null and createTime != ''">and create_time = #{createTime}</if>
+            <if test="timeLow != null and timeLow != ''">and create_time &gt;= #{timeLow}</if>
+            <if test="timeUp != null and timeUp != ''">and create_time &lt; #{timeUp}</if>
+            <if test="column1 != null and column1 != ''">and column1 = #{column1}</if>
+            <if test="column2 != null and column2 != ''">and column2 = #{column2}</if>
+            <if test="column3 != null and column3 != ''">and column3 = #{column3}</if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="getByPhone" resultType="com.yiyun.vo.ReserveResp">
+       SELECT
+        o.product_id productId,
+        o.id orderId,
+        s.name productName,
+        o.user_phone phone,
+        o.reserve_stauts status,
+        FROM_UNIXTIME(o.reserve_time/1000,'%Y-%m-%d %h:%i') reserveTime
+    FROM
+        o_reserve o
+    LEFT JOIN sys_dict s ON s.id = o.product_id and o.type = 2
+    WHERE
+      o.column1=#{value}
+    </select>
+
+    <select id="getByCommitPhone" resultType="com.yiyun.vo.ReserveResp">
+        SELECT
+        o.product_id productId,
+        o.id orderId,
+        o.product_type productName,
+        o.user_phone phone,
+        o.reserve_stauts status,
+        FROM_UNIXTIME(o.create_time/1000,'%Y-%m-%d %h:%i') reserveTime
+        FROM
+        o_reserve o
+        WHERE
+        o.user_phone=#{value}
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from o_reserve
+        <where>
+            <if test="id != null and id != ''">and id = #{id}</if>
+            <if test="type != null and type != ''">and type = #{type}</if>
+            <if test="reserveStauts != null and reserveStauts != ''">and reserve_stauts = #{reserveStauts}</if>
+            <if test="area != null and area != ''">and area = #{area}</if>
+            <if test="productType != null and productType != ''">and product_type = #{productType}</if>
+            <if test="productId != null and productId != ''">and product_id = #{productId}</if>
+            <if test="userName != null and userName != ''">and user_name = #{userName}</if>
+            <if test="userPhone != null and userPhone != ''">and user_phone = #{userPhone}</if>
+            <if test="intention != null and intention != ''">and intention = #{intention}</if>
+            <if test="reserveTime != null and reserveTime != ''">and reserve_time = #{reserveTime}</if>
+            <if test="reserveAdress != null and reserveAdress != ''">and reserve_adress = #{reserveAdress}</if>
+            <if test="salesmanId != null and salesmanId != ''">and salesman_id = #{salesmanId}</if>
+            <if test="acceptTime != null and acceptTime != ''">and accept_time = #{acceptTime}</if>
+            <if test="result != null and result != ''">and result = #{result}</if>
+            <if test="comment != null and comment != ''">and comment = #{comment}</if>
+            <if test="commentTime != null and commentTime != ''">and comment_time = #{commentTime}</if>
+            <if test="remark != null and remark != ''">and remark = #{remark}</if>
+            <if test="createTime != null and createTime != ''">and create_time = #{createTime}</if>
+            <if test="column1 != null and column1 != ''">and column1 = #{column1}</if>
+            <if test="column2 != null and column2 != ''">and column2 = #{column2}</if>
+            <if test="column3 != null and column3 != ''">and column3 = #{column3}</if>
+        </where>
+    </select>
+</mapper>

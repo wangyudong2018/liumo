@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yiyun.dao.cluster.ClusterUBlacklistDao">
+
+    <select id="getBlack" resultType="com.yiyun.domain.UBlacklistDO">
+		select `id`,`user_id`,`user_name`,`user_phone`,`user_idcard`,`black_state`,`add_time`,`remark`,`source`,`opeator`,`create_time`,`Column1`,`Column2`,`Column3` from u_blacklist where user_id = #{value} and black_state=1
+	</select>
+
+    <select id="list" resultType="com.yiyun.domain.UBlacklistDO">
+        select
+        `id`,`user_id`,`user_name`,`user_phone`,`user_idcard`,`black_state`,`add_time`,`remark`,`source`,`opeator`,`create_time`,`Column1`,`Column2`,`Column3`
+        from u_blacklist
+        <where>
+            <if test="id != null and id != ''">and id = #{id}</if>
+            <if test="userId != null and userId != ''">and user_id = #{userId}</if>
+            <if test="userName != null and userName != ''">and user_name = #{userName}</if>
+            <if test="userPhone != null and userPhone != ''">and user_phone = #{userPhone}</if>
+            <if test="userIdcard != null and userIdcard != ''">and user_idcard = #{userIdcard}</if>
+            <if test="blackState != null and blackState != ''">and black_state = #{blackState}</if>
+            <if test="addTime != null and addTime != ''">and add_time = #{addTime}</if>
+            <if test="remark != null and remark != ''">and remark = #{remark}</if>
+            <if test="source != null and source != ''">and source = #{source}</if>
+            <if test="opeator != null and opeator != ''">and opeator = #{opeator}</if>
+            <if test="createTime != null and createTime != ''">and create_time = #{createTime}</if>
+            <if test="column1 != null and column1 != ''">and Column1 = #{column1}</if>
+            <if test="column2 != null and column2 != ''">and Column2 = #{column2}</if>
+            <if test="column3 != null and column3 != ''">and Column3 = #{column3}</if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from u_blacklist
+        <where>
+            <if test="id != null and id != ''">and id = #{id}</if>
+            <if test="userId != null and userId != ''">and user_id = #{userId}</if>
+            <if test="userName != null and userName != ''">and user_name = #{userName}</if>
+            <if test="userIdcard != null and userIdcard != ''">and user_idcard = #{userIdcard}</if>
+            <if test="userPhone != null and userPhone != ''">and user_phone = #{userPhone}</if>
+            <if test="blackState != null and blackState != ''">and black_state = #{blackState}</if>
+            <if test="addTime != null and addTime != ''">and add_time = #{addTime}</if>
+            <if test="remark != null and remark != ''">and remark = #{remark}</if>
+            <if test="source != null and source != ''">and source = #{source}</if>
+            <if test="opeator != null and opeator != ''">and opeator = #{opeator}</if>
+            <if test="createTime != null and createTime != ''">and create_time = #{createTime}</if>
+            <if test="column1 != null and column1 != ''">and Column1 = #{column1}</if>
+            <if test="column2 != null and column2 != ''">and Column2 = #{column2}</if>
+            <if test="column3 != null and column3 != ''">and Column3 = #{column3}</if>
+        </where>
+    </select>
+</mapper>

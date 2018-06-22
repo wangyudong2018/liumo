@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- log4j2每隔1800秒（半小时），自动监控该配置文件是否有变化，如果变化，则自动根据文件内容重新配置（很不错的功能！） -->
+<Configuration status="off" monitorInterval="1800">
+    <!-- 定义全局变量以便使用 -->
+    <Properties>
+        <Property name="LOG_HOME">/data/logs/yiyunCore</Property>
+        <!-- 日志备份目录 -->
+        <Property name="INFO_NAME">info</Property>
+        <Property name="DEBUG_NAME">debug</Property>
+        <Property name="ERROR_NAME">error</Property>
+        <Property name="APP_NAME">appRequest</Property>
+        <Property name="APP_INFO_NAME">appInfoRequest</Property>
+        <Property name="APP_ERROR_NAME">appError</Property>
+    </Properties>
+
+    <!-- 日志输出地 -->
+    <Appenders>
+        <!-- 定义控制台输出 -->
+        <Console name="Console" target="SYSTEM_OUT" follow="true">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} %-5level %class{36} LINE:%L - %msg%xEx%n" />
+        </Console>
+        <!-- 每天gzip一次，单文件最大2M，每天可以有7个 -->
+        <RollingRandomAccessFile  name="DailyFileInfo" fileName="${LOG_HOME}/${INFO_NAME}.log"
+                                  filePattern="${LOG_HOME}/$${date:yyyy-MM}/${INFO_NAME}-%d{yyyy-MM-dd}-%i.log.gz">
+            <PatternLayout>
+                <Pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread][%file:%line] - %msg%n</Pattern>
+            </PatternLayout>
+            <Filters>
+                <ThresholdFilter level="warn" onMatch="DENY" onMismatch="NEUTRAL"/>
+                <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="100MB"/>
+            </Policies>
+        </RollingRandomAccessFile>
+        <RollingRandomAccessFile  name="DailyFileDebug" fileName="${LOG_HOME}/${DEBUG_NAME}.log"
+                                  filePattern="${LOG_HOME}/$${date:yyyy-MM}/${DEBUG_NAME}-%d{yyyy-MM-dd}-%i.log.gz">
+            <PatternLayout>
+                <Pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread][%file:%line] - %msg%n</Pattern>
+            </PatternLayout>
+            <Filters>
+                <ThresholdFilter level="info" onMatch="DENY" onMismatch="NEUTRAL"/>
+                <ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="NEUTRAL"/>
+            </Filters>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="100MB"/>
+            </Policies>
+        </RollingRandomAccessFile>
+        <RollingRandomAccessFile name="DailyFileError" fileName="${LOG_HOME}/${ERROR_NAME}.log"
+                                 filePattern="${LOG_HOME}/$${date:yyyy-MM}/${ERROR_NAME}-%d{yyyy-MM-dd}-%i.log.gz">
+            <PatternLayout>
+                <Pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread][%file:%line] - %msg%n</Pattern>
+            </PatternLayout>
+            <Filters>
+                <ThresholdFilter level="warn" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="100MB"/>
+            </Policies>
+        </RollingRandomAccessFile>
+        <RollingRandomAccessFile name="AppRequestInfo" fileName="${LOG_HOME}/${APP_NAME}/${APP_INFO_NAME}.log"
+                                 filePattern="${LOG_HOME}/$${date:yyyy-MM}/${APP_INFO_NAME}-%d{yyyy-MM-dd}-%i.log.gz">
+            <PatternLayout>
+                <Pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread][%file:%line] - %msg%n</Pattern>
+            </PatternLayout>
+            <Filters>
+                <ThresholdFilter level="warn" onMatch="DENY" onMismatch="NEUTRAL"/>
+                <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="100MB"/>
+            </Policies>
+        </RollingRandomAccessFile>
+        <RollingRandomAccessFile name="AppRequestError" fileName="${LOG_HOME}/${APP_NAME}/${APP_ERROR_NAME}.log"
+                                 filePattern="${LOG_HOME}/$${date:yyyy-MM}/${APP_ERROR_NAME}-%d{yyyy-MM-dd}-%i.log.gz">
+            <PatternLayout>
+                <Pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread][%file:%line] - %msg%n</Pattern>
+            </PatternLayout>
+            <Filters>
+                <ThresholdFilter level="warn" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="100MB"/>
+            </Policies>
+        </RollingRandomAccessFile>
+        <RollingRandomAccessFile name="yeePayInfo"
+                                 fileName="${LOG_HOME}/yeePayLog/yeePayInfo.log"
+                                 filePattern="${LOG_HOME}/$${date:yyyy-MM}/yeePayLog/yeePayInfo-%d{yyyy-MM-dd}-%i.log.gz">
+            <PatternLayout>
+                <Pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} %level
+                    [%thread][%file:%line] - %msg%n</Pattern>
+            </PatternLayout>
+            <Filters>
+                <ThresholdFilter level="warn" onMatch="DENY"
+                                 onMismatch="NEUTRAL" />
+                <ThresholdFilter level="info" onMatch="ACCEPT"
+                                 onMismatch="DENY" />
+            </Filters>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="100MB" />
+            </Policies>
+        </RollingRandomAccessFile>
+        <RollingRandomAccessFile name="yeePayError"
+                                 fileName="${LOG_HOME}/yeePayLog/yeePayError.log"
+                                 filePattern="${LOG_HOME}/$${date:yyyy-MM}/yeePayLog/yeePayError-%d{yyyy-MM-dd}-%i.log.gz">
+            <PatternLayout>
+                <Pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} %level
+                    [%thread][%file:%line] - %msg%n</Pattern>
+            </PatternLayout>
+            <Filters>
+                <ThresholdFilter level="warn" onMatch="ACCEPT"
+                                 onMismatch="DENY" />
+            </Filters>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="100MB" />
+            </Policies>
+        </RollingRandomAccessFile>
+        <RollingRandomAccessFile name="wxLog" fileName="${LOG_HOME}/wx/log.log"
+                                 filePattern="${LOG_HOME}/$${date:yyyy-MM}/wx/log-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout pattern="%d{ABSOLUTE} &lt;%c&gt; %5p [%t]: %m%n" />
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="100 MB" />
+            </Policies>
+        </RollingRandomAccessFile>
+        <RollingRandomAccessFile name="sqlLog" fileName="${LOG_HOME}/sql/log.log"
+                                 filePattern="${LOG_HOME}/$${date:yyyy-MM}/sql/log-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout pattern="%d{ABSOLUTE} &lt;%c&gt; %5p [%t]: %m%n" />
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="100 MB" />
+            </Policies>
+        </RollingRandomAccessFile>
+    </Appenders>
+    <!-- 具体的日志对象及LEVEL控制 -->
+    <Loggers>
+        <Logger name="org.springframework" level="error" additivity="false">
+            <appender-ref ref="DailyFileError" />
+            <appender-ref ref="Console" />
+        </Logger>
+        <Logger name="org.hibernate" level="error" additivity="false">
+            <appender-ref ref="DailyFileError" />
+            <appender-ref ref="Console" />
+        </Logger>
+        <logger name="com.yiyun.app.common.aspect" level="trace"
+                additivity="false">
+            <appender-ref ref="AppRequestInfo" />
+            <appender-ref ref="AppRequestError"/>
+        </logger>
+        <logger name="com.yiyun.app.common.utils.yeepay" level="trace"
+                additivity="false">
+            <appender-ref ref="yeePayInfo" />
+            <appender-ref ref="yeePayError"/>
+        </logger>
+        <logger name="com.yiyun.app.common.utils.wechat" level="trace"
+                additivity="false">
+            <appender-ref ref="wxLog" />
+        </logger>
+        <logger name="com.yiyun.dao.cluster" level="trace"
+                additivity="false">
+            <appender-ref ref="sqlLog" />
+        </logger>
+        <logger name="com" level="trace" additivity="false">
+            <appender-ref ref="DailyFileInfo" />
+            <appender-ref ref="DailyFileDebug" />
+            <appender-ref ref="DailyFileError" />
+        </logger>
+        <root level="ERROR">
+            <appender-ref ref="DailyFileError" />
+        </root>
+    </Loggers>
+</Configuration>
