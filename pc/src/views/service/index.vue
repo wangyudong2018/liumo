@@ -87,12 +87,16 @@ export default {
   width: 100%;
   height: 500px;
   background: url("./imgs/index_part01_bg.png") no-repeat;
+  background-size: cover;
+  overflow: hidden;
 }
 
 .step-wrapper {
   width: 100%;
   height: 396px;
   background: url("./imgs/index_part02_bg.png") no-repeat;
+  background-size: cover;
+  overflow: hidden;
 }
 
 .step-content {
