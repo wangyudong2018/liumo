@@ -220,6 +220,10 @@ public class GenUtils {
             return "main" + File.separator + "resources" + File.separator + "templates" + File.separator
                     + packageName + File.separator + classname + File.separator + "add.html";
         }
+        if (template.contains("edit.html.vm")) {
+            return "main" + File.separator + "resources" + File.separator + "templates" + File.separator
+                    + packageName + File.separator + classname + File.separator + "edit.html";
+        }
         if (template.contains("showBasic.html.vm")) {
             return "main" + File.separator + "resources" + File.separator + "templates" + File.separator
                     + packageName + File.separator + classname + File.separator + "showBasic.html";
@@ -242,6 +246,8 @@ public class GenUtils {
 //		if(template.contains("menu.sql.vm")){
 //			return className.toLowerCase() + "_menu.sql";
 //		}
+        
+        System.err.println(template);
 
         return null;
     }

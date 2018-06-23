@@ -26,6 +26,10 @@ public class LmProduct implements Serializable {
 	private String rate;
 	// 适合人群
 	private String people;
+	// logo
+	private String logo;
+	// 排序
+	private Integer sort;
 	// 是否有效：1有效0无效
 	private String state;
 	// 创建时间

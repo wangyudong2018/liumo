@@ -1,5 +1,6 @@
 package com.yiyun.web.liumo.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -70,6 +71,8 @@ public class LmProductController {
 	@PostMapping("/save")
 	@RequiresPermissions("liumo:lmProduct:add")
 	public R save(LmProduct lmProduct) {
+		lmProduct.setCreateTime(new Date());
+		lmProduct.setUpdateTime(new Date());
 		if (lmProductService.save(lmProduct) > 0) {
 			return R.ok();
 		}
@@ -83,6 +86,7 @@ public class LmProductController {
 	@RequestMapping("/edit")
 	@RequiresPermissions("liumo:lmProduct:edit")
 	public R edit(LmProduct lmProduct) {
+		lmProduct.setUpdateTime(new Date());
 		lmProductService.edit(lmProduct);
 		return R.ok();
 	}
