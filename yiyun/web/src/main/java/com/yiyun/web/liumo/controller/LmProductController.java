@@ -23,7 +23,7 @@ import com.yiyun.web.liumo.service.LmProductService;
 
 /**
  * @title 六漠产品介绍
- * @author Xing
+ * @author wangyudong
  * @date Fri Jun 22 23:28:52 CST 2018
  */
 @Controller
