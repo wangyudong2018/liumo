@@ -45,8 +45,7 @@ public class LmPublicController {
 	@GetMapping("/releaseList")
 	public PageUtil newsList(@RequestParam Map<String, Object> params) {
 		// 查询列表数据
-		params.put("sort", "");
-		params.put("order", "sort asc, create_time desc");
+		params.put("sort", "sort asc, create_time desc");
 		Query query = new Query(params);
 		List<LmRelease> lmReleaseList = lmReleaseService.list(query);
 		int total = lmReleaseService.count(query);
