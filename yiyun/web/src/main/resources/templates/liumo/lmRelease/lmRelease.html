@@ -9,10 +9,10 @@
 				<div class="ibox-body">
 					<div class="fixed-table-toolbar">
 						<div class="columns pull-left">
-							<button shiro:hasPermission="liumo:lmProduct:add" type="button" class="btn  btn-primary" onclick="add()">
+							<button shiro:hasPermission="liumo:lmRelease:add" type="button" class="btn  btn-primary" onclick="add()">
 								<i class="fa fa-plus" aria-hidden="true"></i>添加
 							</button>
-							<button shiro:hasPermission="liumo:lmProduct:batchRemove" type="button" class="btn  btn-danger" onclick="batchRemove()">
+							<button shiro:hasPermission="liumo:lmRelease:batchRemove" type="button" class="btn  btn-danger" onclick="batchRemove()">
 								<i class="fa fa-trash" aria-hidden="true"></i>删除
 							</button>
 						</div>
@@ -21,6 +21,12 @@
 						</div>
 						<div class="columns pull-right col-md-2 nopadding">
 							<input id="searchName" type="text" class="form-control" placeholder="">
+						</div>
+						<div class="columns pull-right col-md-2 nopadding">
+							<select data-placeholder="选择种类<" class="form-control chosen-select" id="category" tabindex="3" style="width: 100%">
+								<option value="news">新闻发布</option>
+								<option value="media">媒体报道</option>
+							</select>
 						</div>
 					</div>
 					<table id="exampleTable" data-mobile-responsive="true">
@@ -37,23 +43,23 @@
 			var s_resetPwd_h = 'hidden';
 		</script>
 	</div>
-	<div shiro:hasPermission="liumo:lmProduct:edit">
+	<div shiro:hasPermission="liumo:lmRelease:edit">
 		<script type="text/javascript">
 			s_edit_h = '';
 		</script>
 	</div>
-	<div shiro:hasPermission="liumo:lmProduct:remove">
+	<div shiro:hasPermission="liumo:lmRelease:remove">
 		<script type="text/javascript">
 			var s_remove_h = '';
 		</script>
 	</div>
-	<div shiro:hasPermission="liumo:lmProduct:resetPwd">
+	<div shiro:hasPermission="liumo:lmRelease:resetPwd">
 		<script type="text/javascript">
 			var s_resetPwd_h = '';
 		</script>
 	</div>
 	<div th:include="include :: footer"></div>
 	<script type="text/javascript" src="/js/appjs/liumo/liumo.js"></script>
-	<script type="text/javascript" src="/js/appjs/liumo/lmProduct/lmProduct.js"></script>
+	<script type="text/javascript" src="/js/appjs/liumo/lmRelease/lmRelease.js"></script>
 </body>
 </html>

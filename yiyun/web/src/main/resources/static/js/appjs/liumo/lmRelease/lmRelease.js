@@ -1,4 +1,4 @@
-var prefix = "/liumo/lmProduct"
+var prefix = "/liumo/lmRelease"
 $(function() {
 	load();
 });
@@ -24,13 +24,13 @@ function load() {
 		pageNumber : 1, // 如果设置了分布，首页页码
 		// search : true, // 是否显示搜索框
 		showColumns : false, // 是否显示内容下拉框（选择显示的列）
-		sidePagination : "server", // 设置在哪里进行分页，可选值为"client" 或者
-		// "server"
+		sidePagination : "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
 		queryParams : function(params) {
 			return {
 				// 说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 				limit : params.limit,
-				offset : params.offset
+				offset : params.offset,
+				category : $("#category").val()
 			// name:$('#searchName').val(),
 			// username:$('#searchName').val()
 			};
@@ -44,35 +44,23 @@ function load() {
 		columns : [ {
 			checkbox : true
 		}, {
-			field : 'title',
-			title : '产品名称'
+			field : 'category',
+			title : '种类',
+			formatter : function(value, row, index) {
+				return value === 'news' ? '新闻发布' : '媒体报道';
+			}
 		}, {
-			field : 'content',
-			title : '产品介绍'
+			field : 'brief',
+			title : '发布简介'
 		}, {
-			field : 'agreemt',
-			title : '服务协议'
-		}, {
-			field : 'rate',
-			title : '服务费率'
-		}, {
-			field : 'people',
-			title : '适合人群'
-		}, {
-			field : 'people',
-			title : '适合人群'
-		}, {
-			field : 'logo',
-			title : 'Logo'
+			field : 'Logo',
+			title : 'logo',
+			formatter : function(value, row, index) {
+				return '<img src="data:image/png;base64,' + row.logo + '">';
+			}
 		}, {
 			field : 'sort',
 			title : '排序'
-		}, {
-			field : 'state',
-			title : '是否有效',
-			formatter : function(value, row, index) {
-				return value === '0' ? '无效' : '有效';
-			}
 		}, {
 			title : '操作',
 			field : 'id',

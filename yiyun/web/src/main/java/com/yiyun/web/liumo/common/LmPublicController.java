@@ -8,10 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yiyun.domain.LmProduct;
+import com.yiyun.domain.LmRelease;
+import com.yiyun.utils.PageUtil;
+import com.yiyun.web.common.utils.Query;
 import com.yiyun.web.liumo.service.LmProductService;
+import com.yiyun.web.liumo.service.LmReleaseService;
 
 /**
  * @title 六漠公共
@@ -24,6 +29,8 @@ public class LmPublicController {
 
 	@Autowired
 	private LmProductService lmProductService;
+	@Autowired
+	private LmReleaseService lmReleaseService;
 
 	@ResponseBody
 	@GetMapping("/productList")
@@ -32,6 +39,19 @@ public class LmPublicController {
 		Map<String, Object> map = new HashMap<String, Object>(8);
 		map.put("state", "1");
 		return lmProductService.list(map);
+	}
+
+	@ResponseBody
+	@GetMapping("/releaseList")
+	public PageUtil newsList(@RequestParam Map<String, Object> params) {
+		// 查询列表数据
+		params.put("sort", "");
+		params.put("order", "sort asc, create_time desc");
+		Query query = new Query(params);
+		List<LmRelease> lmReleaseList = lmReleaseService.list(query);
+		int total = lmReleaseService.count(query);
+		PageUtil pageUtil = new PageUtil(lmReleaseList, total);
+		return pageUtil;
 	}
 
 }

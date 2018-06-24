@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm" enctype="multipart/form-data">
+							<input id="id" name="id" th:value="${lmRelease.id}" type="hidden">
+							<div class="form-group">
+								<label class="col-sm-3 control-label">种类<span class="text-danger">*</span>：
+								</label>
+								<div class="col-sm-8">
+									<select id="category" name="category" class="form-control">
+										<option th:field="*{lmRelease.category}" value="news">新闻发布</option>
+										<option th:field="*{lmRelease.category}" value="media">媒体报道</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">发布简介<span class="text-danger">*</span>：
+								</label>
+								<div class="col-sm-8">
+									<input id="brief" name="brief" th:value="${lmRelease.brief}" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">发布标题<span class="text-danger">*</span>：
+								</label>
+								<div class="col-sm-8">
+									<input id="title" name="title" th:value="${lmRelease.title}" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">发布内容<span class="text-danger">*</span>：
+								</label>
+								<div class="col-sm-8">
+									<textarea id="content" name="content" rows="3" cols="63" th:text="${lmRelease.content}" class="form-control"></textarea>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">Logo： </label>
+								<div class="col-sm-8">
+									<input id="file" name="file" class="form-control" type="file">
+									<!-- 									<input id="logo" name="logo" th:value="${lmRelease.logo}" class="form-control" type="text"> -->
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">排序<span class="text-danger">*</span>：
+								</label>
+								<div class="col-sm-8">
+									<input id="sort" name="sort" th:value="${lmRelease.sort}" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/liumo/lmRelease/edit.js"></script>
+</body>
+</html>
