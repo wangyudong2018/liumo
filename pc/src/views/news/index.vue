@@ -5,8 +5,8 @@
         v-for="newsType in newsTypeList"
         :key="newsType.newsTypeId"
         :newsType="newsType"
-        ></news-type>
-        <news-media :newsMedia="newsMedia"></news-media>
+      ></news-type>
+      <news-media :newsMedia="newsMedia"></news-media>
     </div>
   </div>
 </template>

@@ -14,7 +14,11 @@ public interface LmReleaseService {
 
 	LmRelease get(Long id);
 
+	LmRelease getLogo(Long id);
+
 	List<LmRelease> list(Map<String, Object> map);
+
+	List<LmRelease> newList(Map<String, Object> map);
 
 	int count(Map<String, Object> map);
 

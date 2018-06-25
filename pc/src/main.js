@@ -6,9 +6,12 @@ import router from './router'
 
 import iview from 'iview'
 import 'iview/dist/styles/iview.css'
-import '@/assets/styles/base.css'
 
+import '@/assets/styles/base.css'
 import '@/assets/iconfont/iconfont.css'
+
+import http from './api/index'
+Vue.prototype.$http = http
 
 Vue.config.productionTip = false
 

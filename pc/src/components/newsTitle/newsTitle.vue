@@ -1,8 +1,8 @@
 <template>
   <div class="news-title-wrapper">
-    <h2 class="news-title-zh">{{newsTitle.newsTitleZh}}</h2>
-    <p class="split-line"></p>
-    <h3 class="news-title-en">{{newsTitle.newsTitleEn}}</h3>
+    <h2 class="news-title-zh" :style="{fontSize: newsTitle.zhFontSize + 'px'}">{{newsTitle.newsTitleZh}}</h2>
+    <p class="split-line" :style="{width: newsTitle.splitWidth + 'px', borderBottomWidth: newsTitle.splitHeight + 'px'}"></p>
+    <h3 class="news-title-en" :style="{fontSize: newsTitle.enFontSize + 'px'}">{{newsTitle.newsTitleEn}}</h3>
   </div>
 </template>
 
@@ -20,28 +20,25 @@ export default {
 <style scoped>
   .news-title-wrapper {
     padding: 30px 60px;
+    text-align: center;
     color: #000000;
   }
 
   .news-title-zh {
-    height: 30px;
-    line-height: 30px;
     margin-bottom: 14px;
-    text-align: center;
     font-size: 30px;
   }
 
   .split-line {
     width: 100px;
     margin: 0 auto;
-    border-top: 3px solid #2d86e7;
+    border-bottom-width: 3px;
+    border-bottom-style: solid;
+    border-bottom-color: #2d86e7;
   }
 
   .news-title-en {
-    height: 10px;
-    line-height: 10px;
     margin-top: 8px;
-    text-align: center;
     font-size: 10px;
   }
 </style>

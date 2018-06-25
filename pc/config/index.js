@@ -10,7 +10,15 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+      '/liumo': {
+        target: 'http://rmwangyudong.top:8000',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/liumo': '/liumo'
+        }
+      }
+    },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST

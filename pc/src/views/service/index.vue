@@ -2,51 +2,52 @@
   <div class="content-wrapper">
     <div class="banner-wrapper"></div>
     <div class="step-wrapper">
-        <div class="step-content">
-            <ul>
-                <li>
-                    <div class="step-icon">
-                        <img src="./imgs/icon_01.png" alt="1.在线咨询(APP、电话)">
-                    </div>
-                    <p class="step-des">1.在线咨询(APP、电话)</p>
-                    <span class="step-transition"></span>
-                </li>
-                <li>
-                    <div class="step-icon">
-                        <img src="./imgs/icon_02.png" alt="2.到店申请">
-                    </div>
-                    <p class="step-des">2.到店申请</p>
-                    <span class="step-transition"></span>
-                </li>
-                <li>
-                    <div class="step-icon">
-                        <img src="./imgs/icon_03.png" alt="3.匹配最优银行">
-                    </div>
-                    <p class="step-des">3.匹配最优银行</p>
-                    <span class="step-transition"></span>
-                </li>
-                <li>
-                    <div class="step-icon">
-                        <img src="./imgs/icon_04.png" alt="4.银行审批放款">
-                    </div>
-                    <p class="step-des">4.银行审批放款</p>
-                </li>
-            </ul>
-        </div>
+      <div class="step-content">
+        <ul>
+          <li>
+            <div class="step-icon">
+              <img src="./imgs/icon_01.png" alt="1.在线咨询(APP、电话)">
+            </div>
+            <p class="step-des">1.在线咨询(APP、电话)</p>
+            <span class="step-transition"></span>
+          </li>
+          <li>
+            <div class="step-icon">
+              <img src="./imgs/icon_02.png" alt="2.到店申请">
+            </div>
+            <p class="step-des">2.到店申请</p>
+            <span class="step-transition"></span>
+          </li>
+          <li>
+            <div class="step-icon">
+              <img src="./imgs/icon_03.png" alt="3.匹配最优银行">
+            </div>
+            <p class="step-des">3.匹配最优银行</p>
+            <span class="step-transition"></span>
+          </li>
+          <li>
+            <div class="step-icon">
+              <img src="./imgs/icon_04.png" alt="4.银行审批放款">
+            </div>
+            <p class="step-des">4.银行审批放款</p>
+          </li>
+        </ul>
+      </div>
     </div>
     <div class="pro-wrapper">
-        <div class="pro-content">
-            <propduct-type
-              v-for="productType of productTypeList"
-              :key="productType.loanType"
-              :productType="productType"
-              ></propduct-type>
-        </div>
+      <div class="pro-content">
+        <propduct-type
+          v-for="productType of productTypeList"
+          :key="productType.loanType"
+          :productType="productType"
+        ></propduct-type>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import api from '../../api/api'
 import propductType from '../../components/product/productType'
 export default {
   data () {
@@ -78,11 +79,16 @@ export default {
   },
   components: {
     propductType
+  },
+  created () {
+    this.$http.get(api.productList(), {}, (data) => {
+      console.log(data)
+    })
   }
 }
 </script>
 
-<style>
+<style scoped>
 .banner-wrapper {
   width: 100%;
   height: 500px;

@@ -7,6 +7,10 @@
 		select `id`,`category`,`brief`,`title`,`content`,`logo`,`sort`,`create_time`,`update_time` from lm_release where id = #{value}
 	</select>
 
+	<select id="getLogo" resultType="com.yiyun.domain.LmRelease">
+		select `logo` from lm_release where id = #{value}
+	</select>
+
 	<select id="list" resultType="com.yiyun.domain.LmRelease">
 		select `id`,`category`,`brief`, `logo`,`sort`,`create_time`,`update_time` from lm_release
 		<where>
@@ -15,7 +19,6 @@
 			<if test="brief != null and brief != ''"> and brief = #{brief} </if>
 			<if test="title != null and title != ''"> and title = #{title} </if>
 			<if test="content != null and content != ''"> and content = #{content} </if>
-			<if test="logo != null and logo != ''"> and logo = #{logo} </if>
 			<if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
 			<if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
 		</where>
@@ -32,15 +35,34 @@
 		</if>
 	</select>
 
+	<select id="newList" resultType="com.yiyun.domain.LmRelease">
+		select `id`,`category`,`brief` from lm_release
+		<where>
+			<if test="id != null and id != ''"> and id = #{id} </if>
+			<if test="category != null and category != ''"> and category = #{category} </if>
+			<if test="brief != null and brief != ''"> and brief = #{brief} </if>
+		</where>
+		<choose>
+			<when test="sort != null and sort.trim() != ''">
+				order by ${sort} ${order}
+			</when>
+			<otherwise>
+				order by id desc
+			</otherwise>
+		</choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+
 	<select id="count" resultType="int">
-		select count(*) from lm_release
+		select count(1) from lm_release
 		<where>
 			<if test="id != null and id != ''"> and id = #{id} </if>
 			<if test="category != null and category != ''"> and category = #{category} </if>
 			<if test="brief != null and brief != ''"> and brief = #{brief} </if>
 			<if test="title != null and title != ''"> and title = #{title} </if>
 			<if test="content != null and content != ''"> and content = #{content} </if>
-			<if test="logo != null and logo != ''"> and logo = #{logo} </if>
 			<if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
 			<if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
 		</where>

@@ -37,7 +37,7 @@ export default {}
 
 .nav-content {
   width: 1205px;
-  height: 56px;
+  height: 120px;
   margin: 0 auto;
   padding: 32px 0;
 }
