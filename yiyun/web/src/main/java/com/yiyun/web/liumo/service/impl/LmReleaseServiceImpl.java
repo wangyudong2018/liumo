@@ -22,8 +22,18 @@ public class LmReleaseServiceImpl implements LmReleaseService {
 	}
 
 	@Override
+	public LmRelease getLogo(Long id) {
+		return lmReleaseDao.getLogo(id);
+	}
+
+	@Override
 	public List<LmRelease> list(Map<String, Object> map) {
 		return lmReleaseDao.list(map);
+	}
+
+	@Override
+	public List<LmRelease> newList(Map<String, Object> map) {
+		return lmReleaseDao.newList(map);
 	}
 
 	@Override

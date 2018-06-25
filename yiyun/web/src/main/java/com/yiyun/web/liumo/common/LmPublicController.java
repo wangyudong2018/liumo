@@ -1,15 +1,18 @@
 package com.yiyun.web.liumo.common;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.yiyun.domain.LmProduct;
 import com.yiyun.domain.LmRelease;
@@ -23,7 +26,7 @@ import com.yiyun.web.liumo.service.LmReleaseService;
  * @author wangyudong
  * @date Fri Jun 22 23:28:52 CST 2018
  */
-@Controller
+@RestController
 @RequestMapping("/liumo/public")
 public class LmPublicController {
 
@@ -32,7 +35,6 @@ public class LmPublicController {
 	@Autowired
 	private LmReleaseService lmReleaseService;
 
-	@ResponseBody
 	@GetMapping("/productList")
 	public List<LmProduct> productList() {
 		// 查询列表数据
@@ -41,16 +43,22 @@ public class LmPublicController {
 		return lmProductService.list(map);
 	}
 
-	@ResponseBody
 	@GetMapping("/releaseList")
 	public PageUtil newsList(@RequestParam Map<String, Object> params) {
 		// 查询列表数据
 		params.put("sort", "sort asc, create_time desc");
 		Query query = new Query(params);
-		List<LmRelease> lmReleaseList = lmReleaseService.list(query);
+		List<LmRelease> lmReleaseList = lmReleaseService.newList(query);
 		int total = lmReleaseService.count(query);
 		PageUtil pageUtil = new PageUtil(lmReleaseList, total);
 		return pageUtil;
+	}
+
+	@GetMapping("/release/{id}")
+	public void newsListId(@PathVariable("id") Long id, HttpServletResponse response) throws IOException {
+		response.setHeader("Cache-Control", "max-age=604800"); // 设置缓存
+		LmRelease lmRelease = lmReleaseService.get(id);
+		response.getOutputStream().write(lmRelease.getLogo());
 	}
 
 }
