@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.yiyun.domain.LmFile;
 import com.yiyun.domain.LmProduct;
 import com.yiyun.domain.LmRelease;
 import com.yiyun.utils.PageUtil;
 import com.yiyun.web.common.utils.Query;
+import com.yiyun.web.liumo.service.LmFileService;
 import com.yiyun.web.liumo.service.LmProductService;
 import com.yiyun.web.liumo.service.LmReleaseService;
 
@@ -34,6 +36,8 @@ public class LmPublicController {
 	private LmProductService lmProductService;
 	@Autowired
 	private LmReleaseService lmReleaseService;
+	@Autowired
+	private LmFileService lmFileService;
 
 	@GetMapping("/productList")
 	public List<LmProduct> productList() {
@@ -44,7 +48,7 @@ public class LmPublicController {
 	}
 
 	@GetMapping("/releaseList")
-	public PageUtil newsList(@RequestParam Map<String, Object> params) {
+	public PageUtil releaseList(@RequestParam Map<String, Object> params) {
 		// 查询列表数据
 		params.put("sort", "sort asc, create_time desc");
 		Query query = new Query(params);
@@ -55,10 +59,25 @@ public class LmPublicController {
 	}
 
 	@GetMapping("/release/{id}")
-	public void newsListId(@PathVariable("id") Long id, HttpServletResponse response) throws IOException {
+	public void release(@PathVariable("id") Long id, HttpServletResponse response) throws IOException {
 		response.setHeader("Cache-Control", "max-age=604800"); // 设置缓存
 		LmRelease lmRelease = lmReleaseService.get(id);
 		response.getOutputStream().write(lmRelease.getLogo());
+	}
+
+	@GetMapping("/bannerList")
+	public List<LmFile> bannerList(@RequestParam Map<String, Object> params) {
+		// 查询列表数据
+		params.put("sort", "sort asc, create_time desc");
+		List<LmFile> lmFileList = lmFileService.newList(params);
+		return lmFileList;
+	}
+
+	@GetMapping("/banner/{id}")
+	public void banner(@PathVariable("id") Long id, HttpServletResponse response) throws IOException {
+		response.setHeader("Cache-Control", "max-age=604800"); // 设置缓存
+		LmFile lmFile = lmFileService.get(id);
+		response.getOutputStream().write(lmFile.getLmFile());
 	}
 
 }

@@ -1,4 +1,4 @@
-var prefix = "/liumo/lmRelease"
+var prefix = "/liumo/lmFile"
 $(function() {
 	load();
 });
@@ -30,7 +30,7 @@ function load() {
 				// 说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 				limit : params.limit,
 				offset : params.offset,
-				category : $("#category").val()
+				lmType : $("#lmType").val()
 			// name:$('#searchName').val(),
 			// username:$('#searchName').val()
 			};
@@ -44,19 +44,16 @@ function load() {
 		columns : [ {
 			checkbox : true
 		}, {
-			field : 'category',
-			title : '种类',
+			field : 'lmType',
+			title : '类型',
 			formatter : function(value, row, index) {
-				return value === 'news' ? '新闻发布' : '媒体报道';
+				return value === '01' ? '首页banner' : '产品页banner';
 			}
 		}, {
-			field : 'brief',
-			title : '发布简介'
-		}, {
-			field : 'Logo',
-			title : 'logo',
+			field : 'lmFile',
+			title : '文件',
 			formatter : function(value, row, index) {
-				return '<img src="data:image/png;base64,' + row.logo + '">';
+				return '<img src="data:image/png;base64,' + row.lmFile + '">';
 			}
 		}, {
 			field : 'sort',
