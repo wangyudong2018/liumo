@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import api from '../../api/api'
 import newsType from '../../components/newsType/newsType'
 import newsMedia from '../../components/newsMedia/newsMedia'
 export default {
@@ -21,110 +22,12 @@ export default {
         {
           newsTypeId: '01',
           newsTitle: {newsTitleZh: '新闻发布', newsTitleEn: 'NEWS RELEASE'},
-          newsList: [
-            {
-              newsId: '01',
-              newsUrl: '',
-              newsBgUrl: './imgs/news01.png',
-              newsTopic: '金融业还需开放力度'
-            },
-            {
-              newsId: '02',
-              newsUrl: '',
-              newsBgUrl: './imgs/news02.png',
-              newsTopic: '金融业还需开放力度'
-            },
-            {
-              newsId: '03',
-              newsUrl: '',
-              newsBgUrl: './imgs/news03.png',
-              newsTopic: '金融业还需开放力度'
-            },
-            {
-              newsId: '04',
-              newsUrl: '',
-              newsBgUrl: './imgs/news04.png',
-              newsTopic: '金融业还需开放力度'
-            },
-            {
-              newsId: '05',
-              newsUrl: '',
-              newsBgUrl: './imgs/news05.png',
-              newsTopic: '金融业还需开放力度'
-            },
-            {
-              newsId: '06',
-              newsUrl: '',
-              newsBgUrl: './imgs/news06.png',
-              newsTopic: '金融业还需开放力度'
-            },
-            {
-              newsId: '07',
-              newsUrl: '',
-              newsBgUrl: './imgs/news07.png',
-              newsTopic: '金融业还需开放力度'
-            },
-            {
-              newsId: '08',
-              newsUrl: '',
-              newsBgUrl: './imgs/news08.png',
-              newsTopic: '金融业还需开放力度'
-            }
-          ]
+          newsList: []
         },
         {
           newsTypeId: '02',
           newsTitle: {newsTitleZh: '媒体报道', newsTitleEn: 'MEDIA REPORTS'},
-          newsList: [
-            {
-              newsId: '01',
-              newsUrl: '',
-              newsBgUrl: './imgs/news01.png',
-              newsTopic: '金融业还需开放力度'
-            },
-            {
-              newsId: '02',
-              newsUrl: '',
-              newsBgUrl: './imgs/news02.png',
-              newsTopic: '金融业还需开放力度'
-            },
-            {
-              newsId: '03',
-              newsUrl: '',
-              newsBgUrl: './imgs/news03.png',
-              newsTopic: '金融业还需开放力度'
-            },
-            {
-              newsId: '04',
-              newsUrl: '',
-              newsBgUrl: './imgs/news04.png',
-              newsTopic: '金融业还需开放力度'
-            },
-            {
-              newsId: '05',
-              newsUrl: '',
-              newsBgUrl: './imgs/news05.png',
-              newsTopic: '金融业还需开放力度'
-            },
-            {
-              newsId: '06',
-              newsUrl: '',
-              newsBgUrl: './imgs/news06.png',
-              newsTopic: '金融业还需开放力度'
-            },
-            {
-              newsId: '07',
-              newsUrl: '',
-              newsBgUrl: './imgs/news07.png',
-              newsTopic: '金融业还需开放力度'
-            },
-            {
-              newsId: '08',
-              newsUrl: '',
-              newsBgUrl: './imgs/news08.png',
-              newsTopic: '金融业还需开放力度'
-            }
-          ]
+          newsList: []
         }
       ],
       newsMedia: {
@@ -138,6 +41,14 @@ export default {
   components: {
     newsType,
     newsMedia
+  },
+  mounted () {
+    this.$http.get(api.releaseList(), {category: 'news', limit: 100, offset: 0}, (res) => {
+      this.newsTypeList[0].newsList = res.data.rows
+    })
+    this.$http.get(api.releaseList(), {category: 'media', limit: 100, offset: 0}, (res) => {
+      this.newsTypeList[1].newsList = res.data.rows
+    })
   }
 }
 </script>

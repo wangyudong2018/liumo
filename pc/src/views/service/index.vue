@@ -1,6 +1,13 @@
 <template>
   <div class="content-wrapper">
-    <div class="banner-wrapper"></div>
+    <div class="banner-wrapper">
+      <div
+        v-for="banner of bannerList"
+        :key="banner.id"
+      >
+        <img :src="loadBannersImg + banner.id" alt="六漠科技">
+      </div>
+    </div>
     <div class="step-wrapper">
       <div class="step-content">
         <ul>
@@ -47,42 +54,27 @@
 </template>
 
 <script>
-import api from '../../api/api'
+import api, { LOAD_BANNERS_IMG } from '../../api/api'
 import propductType from '../../components/product/productType'
 export default {
   data () {
     return {
-      productTypeList: [
-        {
-          loanType: '01',
-          loanTypeName: '银行抵押贷款',
-          serviceRate: '2',
-          productIntro: '提供银行抵押贷款居间服务，为客户匹配最优银行，解决客户资金需求。',
-          productDes: '名下有可抵押房产的客户。'
-        },
-        {
-          loanType: '02',
-          loanTypeName: '银行信用贷款',
-          serviceRate: '2',
-          productIntro: '提供银行抵押贷款居间服务，为客户匹配最优银行，解决客户资金需求。',
-          productDes: '名下有可抵押房产的客户。'
-        },
-        {
-          loanType: '03',
-          loanTypeName: '银行按揭贷款',
-          serviceRate: '2',
-          productIntro: '提供银行抵押贷款居间服务，为客户匹配最优银行，解决客户资金需求。',
-          productDes: '名下有可抵押房产的客户。'
-        }
-      ]
+      loadBannersImg: LOAD_BANNERS_IMG,
+      bannerList: [],
+      productTypeList: []
     }
+  },
+  created () {
+    this.$http.get(api.bannerList(), {lmType: '02'}, (res) => {
+      this.bannerList = res.data
+    })
   },
   components: {
     propductType
   },
-  created () {
-    this.$http.get(api.productList(), {}, (data) => {
-      console.log(data)
+  mounted () {
+    this.$http.get(api.productList(), {}, (res) => {
+      this.productTypeList = res.data
     })
   }
 }
@@ -92,16 +84,19 @@ export default {
 .banner-wrapper {
   width: 100%;
   height: 500px;
-  background: url("./imgs/index_part01_bg.png") no-repeat;
-  background-size: cover;
   overflow: hidden;
+}
+
+.banner-wrapper img {
+  width: 100%;
+  height: 500px;
 }
 
 .step-wrapper {
   width: 100%;
   height: 396px;
   background: url("./imgs/index_part02_bg.png") no-repeat;
-  background-size: cover;
+  background-size: 100% 100%;
   overflow: hidden;
 }
 
@@ -147,7 +142,7 @@ export default {
 }
 
 .pro-wrapper {
-    width: 100%;
+  width: 100%;
 }
 
 .pro-content {

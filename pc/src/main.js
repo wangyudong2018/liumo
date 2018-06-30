@@ -17,6 +17,15 @@ Vue.config.productionTip = false
 
 Vue.use(iview)
 
+// 安装百度统计
+router.beforeEach((to, from, next) => {
+  // _hmt.push(['_trackPageview', pageURL]) 必须是以"/"（斜杠）开头的相对路径
+  if (window._htm) {
+    if (to.path) window._htm.push(['_trackPageView', '/#' + to.fullPath])
+  }
+  next()
+})
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

@@ -1,11 +1,18 @@
 <template>
-  <div class="news-item-box fl" :style="newsTopic">
-    <p class="news-item-des">{{newsItem.newsTopic | addLabel}}</p>
+  <div class="news-item-box fl">
+    <img :src="loadImgUrl + newsItem.id">
+    <p class="news-item-des">{{newsItem.brief}}</p>
   </div>
 </template>
 
 <script>
+import { LOAD_NEWS_IMG } from '../../api/api'
 export default {
+  data () {
+    return {
+      loadImgUrl: LOAD_NEWS_IMG
+    }
+  },
   props: {
     newsItem: {
       type: Object,
@@ -16,8 +23,7 @@ export default {
     newsTopic: function () {
       return {
         // 注意加载图片路径时必须使用require()方法，否则不能正确识别图片的路径
-        backgroundImage: 'url(' + require('./imgs/news' + this.newsItem.newsId + '.png') + ')'
-        // backgroundImage: 'url(' + this.newsItem.newsBgUrl + ')'
+        // backgroundImage: 'url(' + require('./imgs/news0' + this.newsItem.id + '.png') + ')'
       }
     }
   },
@@ -37,9 +43,12 @@ export default {
     width: 240px;
     height: 260px;
     margin: 0 30px 54px 30px;
-    background: url("./imgs/news01.png");
-    background-repeat: no-repeat;
-    background-size: cover;
+    overflow: hidden;
+  }
+
+  .news-item-box img {
+    width: 100%;
+    height: auto;
   }
 
   .news-item-des {

@@ -1,7 +1,12 @@
 <template>
   <div class="container">
     <div class="banner-wrapper">
-      <img src="./imgs/index_banner.png" alt="六漠科技">
+      <div
+        v-for="banner of bannerList"
+        :key="banner.id"
+      >
+        <img :src="loadBannersImg + banner.id" alt="六漠科技">
+      </div>
     </div>
     <div class="contranct-wrapper">
       <div class="contranct-title">
@@ -77,6 +82,8 @@
 </template>
 
 <script>
+import api, { LOAD_BANNERS_IMG } from '../../api/api'
+
 import spreadHead from '../../components/spreadHead/spreadHead'
 import newsTitle from '../../components/newsTitle/newsTitle'
 import Specialty from '../../components/specialty/specialty'
@@ -84,6 +91,8 @@ import bankShow from '../../components/bankShow/bankShow'
 export default {
   data () {
     return {
+      loadBannersImg: LOAD_BANNERS_IMG,
+      bannerList: [],
       constract: {
         spreadHead: {
           en: 'Service Runs On Technology',
@@ -221,6 +230,11 @@ export default {
       }
     }
   },
+  created () {
+    this.$http.get(api.bannerList(), {lmType: '01'}, (res) => {
+      this.bannerList = res.data
+    })
+  },
   components: {
     spreadHead,
     newsTitle,
@@ -234,6 +248,7 @@ export default {
 .banner-wrapper {
   width: 100%;
   height: 700px;
+  overflow: hidden;
 }
 
 .banner-wrapper img {

@@ -3,14 +3,14 @@
     <div class="nav-content">
       <div class="nav-left fl">
         <div class="nav-logo fl">
-          <img src="./imgs/logo.png" alt="六漠科技">
+          <img src="./imgs/logo.png" alt="六漠科技LOGO">
         </div>
         <div class="nav-title fl">
-          <h1>六漠科技</h1>
+          <img src="./imgs/title.png" alt="六漠科技">
         </div>
         <div class="nav-location fl">
           <i class="iconfont icon-coordinates_fill"></i>
-          <span class="city-name">北京</span>
+          <span class="city-name">{{currentPosition}}</span>
         </div>
       </div>
       <div class="nav-right fr">
@@ -26,7 +26,50 @@
 </template>
 
 <script>
-export default {}
+import $ from 'jQuery'
+import { loadAMapJS } from '../../utils/asyncLoadJS'
+const loadUrl = 'http://api.map.baidu.com/getscript?v=3.0&ak=DTvpddNZXw3opkwd9bt7sd9RZLash8yk&services=&t=20180626110404'
+export default {
+  data () {
+    return {
+      currentPosition: '',
+      loadedAMapJS: false
+    }
+  },
+  created () {
+    // 判断是否加载过
+    if (!this.loadedAMapJS) {
+      loadAMapJS().then(() => {
+        this.loadedAMapJS = true
+      })
+    }
+  },
+  mounted () {
+    // 还可以再进行优化
+    let interval = setInterval(() => {
+      if (this.loadedAMapJS) {
+        let timer = setInterval(() => {
+          if ($('script[src="' + loadUrl + '"]').length > 0) {
+            $.getScript(loadUrl, () => {
+              clearInterval(timer)
+              clearInterval(interval)
+              this.getCurrentLocation()
+            })
+          }
+        }, 30)
+      }
+    }, 300)
+  },
+  methods: {
+    getCurrentLocation () {
+      /* global BMap,BMAP_STATUS_SUCCESS */
+      let self = this
+      new BMap.Geolocation().getCurrentPosition(function (r) {
+        this.getStatus() === BMAP_STATUS_SUCCESS ? self.currentPosition = r.address.city : self.currentPosition = ''
+      })
+    }
+  }
+}
 </script>
 
 <style scoped>
@@ -58,32 +101,38 @@ export default {}
 }
 
 .nav-title {
-  width: 185px;
+  width: 205px;
   height: 56px;
-  margin-left: 20px;
+  padding: 3px 0 3px 15px;
+  overflow: hidden;
 }
 
-.nav-title h1 {
-  line-height: 56px;
-  font-size: 44px;
+.nav-logo img, .nav-title img {
+  width: 100%;
+  height: auto;
 }
 
 .nav-location {
-  width: 120px;
-  height: 56px;
-  margin-left: 30px;
+  width: 269px;
+  padding: 20px 0 6px 30px;
   font-size: 0;
   color: #838383;
 }
 
 .nav-location .iconfont {
-  font-size: 28px;
+  display: inline-block;
+  width: 30px;
+  vertical-align: middle;
+  font-size: 30px;
 }
 
 .nav-location .city-name {
   display: inline-block;
-  margin-left: 20px;
-  padding-top: 16px;
+  width: 200px;
+  height: 30px;
+  line-height: 30px;
+  margin-left: 9px;
+  vertical-align: middle;
   font-size: 28px;
 }
 
