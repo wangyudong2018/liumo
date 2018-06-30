@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yiyun.dao.master.LmFileDao">
+
+	<select id="get" resultType="com.yiyun.domain.LmFile">
+		select `id`,`lm_type`,`lm_file`,`sort`,`create_time`,`update_time` from lm_file where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.yiyun.domain.LmFile">
+		select `id`,`lm_type`,`lm_file`,`sort`,`create_time`,`update_time` from lm_file
+		<where>
+			<if test="id != null and id != ''"> and id = #{id} </if>
+			<if test="lmType != null and lmType != ''"> and lm_type = #{lmType} </if>
+		</where>
+		<choose>
+			<when test="sort != null and sort.trim() != ''">
+				order by ${sort} ${order}
+			</when>
+			<otherwise>
+				order by id desc
+			</otherwise>
+		</choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+
+	<select id="newList" resultType="com.yiyun.domain.LmFile">
+		select `id`,`lm_type`,`sort` from lm_file
+		<where>
+			<if test="id != null and id != ''"> and id = #{id} </if>
+			<if test="lmType != null and lmType != ''"> and lm_type = #{lmType} </if>
+		</where>
+		<choose>
+			<when test="sort != null and sort.trim() != ''">
+				order by ${sort} ${order}
+			</when>
+			<otherwise>
+				order by id desc
+			</otherwise>
+		</choose>
+	</select>
+
+	<select id="count" resultType="int">
+		select count(1) from lm_file
+		<where>
+			<if test="id != null and id != ''"> and id = #{id} </if>
+			<if test="lmType != null and lmType != ''"> and lm_type = #{lmType} </if>
+			<if test="sort != null and sort != ''"> and sort = #{sort} </if>
+			<if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+			<if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		</where>
+	</select>
+
+	<insert id="save" parameterType="com.yiyun.domain.LmFile" useGeneratedKeys="true" keyProperty="id">
+		insert into lm_file
+		(
+		`lm_type`,
+		`lm_file`,
+		`sort`,
+		`create_time`,
+		`update_time`
+		)
+		values
+		(
+		#{lmType},
+		#{lmFile},
+		#{sort},
+		#{createTime},
+		#{updateTime}
+		)
+	</insert>
+
+	<update id="edit" parameterType="com.yiyun.domain.LmFile">
+		update lm_file
+		<set>
+			<if test="lmType != null">`lm_type` = #{lmType}, </if>
+			<if test="lmFile != null">`lm_file` = #{lmFile}, </if>
+			<if test="sort != null">`sort` = #{sort}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}</if>
+		</set>
+		where id = #{id}
+	</update>
+
+	<delete id="remove">
+		delete from lm_file where id = #{value}
+	</delete>
+
+	<delete id="batchRemove">
+		delete from lm_file where id in
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>
