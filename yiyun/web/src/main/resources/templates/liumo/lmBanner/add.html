@@ -8,16 +8,21 @@
 			<div class="col-sm-12">
 				<div class="ibox float-e-margins">
 					<div class="ibox-content">
-						<form class="form-horizontal m-t" id="signupForm" enctype="multipart/form-data">
-							<input id="id" name="id" th:value="${lmFile.id}" type="hidden">
+						<form class="form-horizontal m-t" id="signupForm">
 							<div class="form-group">
-								<label class="col-sm-3 control-label">类型<span class="text-danger">*</span>：
+								<label class="col-sm-3 control-label">渠道<span class="text-danger">*</span>：
 								</label>
 								<div class="col-sm-8">
-									<select id="lmType" name="lmType" class="form-control">
-										<option th:field="*{lmFile.lmType}" value="01">首页banner</option>
-										<option th:field="*{lmFile.lmType}" value="02">产品页banner</option>
+									<select id="channel" name="channel" class="form-control">
+										<option value="pc">pc</option>
+										<option value="mb">mb</option>
 									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">属于哪个页面的banner：</label>
+								<div class="col-sm-8">
+									<input id="page" name="page" class="form-control" type="text">
 								</div>
 							</div>
 							<div class="form-group">
@@ -31,7 +36,7 @@
 								<label class="col-sm-3 control-label">排序<span class="text-danger">*</span>：
 								</label>
 								<div class="col-sm-8">
-									<input id="sort" name="sort" th:value="${lmFile.sort}" class="form-control" type="text">
+									<input id="sort" name="sort" class="form-control" type="text">
 								</div>
 							</div>
 							<div class="form-group">
@@ -46,8 +51,6 @@
 		</div>
 	</div>
 	<div th:include="include::footer"></div>
-	<script type="text/javascript" src="/js/appjs/liumo/lmFile/edit.js">
-		
-	</script>
+	<script type="text/javascript" src="/js/appjs/liumo/lmBanner/add.js"></script>
 </body>
 </html>

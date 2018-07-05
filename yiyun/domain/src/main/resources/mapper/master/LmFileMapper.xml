@@ -4,14 +4,17 @@
 <mapper namespace="com.yiyun.dao.master.LmFileDao">
 
 	<select id="get" resultType="com.yiyun.domain.LmFile">
-		select `id`,`lm_type`,`lm_file`,`sort`,`create_time`,`update_time` from lm_file where id = #{value}
+		select `id`,`lm_type`,`lm_file`,`create_time`,`update_time` from lm_file where id = #{value}
 	</select>
 
 	<select id="list" resultType="com.yiyun.domain.LmFile">
-		select `id`,`lm_type`,`lm_file`,`sort`,`create_time`,`update_time` from lm_file
+		select `id`,`lm_type`,`lm_file`,`create_time`,`update_time` from lm_file
 		<where>
 			<if test="id != null and id != ''"> and id = #{id} </if>
 			<if test="lmType != null and lmType != ''"> and lm_type = #{lmType} </if>
+			<if test="lmFile != null and lmFile != ''"> and lm_file = #{lmFile} </if>
+			<if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+			<if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
 		</where>
 		<choose>
 			<when test="sort != null and sort.trim() != ''">
@@ -26,28 +29,12 @@
 		</if>
 	</select>
 
-	<select id="newList" resultType="com.yiyun.domain.LmFile">
-		select `id`,`lm_type`,`sort` from lm_file
-		<where>
-			<if test="id != null and id != ''"> and id = #{id} </if>
-			<if test="lmType != null and lmType != ''"> and lm_type = #{lmType} </if>
-		</where>
-		<choose>
-			<when test="sort != null and sort.trim() != ''">
-				order by ${sort} ${order}
-			</when>
-			<otherwise>
-				order by id desc
-			</otherwise>
-		</choose>
-	</select>
-
 	<select id="count" resultType="int">
-		select count(1) from lm_file
+		select count(*) from lm_file
 		<where>
 			<if test="id != null and id != ''"> and id = #{id} </if>
 			<if test="lmType != null and lmType != ''"> and lm_type = #{lmType} </if>
-			<if test="sort != null and sort != ''"> and sort = #{sort} </if>
+			<if test="lmFile != null and lmFile != ''"> and lm_file = #{lmFile} </if>
 			<if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
 			<if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
 		</where>
@@ -58,7 +45,6 @@
 		(
 		`lm_type`,
 		`lm_file`,
-		`sort`,
 		`create_time`,
 		`update_time`
 		)
@@ -66,7 +52,6 @@
 		(
 		#{lmType},
 		#{lmFile},
-		#{sort},
 		#{createTime},
 		#{updateTime}
 		)
@@ -77,7 +62,6 @@
 		<set>
 			<if test="lmType != null">`lm_type` = #{lmType}, </if>
 			<if test="lmFile != null">`lm_file` = #{lmFile}, </if>
-			<if test="sort != null">`sort` = #{sort}, </if>
 			<if test="createTime != null">`create_time` = #{createTime}, </if>
 			<if test="updateTime != null">`update_time` = #{updateTime}</if>
 		</set>

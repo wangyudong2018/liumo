@@ -1,27 +1,27 @@
 package com.yiyun.dao.master;
 
-import com.yiyun.domain.LmProduct;
+import com.yiyun.domain.LmBanner;
 
 import java.util.List;
 import java.util.Map;
 import com.yiyun.common.MyMapper;
 
 /**
- * @title 六漠产品介绍
+ * @title 六漠banner表
  * @author WangYuDong
  * @date Thu Jul 05 22:19:09 CST 2018
  */
-public interface LmProductDao extends MyMapper<LmProduct> {
+public interface LmBannerDao extends MyMapper<LmBanner> {
 
-	LmProduct get(Long id);
+	LmBanner get(Long id);
 
-	List<LmProduct> list(Map<String, Object> map);
+	List<LmBanner> list(Map<String, Object> map);
 
 	int count(Map<String, Object> map);
 
-	int save(LmProduct lmProduct);
+	int save(LmBanner lmBanner);
 
-	int edit(LmProduct lmProduct);
+	int edit(LmBanner lmBanner);
 
 	int remove(Long id);
 

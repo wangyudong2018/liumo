@@ -1,7 +1,5 @@
 package com.yiyun.web.liumo.controller;
 
-import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.yiyun.domain.LmFile;
 import com.yiyun.utils.PageUtil;
@@ -25,8 +22,8 @@ import com.yiyun.web.liumo.service.LmFileService;
 
 /**
  * @title 六漠文件表
- * @author wangyudong
- * @date Thu Jun 28 23:09:06 CST 2018
+ * @author WangYuDong
+ * @date Thu Jul 05 22:19:09 CST 2018
  */
 @Controller
 @RequestMapping("/liumo/lmFile")
@@ -46,7 +43,6 @@ public class LmFileController {
 	@RequiresPermissions("liumo:lmFile:lmFile")
 	public PageUtil list(@RequestParam Map<String, Object> params) {
 		// 查询列表数据
-		params.put("sort", "sort asc, create_time desc");
 		Query query = new Query(params);
 		List<LmFile> lmFileList = lmFileService.list(query);
 		int total = lmFileService.count(query);
@@ -74,10 +70,7 @@ public class LmFileController {
 	@ResponseBody
 	@PostMapping("/save")
 	@RequiresPermissions("liumo:lmFile:add")
-	public R save(@RequestParam("file") MultipartFile file, LmFile lmFile) throws IOException {
-		lmFile.setLmFile(file.getBytes());
-		lmFile.setCreateTime(new Date());
-		lmFile.setUpdateTime(new Date());
+	public R save(LmFile lmFile) {
 		if (lmFileService.save(lmFile) > 0) {
 			return R.ok();
 		}
@@ -90,13 +83,7 @@ public class LmFileController {
 	@ResponseBody
 	@RequestMapping("/edit")
 	@RequiresPermissions("liumo:lmFile:edit")
-	public R edit(@RequestParam("file") MultipartFile file, LmFile lmFile) throws IOException {
-		if (null != file && file.getBytes().length > 0) {
-			lmFile.setLmFile(file.getBytes());
-		} else {
-			lmFile.setLmFile(null);
-		}
-		lmFile.setUpdateTime(new Date());
+	public R edit(LmFile lmFile) {
 		lmFileService.edit(lmFile);
 		return R.ok();
 	}

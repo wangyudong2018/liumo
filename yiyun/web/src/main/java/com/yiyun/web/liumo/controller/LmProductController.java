@@ -23,12 +23,13 @@ import com.yiyun.web.liumo.service.LmProductService;
 
 /**
  * @title 六漠产品介绍
- * @author wangyudong
- * @date Fri Jun 22 23:28:52 CST 2018
+ * @author WangYuDong
+ * @date Thu Jul 05 22:19:09 CST 2018
  */
 @Controller
 @RequestMapping("/liumo/lmProduct")
 public class LmProductController {
+
 	@Autowired
 	private LmProductService lmProductService;
 

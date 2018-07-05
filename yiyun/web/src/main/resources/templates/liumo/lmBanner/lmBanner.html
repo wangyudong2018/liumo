@@ -9,10 +9,10 @@
 				<div class="ibox-body">
 					<div class="fixed-table-toolbar">
 						<div class="columns pull-left">
-							<button shiro:hasPermission="liumo:lmFile:add" type="button" class="btn  btn-primary" onclick="add()">
+							<button shiro:hasPermission="liumo:lmBanner:add" type="button" class="btn  btn-primary" onclick="add()">
 								<i class="fa fa-plus" aria-hidden="true"></i>添加
 							</button>
-							<button shiro:hasPermission="liumo:lmFile:batchRemove" type="button" class="btn  btn-danger" onclick="batchRemove()">
+							<button shiro:hasPermission="liumo:lmBanner:batchRemove" type="button" class="btn  btn-danger" onclick="batchRemove()">
 								<i class="fa fa-trash" aria-hidden="true"></i>删除
 							</button>
 						</div>
@@ -21,12 +21,6 @@
 						</div>
 						<div class="columns pull-right col-md-2 nopadding">
 							<input id="searchName" type="text" class="form-control" placeholder="">
-						</div>
-						<div class="columns pull-right col-md-2 nopadding">
-							<select data-placeholder="选择类型<" class="form-control chosen-select" id="lmType" tabindex="3" style="width: 100%">
-								<option value="01">首页banner</option>
-								<option value="02">产品页banner</option>
-							</select>
 						</div>
 					</div>
 					<table id="exampleTable" data-mobile-responsive="true">
@@ -43,23 +37,23 @@
 			var s_resetPwd_h = 'hidden';
 		</script>
 	</div>
-	<div shiro:hasPermission="liumo:lmFile:edit">
+	<div shiro:hasPermission="liumo:lmBanner:edit">
 		<script type="text/javascript">
 			s_edit_h = '';
 		</script>
 	</div>
-	<div shiro:hasPermission="liumo:lmFile:remove">
+	<div shiro:hasPermission="liumo:lmBanner:remove">
 		<script type="text/javascript">
 			var s_remove_h = '';
 		</script>
 	</div>
-	<div shiro:hasPermission="liumo:lmFile:resetPwd">
+	<div shiro:hasPermission="liumo:lmBanner:resetPwd">
 		<script type="text/javascript">
 			var s_resetPwd_h = '';
 		</script>
 	</div>
 	</div>
 	<div th:include="include :: footer"></div>
-	<script type="text/javascript" src="/js/appjs/liumo/lmFile/lmFile.js"></script>
+	<script type="text/javascript" src="/js/appjs/liumo/lmBanner/lmBanner.js"></script>
 </body>
 </html>

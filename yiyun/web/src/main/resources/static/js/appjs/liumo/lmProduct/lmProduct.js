@@ -24,8 +24,7 @@ function load() {
 		pageNumber : 1, // 如果设置了分布，首页页码
 		// search : true, // 是否显示搜索框
 		showColumns : false, // 是否显示内容下拉框（选择显示的列）
-		sidePagination : "server", // 设置在哪里进行分页，可选值为"client" 或者
-		// "server"
+		sidePagination : "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
 		queryParams : function(params) {
 			return {
 				// 说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
@@ -44,6 +43,9 @@ function load() {
 		columns : [ {
 			checkbox : true
 		}, {
+			field : 'prdType',
+			title : '产品类型'
+		}, {
 			field : 'title',
 			title : '产品名称'
 		}, {
@@ -51,28 +53,19 @@ function load() {
 			title : '产品介绍'
 		}, {
 			field : 'agreemt',
-			title : '服务协议'
-		}, {
-			field : 'rate',
-			title : '服务费率'
+			title : '居间服务和费率'
 		}, {
 			field : 'people',
 			title : '适合人群'
-		}, {
-			field : 'people',
-			title : '适合人群'
-		}, {
-			field : 'logo',
-			title : 'Logo'
-		}, {
-			field : 'sort',
-			title : '排序'
 		}, {
 			field : 'state',
 			title : '是否有效',
 			formatter : function(value, row, index) {
 				return value === '0' ? '无效' : '有效';
 			}
+		}, {
+			field : 'sort',
+			title : '排序'
 		}, {
 			title : '操作',
 			field : 'id',

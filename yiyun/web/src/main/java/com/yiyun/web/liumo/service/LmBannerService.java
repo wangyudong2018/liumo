@@ -1,26 +1,26 @@
 package com.yiyun.web.liumo.service;
 
-import com.yiyun.domain.LmFile;
+import com.yiyun.domain.LmBanner;
 
 import java.util.List;
 import java.util.Map;
 
 /**
- * @title 六漠文件表
+ * @title 六漠banner表
  * @author WangYuDong
  * @date Thu Jul 05 22:19:09 CST 2018
  */
-public interface LmFileService {
+public interface LmBannerService {
 
-	LmFile get(Long id);
+	LmBanner get(Long id);
 
-	List<LmFile> list(Map<String, Object> map);
+	List<LmBanner> list(Map<String, Object> map);
 
 	int count(Map<String, Object> map);
 
-	int save(LmFile lmFile);
+	int save(LmBanner lmBanner);
 
-	int edit(LmFile lmFile);
+	int edit(LmBanner lmBanner);
 
 	int remove(Long id);
 

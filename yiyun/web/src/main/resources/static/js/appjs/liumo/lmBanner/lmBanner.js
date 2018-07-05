@@ -1,4 +1,4 @@
-var prefix = "/liumo/lmFile"
+var prefix = "/liumo/lmBanner"
 $(function() {
 	load();
 });
@@ -20,7 +20,7 @@ function load() {
 		singleSelect : false, // 设置为true将禁止多选
 		// contentType : "application/x-www-form-urlencoded",
 		// //发送到服务器的数据编码类型
-		pageSize : 5, // 如果设置了分页，每页数据条数
+		pageSize : 10, // 如果设置了分页，每页数据条数
 		pageNumber : 1, // 如果设置了分布，首页页码
 		// search : true, // 是否显示搜索框
 		showColumns : false, // 是否显示内容下拉框（选择显示的列）
@@ -29,8 +29,7 @@ function load() {
 			return {
 				// 说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 				limit : params.limit,
-				offset : params.offset,
-				lmType : $("#lmType").val()
+				offset : params.offset
 			// name:$('#searchName').val(),
 			// username:$('#searchName').val()
 			};
@@ -44,17 +43,14 @@ function load() {
 		columns : [ {
 			checkbox : true
 		}, {
-			field : 'lmType',
-			title : '类型',
-			formatter : function(value, row, index) {
-				return value === '01' ? '首页banner' : '产品页banner';
-			}
+			field : 'channel',
+			title : '渠道'
 		}, {
-			field : 'lmFile',
-			title : '文件',
-			formatter : function(value, row, index) {
-				return '<img src="data:image/png;base64,' + row.lmFile + '">';
-			}
+			field : 'page',
+			title : '属于哪个页面的banner'
+		}, {
+			field : 'fileId',
+			title : '文件表ID'
 		}, {
 			field : 'sort',
 			title : '排序'

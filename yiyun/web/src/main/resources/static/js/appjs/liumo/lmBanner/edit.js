@@ -11,7 +11,7 @@ function edit() {
 	$.ajax({
 		cache : true,
 		type : "POST",
-		url : "/liumo/lmFile/edit",
+		url : "/liumo/lmBanner/edit",
 		cache : false,
 		contentType : false,
 		processData : false,
@@ -39,10 +39,7 @@ function validateRule() {
 	var icon = "<i class='fa fa-times-circle'></i> ";
 	$("#signupForm").validate({
 		rules : {
-			lmType : {
-				required : true
-			},
-			lmFile : {
+			file : {
 				required : true
 			},
 			sort : {
@@ -51,10 +48,7 @@ function validateRule() {
 			}
 		},
 		messages : {
-			lmType : {
-				required : icon + "请选择类型"
-			},
-			lmFile : {
+			file : {
 				required : icon + "请选择文件"
 			},
 			sort : {

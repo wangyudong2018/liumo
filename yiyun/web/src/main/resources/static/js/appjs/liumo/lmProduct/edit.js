@@ -45,13 +45,7 @@ function validateRule() {
 			agreemt : {
 				required : true
 			},
-			rate : {
-				required : true
-			},
 			people : {
-				required : true
-			},
-			logo : {
 				required : true
 			},
 			sort : {
@@ -67,16 +61,10 @@ function validateRule() {
 				required : icon + "请输入产品介绍"
 			},
 			agreemt : {
-				required : icon + "请输入服务协议"
-			},
-			rate : {
-				required : icon + "请输入服务费率"
+				required : icon + "请输入居间服务和费率"
 			},
 			people : {
 				required : icon + "请输入适合人群"
-			},
-			logo : {
-				required : icon + "请输入Logo"
 			},
 			sort : {
 				required : icon + "请输入排序",

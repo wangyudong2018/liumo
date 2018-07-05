@@ -27,11 +27,6 @@ public class LmFileServiceImpl implements LmFileService {
 	}
 
 	@Override
-	public List<LmFile> newList(Map<String, Object> map) {
-		return lmFileDao.newList(map);
-	}
-
-	@Override
 	public int count(Map<String, Object> map) {
 		return lmFileDao.count(map);
 	}

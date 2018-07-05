@@ -1,10 +1,10 @@
 package com.yiyun.web.liumo.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.yiyun.dao.master.LmProductDao;
 import com.yiyun.domain.LmProduct;
@@ -12,6 +12,7 @@ import com.yiyun.web.liumo.service.LmProductService;
 
 @Service
 public class LmProductServiceImpl implements LmProductService {
+
 	@Autowired
 	private LmProductDao lmProductDao;
 

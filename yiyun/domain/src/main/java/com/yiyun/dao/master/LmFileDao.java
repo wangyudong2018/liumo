@@ -8,16 +8,14 @@ import com.yiyun.common.MyMapper;
 
 /**
  * @title 六漠文件表
- * @author wangyudong
- * @date Thu Jun 28 23:09:06 CST 2018
+ * @author WangYuDong
+ * @date Thu Jul 05 22:19:09 CST 2018
  */
 public interface LmFileDao extends MyMapper<LmFile> {
 
 	LmFile get(Long id);
 
 	List<LmFile> list(Map<String, Object> map);
-
-	List<LmFile> newList(Map<String, Object> map);
 
 	int count(Map<String, Object> map);
 
@@ -28,4 +26,5 @@ public interface LmFileDao extends MyMapper<LmFile> {
 	int remove(Long id);
 
 	int batchRemove(Long[] ids);
+
 }
