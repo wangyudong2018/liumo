@@ -99,7 +99,7 @@ public class LmPublicController {
 	@GetMapping("/releaseList")
 	public PageUtil releaseList(@RequestParam Map<String, Object> params) {
 		// 查询列表数据
-		if ((Integer) params.get("limit") > 30) {
+		if (Integer.parseInt(params.get("limit").toString()) > 30) {
 			params.put("limit", 30);
 		}
 		if (StringUtils.equals("pc", (String) params.get("channel"))) {
@@ -119,6 +119,7 @@ public class LmPublicController {
 			Map<String, Object> map = null;
 			for (LmRelease record : records) {
 				map = new HashMap<String, Object>(16);
+				map.put("id", record.getId());
 				map.put("thumbnail", record.getThumbnail());
 				map.put("title", record.getTitle());
 				map.put("brief", record.getBrief());

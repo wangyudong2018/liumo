@@ -27,4 +27,6 @@ public interface LmReleaseDao extends MyMapper<LmRelease> {
 
 	int batchRemove(Long[] ids);
 
+	int batchRemoveFile(Long[] ids);
+
 }

@@ -26,4 +26,6 @@ public interface LmReleaseService {
 
 	int batchRemove(Long[] ids);
 
+	int batchRemoveFile(Long[] ids);
+
 }

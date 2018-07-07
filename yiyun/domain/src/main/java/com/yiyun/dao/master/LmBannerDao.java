@@ -27,4 +27,6 @@ public interface LmBannerDao extends MyMapper<LmBanner> {
 
 	int batchRemove(Long[] ids);
 
+	int batchRemoveFile(Long[] ids);
+
 }

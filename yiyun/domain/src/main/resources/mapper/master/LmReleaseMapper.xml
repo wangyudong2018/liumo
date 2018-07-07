@@ -19,7 +19,7 @@
 			<if test="stick != null and stick != ''"> and stick = #{stick} </if>
 			<if test="state != null and state != ''"> and state = #{state} </if>
 			<if test="outChain != null and outChain != ''"> and out_chain = #{outChain} </if>
-			<if test="terminal != null and terminal != ''"> and terminal in (#{terminal}) </if>
+			<if test="terminal != null and terminal != ''"> and terminal in (${terminal}) </if>
 			<if test="sort != null and sort != ''"> and sort = #{sort} </if>
 			<if test="releaseDate != null and releaseDate != ''"> and release_date = #{releaseDate} </if>
 			<if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
@@ -118,6 +118,14 @@
 		<foreach item="id" collection="array" open="(" separator="," close=")">
 			#{id}
 		</foreach>
+	</delete>
+	<delete id="batchRemoveFile">
+		delete from lm_file where id in (
+		select thumbnail from lm_release where id in
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+		)
 	</delete>
 
 </mapper>

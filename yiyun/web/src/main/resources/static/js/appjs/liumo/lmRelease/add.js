@@ -3,8 +3,10 @@ $().ready(function() {
 	$('#category').on('change', function() {
 		if (this.value === '01') {
 			$('#outChainDiv').hide();
+			$('#contentDiv').show();
 		} else {
 			$('#outChainDiv').show();
+			$('#contentDiv').hide();
 		}
 	}).trigger('change');
 

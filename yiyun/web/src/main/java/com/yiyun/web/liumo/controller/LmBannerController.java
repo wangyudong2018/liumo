@@ -123,6 +123,7 @@ public class LmBannerController {
 	@ResponseBody
 	@RequiresPermissions("liumo:lmBanner:remove")
 	public R remove(Long id) {
+		lmFileService.remove(lmBannerService.get(id).getFileId());
 		if (lmBannerService.remove(id) > 0) {
 			return R.ok();
 		}
@@ -136,6 +137,7 @@ public class LmBannerController {
 	@ResponseBody
 	@RequiresPermissions("liumo:lmBanner:batchRemove")
 	public R remove(@RequestParam("ids[]") Long[] ids) {
+		lmBannerService.batchRemoveFile(ids);
 		lmBannerService.batchRemove(ids);
 		return R.ok();
 	}

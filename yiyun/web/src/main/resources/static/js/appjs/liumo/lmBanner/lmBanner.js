@@ -50,7 +50,10 @@ function load() {
 			title : '属于哪个页面的banner'
 		}, {
 			field : 'fileId',
-			title : '文件表ID'
+			title : '文件',
+			formatter : function(value, row, index) {
+				return '<img src="/liumo/public/file/' + value + '"/>';
+			}
 		}, {
 			field : 'sort',
 			title : '排序'

@@ -124,6 +124,7 @@ public class LmReleaseController {
 	@ResponseBody
 	@RequiresPermissions("liumo:lmRelease:remove")
 	public R remove(Long id) {
+		lmFileService.remove(lmReleaseService.get(id).getThumbnail());
 		if (lmReleaseService.remove(id) > 0) {
 			return R.ok();
 		}
@@ -137,6 +138,7 @@ public class LmReleaseController {
 	@ResponseBody
 	@RequiresPermissions("liumo:lmRelease:batchRemove")
 	public R remove(@RequestParam("ids[]") Long[] ids) {
+		lmReleaseService.batchRemoveFile(ids);
 		lmReleaseService.batchRemove(ids);
 		return R.ok();
 	}

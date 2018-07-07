@@ -51,4 +51,9 @@ public class LmBannerServiceImpl implements LmBannerService {
 		return lmBannerDao.batchRemove(ids);
 	}
 
+	@Override
+	public int batchRemoveFile(Long[] ids) {
+		return lmBannerDao.batchRemoveFile(ids);
+	}
+
 }

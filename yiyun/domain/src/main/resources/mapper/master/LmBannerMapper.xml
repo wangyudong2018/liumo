@@ -80,4 +80,14 @@
 		</foreach>
 	</delete>
 
+	<delete id="batchRemoveFile">
+		delete from lm_file where id in (
+		select file_id from lm_banner where id in
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+		)
+	</delete>
+
+
 </mapper>

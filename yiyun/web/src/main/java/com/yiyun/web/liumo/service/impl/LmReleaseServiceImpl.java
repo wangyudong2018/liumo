@@ -51,4 +51,9 @@ public class LmReleaseServiceImpl implements LmReleaseService {
 		return lmReleaseDao.batchRemove(ids);
 	}
 
+	@Override
+	public int batchRemoveFile(Long[] ids) {
+		return lmReleaseDao.batchRemoveFile(ids);
+	}
+
 }
