@@ -120,13 +120,16 @@ public class LmPublicController {
 			for (LmRelease record : records) {
 				map = new HashMap<String, Object>(16);
 				map.put("id", record.getId());
+				map.put("category", record.getCategory());
 				map.put("thumbnail", record.getThumbnail());
 				map.put("title", record.getTitle());
 				map.put("brief", record.getBrief());
 				map.put("original", record.getOriginal());
 				map.put("title", record.getTitle());
+				map.put("stick", record.getStick());
 				map.put("outChain", record.getOutChain());
 				map.put("releaseDate", sdf.format(record.getReleaseDate()));
+				map.put("releaseTime", record.getCreateTime());
 				list.add(map);
 			}
 		}
@@ -138,19 +141,25 @@ public class LmPublicController {
 
 	@GetMapping("/release/{id}")
 	public Map<String, Object> release(@PathVariable("id") Long id) {
+		Map<String, Object> map = new HashMap<String, Object>(16);
 		LmRelease record = lmReleaseService.get(id);
+		if (null == record) {
+			return map;
+		}
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Map<String, Object> map = new HashMap<String, Object>(16);
+		map.put("id", record.getId());
+		map.put("category", record.getCategory());
 		map.put("thumbnail", record.getThumbnail());
 		map.put("title", record.getTitle());
 		map.put("brief", record.getBrief());
 		map.put("original", record.getOriginal());
 		map.put("title", record.getTitle());
+		map.put("stick", record.getStick());
 		map.put("outChain", record.getOutChain());
 		map.put("releaseDate", sdf.format(record.getReleaseDate()));
-		map.put("content", record.getContent());
 		map.put("releaseTime", record.getCreateTime());
+		map.put("content", record.getContent());
 
 		return map;
 	}
