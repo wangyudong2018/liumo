@@ -35,6 +35,8 @@ public class LmRelease implements Serializable {
 	private String state;
 	// 外部链接
 	private String outChain;
+	// 新闻内容
+	private String content;
 	// 发布终端（00全部；01PC；02MB）
 	private String terminal;
 	// 排序

@@ -1,5 +1,7 @@
 package com.yiyun.web.liumo.controller;
 
+import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.yiyun.domain.LmFile;
 import com.yiyun.utils.PageUtil;
@@ -69,12 +72,18 @@ public class LmFileController {
 	 */
 	@ResponseBody
 	@PostMapping("/save")
-	@RequiresPermissions("liumo:lmFile:add")
-	public R save(LmFile lmFile) {
+	// @RequiresPermissions("liumo:lmFile:add")
+	public String save(@RequestParam("file") MultipartFile file) throws IOException {
+		LmFile lmFile = new LmFile();
+		lmFile.setLmFile(file.getBytes());
+		lmFile.setLmType(file.getContentType());
+		lmFile.setCreateTime(new Date());
+		lmFile.setUpdateTime(new Date());
+		lmFileService.save(lmFile);
 		if (lmFileService.save(lmFile) > 0) {
-			return R.ok();
+			return "{\"success\": true,\"msg\": \"上传成功\", \"file_path\": \"/liumo/public/file/" + lmFile.getId() + "\"}";
 		}
-		return R.error();
+		return "{\"success\": false,\"msg\": \"上传失败\"}";
 	}
 
 	/**

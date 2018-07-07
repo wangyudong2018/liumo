@@ -4,7 +4,7 @@
 <mapper namespace="com.yiyun.dao.master.LmReleaseDao">
 
 	<select id="get" resultType="com.yiyun.domain.LmRelease">
-		select `id`,`category`,`thumbnail`,`title`,`brief`,`original`,`stick`,`state`,`out_chain`,`terminal`,`sort`,`release_date`,`create_time`,`update_time` from lm_release where id = #{value}
+		select `id`,`category`,`thumbnail`,`title`,`brief`,`original`,`stick`,`state`,`out_chain`,`content`,`terminal`,`sort`,`release_date`,`create_time`,`update_time` from lm_release where id = #{value}
 	</select>
 
 	<select id="list" resultType="com.yiyun.domain.LmRelease">
@@ -19,7 +19,7 @@
 			<if test="stick != null and stick != ''"> and stick = #{stick} </if>
 			<if test="state != null and state != ''"> and state = #{state} </if>
 			<if test="outChain != null and outChain != ''"> and out_chain = #{outChain} </if>
-			<if test="terminal != null and terminal != ''"> and terminal = #{terminal} </if>
+			<if test="terminal != null and terminal != ''"> and terminal in (#{terminal}) </if>
 			<if test="sort != null and sort != ''"> and sort = #{sort} </if>
 			<if test="releaseDate != null and releaseDate != ''"> and release_date = #{releaseDate} </if>
 			<if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
@@ -62,6 +62,7 @@
 		`stick`,
 		`state`,
 		`out_chain`,
+		`content`,
 		`terminal`,
 		`sort`,
 		`release_date`,
@@ -78,6 +79,7 @@
 		#{stick},
 		#{state},
 		#{outChain},
+		#{content},
 		#{terminal},
 		#{sort},
 		#{releaseDate},
@@ -97,6 +99,7 @@
 			<if test="stick != null">`stick` = #{stick}, </if>
 			<if test="state != null">`state` = #{state}, </if>
 			<if test="outChain != null">`out_chain` = #{outChain}, </if>
+			<if test="content != null">`content` = #{content}, </if>
 			<if test="terminal != null">`terminal` = #{terminal}, </if>
 			<if test="sort != null">`sort` = #{sort}, </if>
 			<if test="releaseDate != null">`release_date` = #{releaseDate}, </if>

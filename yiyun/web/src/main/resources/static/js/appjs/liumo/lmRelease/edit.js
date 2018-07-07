@@ -7,6 +7,90 @@ $().ready(function() {
 			$('#outChainDiv').show();
 		}
 	}).trigger('change');
+
+	var content = new Simditor({
+		textarea : $('#content'),
+		placeholder : '新闻内容',
+		defaultImage : '/img/a1.jpg',
+		params : {},
+		upload : {
+			url : '/liumo/lmFile/save',
+			params : null,
+			fileKey : 'file',
+			connectionCount : 10,
+			leaveConfirm : '上传正在进行中，你确定要离开这个页面吗？'
+		},
+		tabIndent : true,
+		toolbar : [ 'title', 'bold', 'italic', 'underline', 'strikethrough', 'fontScale', 'color', 'ol', 'ul', 'blockquote', 'code', 'table', 'link', 'image', 'hr', 'indent', 'outdent', 'alignment' ],
+		toolbarFloat : true,
+		toolbarFloatOffset : 0,
+		toolbarHidden : false,
+		pasteImage : false,
+		cleanPaste : false,
+		imageButton : [ 'upload', 'external' ],
+		allowedTags : [ 'br', 'span', 'a', 'img', 'b', 'strong', 'i', 'strike', 'u', 'font', 'p', 'ul', 'ol', 'li', 'blockquote', 'pre', 'code', 'h1', 'h2', 'h3', 'h4', 'hr' ],
+		codeLanguages : [ {
+			name : 'Bash',
+			value : 'bash'
+		}, {
+			name : 'C++',
+			value : 'c++'
+		}, {
+			name : 'C#',
+			value : 'cs'
+		}, {
+			name : 'CSS',
+			value : 'css'
+		}, {
+			name : 'Erlang',
+			value : 'erlang'
+		}, {
+			name : 'Less',
+			value : 'less'
+		}, {
+			name : 'Sass',
+			value : 'sass'
+		}, {
+			name : 'Diff',
+			value : 'diff'
+		}, {
+			name : 'CoffeeScript',
+			value : 'coffeescript'
+		}, {
+			name : 'HTML,XML',
+			value : 'html'
+		}, {
+			name : 'JSON',
+			value : 'json'
+		}, {
+			name : 'Java',
+			value : 'java'
+		}, {
+			name : 'JavaScript',
+			value : 'js'
+		}, {
+			name : 'Markdown',
+			value : 'markdown'
+		}, {
+			name : 'Objective C',
+			value : 'oc'
+		}, {
+			name : 'PHP',
+			value : 'php'
+		}, {
+			name : 'Perl',
+			value : 'parl'
+		}, {
+			name : 'Python',
+			value : 'python'
+		}, {
+			name : 'Ruby',
+			value : 'ruby'
+		}, {
+			name : 'SQL',
+			value : 'sql'
+		} ]
+	});
 });
 
 $.validator.setDefaults({
