@@ -20,7 +20,7 @@ function load() {
 		singleSelect : false, // 设置为true将禁止多选
 		// contentType : "application/x-www-form-urlencoded",
 		// //发送到服务器的数据编码类型
-		pageSize : 5, // 如果设置了分页，每页数据条数
+		pageSize : 10, // 如果设置了分页，每页数据条数
 		pageNumber : 1, // 如果设置了分布，首页页码
 		// search : true, // 是否显示搜索框
 		showColumns : false, // 是否显示内容下拉框（选择显示的列）
@@ -30,7 +30,9 @@ function load() {
 				// 说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 				limit : params.limit,
 				offset : params.offset,
-				category : $("#category").val()
+				category : $("#category").val(),
+				terminal : $("#terminal").val(),
+				state : $("#state").val()
 			// name:$('#searchName').val(),
 			// username:$('#searchName').val()
 			};
@@ -45,22 +47,48 @@ function load() {
 			checkbox : true
 		}, {
 			field : 'category',
-			title : '种类',
+			title : '发布类型',
 			formatter : function(value, row, index) {
-				return value === 'news' ? '新闻发布' : '媒体报道';
+				return value === '01' ? '新闻发布' : '媒体报道';
 			}
+		}, {
+			field : 'title',
+			title : '发布标题'
 		}, {
 			field : 'brief',
 			title : '发布简介'
 		}, {
-			field : 'Logo',
-			title : 'logo',
+			field : 'original',
+			title : '原创者'
+		}, {
+			field : 'stick',
+			title : '是否置顶',
 			formatter : function(value, row, index) {
-				return '<img src="data:image/png;base64,' + row.logo + '">';
+				return value === '1' ? '是' : '否';
+			}
+		}, {
+			field : 'state',
+			title : '是否有效',
+			formatter : function(value, row, index) {
+				return value === '1' ? '是' : '否';
+			}
+		}, {
+			field : 'terminal',
+			title : '发布终端',
+			formatter : function(value, row, index) {
+				if (value === '01') {
+					return 'PC';
+				} else if (value === '02') {
+					return 'APP';
+				}
+				return '全部';
 			}
 		}, {
 			field : 'sort',
 			title : '排序'
+		}, {
+			field : 'releaseDate',
+			title : '发布日期'
 		}, {
 			title : '操作',
 			field : 'id',

@@ -20,12 +20,25 @@
 							<button class="btn btn-success" onclick="reLoad(1)">查询</button>
 						</div>
 						<div class="columns pull-right col-md-2 nopadding">
-							<input id="searchName" type="text" class="form-control" placeholder="">
+							<select data-placeholder="是否有效" class="form-control chosen-select" id="state" tabindex="3" style="width: 100%">
+								<option value="">是否有效</option>
+								<option value="1">有效</option>
+								<option value="0">无效</option>
+							</select>
 						</div>
 						<div class="columns pull-right col-md-2 nopadding">
-							<select data-placeholder="选择种类<" class="form-control chosen-select" id="category" tabindex="3" style="width: 100%">
-								<option value="news">新闻发布</option>
-								<option value="media">媒体报道</option>
+							<select data-placeholder="发布类型<" class="form-control chosen-select" id="category" tabindex="3" style="width: 100%">
+								<option value="">发布类型</option>
+								<option value="01">新闻发布</option>
+								<option value="02">媒体报道</option>
+							</select>
+						</div>
+						<div class="columns pull-right col-md-2 nopadding">
+							<select data-placeholder="发布终端" class="form-control chosen-select" id="terminal" tabindex="3" style="width: 100%">
+								<option value="">发布终端</option>
+								<option value="00">全部</option>
+								<option value="01">PC</option>
+								<option value="02">APP</option>
 							</select>
 						</div>
 					</div>
@@ -59,7 +72,6 @@
 		</script>
 	</div>
 	<div th:include="include :: footer"></div>
-	<script type="text/javascript" src="/js/appjs/liumo/liumo.js"></script>
 	<script type="text/javascript" src="/js/appjs/liumo/lmRelease/lmRelease.js"></script>
 </body>
 </html>

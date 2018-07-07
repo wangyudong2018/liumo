@@ -1,13 +1,13 @@
 package com.yiyun.web.liumo.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Map;
 
-import com.yiyun.domain.LmRelease;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.yiyun.dao.master.LmReleaseDao;
+import com.yiyun.domain.LmRelease;
 import com.yiyun.web.liumo.service.LmReleaseService;
 
 @Service
@@ -22,18 +22,8 @@ public class LmReleaseServiceImpl implements LmReleaseService {
 	}
 
 	@Override
-	public LmRelease getLogo(Long id) {
-		return lmReleaseDao.getLogo(id);
-	}
-
-	@Override
 	public List<LmRelease> list(Map<String, Object> map) {
 		return lmReleaseDao.list(map);
-	}
-
-	@Override
-	public List<LmRelease> newList(Map<String, Object> map) {
-		return lmReleaseDao.newList(map);
 	}
 
 	@Override

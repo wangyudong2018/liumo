@@ -102,12 +102,14 @@ public class LmBannerController {
 	@RequiresPermissions("liumo:lmBanner:edit")
 	public R edit(LmBanner lmBanner, @RequestParam("file") MultipartFile file) throws IOException {
 
-		LmFile lmFile = new LmFile();
-		lmFile.setId(lmBannerService.get(lmBanner.getId()).getFileId());
-		lmFile.setLmFile(file.getBytes());
-		lmFile.setLmType(file.getContentType());
-		lmFile.setUpdateTime(new Date());
-		lmFileService.edit(lmFile);
+		if (!file.isEmpty()) {
+			LmFile lmFile = new LmFile();
+			lmFile.setId(lmBannerService.get(lmBanner.getId()).getFileId());
+			lmFile.setLmFile(file.getBytes());
+			lmFile.setLmType(file.getContentType());
+			lmFile.setUpdateTime(new Date());
+			lmFileService.edit(lmFile);
+		}
 
 		lmBanner.setUpdateTime(new Date());
 		lmBannerService.edit(lmBanner);

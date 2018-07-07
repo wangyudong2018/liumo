@@ -8,22 +8,22 @@
 			<div class="col-sm-12">
 				<div class="ibox float-e-margins">
 					<div class="ibox-content">
-						<form class="form-horizontal m-t" id="signupForm" enctype="multipart/form-data">
+						<form class="form-horizontal m-t" id="signupForm">
 							<div class="form-group">
-								<label class="col-sm-3 control-label">种类<span class="text-danger">*</span>：
+								<label class="col-sm-3 control-label">发布类型<span class="text-danger">*</span>：
 								</label>
 								<div class="col-sm-8">
 									<select id="category" name="category" class="form-control">
-										<option value="news">新闻发布</option>
-										<option value="media">媒体报道</option>
+										<option value="01">新闻发布</option>
+										<option value="02">媒体报道</option>
 									</select>
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">发布简介<span class="text-danger">*</span>：
+								<label class="col-sm-3 control-label">缩略图<span class="text-danger">*</span>：
 								</label>
 								<div class="col-sm-8">
-									<input id="brief" name="brief" class="form-control" type="text">
+									<input id="file" name="file" class="form-control" type="file">
 								</div>
 							</div>
 							<div class="form-group">
@@ -34,17 +34,47 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">发布内容<span class="text-danger">*</span>：
+								<label class="col-sm-3 control-label">发布简介<span class="text-danger">*</span>：
 								</label>
 								<div class="col-sm-8">
-									<textarea id="content" name="content" rows="3" cols="63" class="form-control"></textarea>
+									<input id="brief" name="brief" class="form-control" type="text">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">Logo<span class="text-danger">*</span>：
+								<label class="col-sm-3 control-label">原创者：</label>
+								<div class="col-sm-8">
+									<input id="original" name="original" class="form-control" type="text" value="六漠原创">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">是否置顶<span class="text-danger">*</span>：
 								</label>
 								<div class="col-sm-8">
-									<input id="file" name="file" class="form-control" type="file">
+									<select id="stick" name="stick" class="form-control">
+										<option value="0">否</option>
+										<option value="1">是</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">发布终端<span class="text-danger">*</span>：
+								</label>
+								<div class="col-sm-8">
+									<select id="terminal" name="terminal" class="form-control">
+										<option value="00">全部</option>
+										<option value="01">PC</option>
+										<option value="02">APP</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">是否有效<span class="text-danger">*</span>：
+								</label>
+								<div class="col-sm-8">
+									<select id="state" name="state" class="form-control">
+										<option value="1">是</option>
+										<option value="0">否</option>
+									</select>
 								</div>
 							</div>
 							<div class="form-group">
@@ -52,6 +82,20 @@
 								</label>
 								<div class="col-sm-8">
 									<input id="sort" name="sort" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group" id="outChainDiv">
+								<label class="col-sm-3 control-label">外部链接<span class="text-danger">*</span>：
+								</label>
+								<div class="col-sm-8">
+									<input id="outChain" name="outChain" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group" id="contentDiv">
+								<label class="col-sm-3 control-label">新闻内容<span class="text-danger">*</span>：
+								</label>
+								<div class="col-sm-8">
+									<input id="content" name="content" class="form-control" type="text">
 								</div>
 							</div>
 							<div class="form-group">

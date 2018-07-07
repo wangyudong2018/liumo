@@ -8,23 +8,22 @@
 			<div class="col-sm-12">
 				<div class="ibox float-e-margins">
 					<div class="ibox-content">
-						<form class="form-horizontal m-t" id="signupForm" enctype="multipart/form-data">
+						<form class="form-horizontal m-t" id="signupForm">
 							<input id="id" name="id" th:value="${lmRelease.id}" type="hidden">
 							<div class="form-group">
-								<label class="col-sm-3 control-label">种类<span class="text-danger">*</span>：
+								<label class="col-sm-3 control-label">发布类型<span class="text-danger">*</span>：
 								</label>
 								<div class="col-sm-8">
 									<select id="category" name="category" class="form-control">
-										<option th:field="*{lmRelease.category}" value="news">新闻发布</option>
-										<option th:field="*{lmRelease.category}" value="media">媒体报道</option>
+										<option th:field="*{lmRelease.category}" value="01">新闻发布</option>
+										<option th:field="*{lmRelease.category}" value="02">媒体报道</option>
 									</select>
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">发布简介<span class="text-danger">*</span>：
-								</label>
+								<label class="col-sm-3 control-label">缩略图：</label>
 								<div class="col-sm-8">
-									<input id="brief" name="brief" th:value="${lmRelease.brief}" class="form-control" type="text">
+									<input id="file" name="file" class="form-control" type="file">
 								</div>
 							</div>
 							<div class="form-group">
@@ -35,17 +34,48 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">发布内容<span class="text-danger">*</span>：
+								<label class="col-sm-3 control-label">发布简介<span class="text-danger">*</span>：
 								</label>
 								<div class="col-sm-8">
-									<textarea id="content" name="content" rows="3" cols="63" th:text="${lmRelease.content}" class="form-control"></textarea>
+									<input id="brief" name="brief" th:value="${lmRelease.brief}" class="form-control" type="text">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">Logo： </label>
+								<label class="col-sm-3 control-label">原创者<span class="text-danger">*</span>：
+								</label>
 								<div class="col-sm-8">
-									<input id="file" name="file" class="form-control" type="file">
-									<!-- 									<input id="logo" name="logo" th:value="${lmRelease.logo}" class="form-control" type="text"> -->
+									<input id="original" name="original" th:value="${lmRelease.original}" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">是否置顶<span class="text-danger">*</span>：
+								</label>
+								<div class="col-sm-8">
+									<select id="stick" name="stick" class="form-control">
+										<option th:field="*{lmRelease.stick}" value="0">否</option>
+										<option th:field="*{lmRelease.stick}" value="1">是</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">发布终端<span class="text-danger">*</span>：
+								</label>
+								<div class="col-sm-8">
+									<select id="terminal" name="terminal" class="form-control">
+										<option th:field="*{lmRelease.terminal}" value="00">全部</option>
+										<option th:field="*{lmRelease.terminal}" value="01">PC</option>
+										<option th:field="*{lmRelease.terminal}" value="02">APP</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">是否有效<span class="text-danger">*</span>：
+								</label>
+								<div class="col-sm-8">
+									<select id="state" name="state" class="form-control">
+										<option th:field="*{lmRelease.state}" value="1">是</option>
+										<option th:field="*{lmRelease.state}" value="0">否</option>
+									</select>
 								</div>
 							</div>
 							<div class="form-group">
@@ -53,6 +83,13 @@
 								</label>
 								<div class="col-sm-8">
 									<input id="sort" name="sort" th:value="${lmRelease.sort}" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group" id="outChainDiv">
+								<label class="col-sm-3 control-label">外部链接<span class="text-danger">*</span>：
+								</label>
+								<div class="col-sm-8">
+									<input id="outChain" name="outChain" th:value="${lmRelease.outChain}" class="form-control" type="text">
 								</div>
 							</div>
 							<div class="form-group">

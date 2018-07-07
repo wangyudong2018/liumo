@@ -19,9 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.yiyun.domain.LmBanner;
 import com.yiyun.domain.LmFile;
 import com.yiyun.domain.LmProduct;
-import com.yiyun.domain.LmRelease;
 import com.yiyun.utils.PageUtil;
-import com.yiyun.web.common.utils.Query;
 import com.yiyun.web.liumo.service.LmBannerService;
 import com.yiyun.web.liumo.service.LmFileService;
 import com.yiyun.web.liumo.service.LmProductService;
@@ -93,21 +91,14 @@ public class LmPublicController {
 	}
 
 	@GetMapping("/releaseList")
-	public PageUtil releaseList(@RequestParam Map<String, Object> params) {
+	public PageUtil releaseList() {
 		// 查询列表数据
-		params.put("sort", "sort asc, create_time desc");
-		Query query = new Query(params);
-		List<LmRelease> lmReleaseList = lmReleaseService.newList(query);
-		int total = lmReleaseService.count(query);
-		PageUtil pageUtil = new PageUtil(lmReleaseList, total);
-		return pageUtil;
-	}
-
-	@GetMapping("/release/{id}")
-	public void release(@PathVariable("id") Long id, HttpServletResponse response) throws IOException {
-		response.setHeader("Cache-Control", "max-age=604800"); // 设置缓存
-		LmRelease lmRelease = lmReleaseService.get(id);
-		response.getOutputStream().write(lmRelease.getLogo());
+		// Query query = new Query(params);
+		// List<LmRelease> lmReleaseList = lmReleaseService.newList(query);
+		// int total = lmReleaseService.count(query);
+		// PageUtil pageUtil = new PageUtil(lmReleaseList, total);
+		// return pageUtil;
+		return null;
 	}
 
 }

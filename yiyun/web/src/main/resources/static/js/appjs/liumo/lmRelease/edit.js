@@ -1,5 +1,12 @@
 $().ready(function() {
 	validateRule();
+	$('#category').on('change', function() {
+		if (this.value === '01') {
+			$('#outChainDiv').hide();
+		} else {
+			$('#outChainDiv').show();
+		}
+	}).trigger('change');
 });
 
 $.validator.setDefaults({
@@ -39,13 +46,10 @@ function validateRule() {
 	var icon = "<i class='fa fa-times-circle'></i> ";
 	$("#signupForm").validate({
 		rules : {
-			brief : {
-				required : true
-			},
 			title : {
 				required : true
 			},
-			content : {
+			brief : {
 				required : true
 			},
 			sort : {
@@ -54,14 +58,11 @@ function validateRule() {
 			}
 		},
 		messages : {
-			brief : {
-				required : icon + "请输入发布简介"
-			},
 			title : {
 				required : icon + "请输入发布标题"
 			},
-			content : {
-				required : icon + "请输入发布内容"
+			brief : {
+				required : icon + "请输入发布简介"
 			},
 			sort : {
 				required : icon + "请输入排序",

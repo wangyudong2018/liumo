@@ -7,18 +7,14 @@ import java.util.Map;
 
 /**
  * @title 六漠新闻媒体发布
- * @author wangyudong
- * @date Sun Jun 24 10:27:30 CST 2018
+ * @author WangYuDong
+ * @date Sat Jul 07 12:07:07 CST 2018
  */
 public interface LmReleaseService {
 
 	LmRelease get(Long id);
 
-	LmRelease getLogo(Long id);
-
 	List<LmRelease> list(Map<String, Object> map);
-
-	List<LmRelease> newList(Map<String, Object> map);
 
 	int count(Map<String, Object> map);
 

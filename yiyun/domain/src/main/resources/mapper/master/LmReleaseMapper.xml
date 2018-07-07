@@ -4,65 +4,48 @@
 <mapper namespace="com.yiyun.dao.master.LmReleaseDao">
 
 	<select id="get" resultType="com.yiyun.domain.LmRelease">
-		select `id`,`category`,`brief`,`title`,`content`,`logo`,`sort`,`create_time`,`update_time` from lm_release where id = #{value}
-	</select>
-
-	<select id="getLogo" resultType="com.yiyun.domain.LmRelease">
-		select `logo` from lm_release where id = #{value}
+		select `id`,`category`,`thumbnail`,`title`,`brief`,`original`,`stick`,`state`,`out_chain`,`terminal`,`sort`,`release_date`,`create_time`,`update_time` from lm_release where id = #{value}
 	</select>
 
 	<select id="list" resultType="com.yiyun.domain.LmRelease">
-		select `id`,`category`,`brief`, `logo`,`sort`,`create_time`,`update_time` from lm_release
+		select `id`,`category`,`thumbnail`,`title`,`brief`,`original`,`stick`,`state`,`out_chain`,`terminal`,`sort`,`release_date`,`create_time`,`update_time` from lm_release
 		<where>
 			<if test="id != null and id != ''"> and id = #{id} </if>
 			<if test="category != null and category != ''"> and category = #{category} </if>
-			<if test="brief != null and brief != ''"> and brief = #{brief} </if>
+			<if test="thumbnail != null and thumbnail != ''"> and thumbnail = #{thumbnail} </if>
 			<if test="title != null and title != ''"> and title = #{title} </if>
-			<if test="content != null and content != ''"> and content = #{content} </if>
+			<if test="brief != null and brief != ''"> and brief = #{brief} </if>
+			<if test="original != null and original != ''"> and original = #{original} </if>
+			<if test="stick != null and stick != ''"> and stick = #{stick} </if>
+			<if test="state != null and state != ''"> and state = #{state} </if>
+			<if test="outChain != null and outChain != ''"> and out_chain = #{outChain} </if>
+			<if test="terminal != null and terminal != ''"> and terminal = #{terminal} </if>
+			<if test="sort != null and sort != ''"> and sort = #{sort} </if>
+			<if test="releaseDate != null and releaseDate != ''"> and release_date = #{releaseDate} </if>
 			<if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
 			<if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
 		</where>
-		<choose>
-			<when test="sort != null and sort.trim() != ''">
-				order by ${sort} ${order}
-			</when>
-			<otherwise>
-				order by id desc
-			</otherwise>
-		</choose>
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
-	</select>
-
-	<select id="newList" resultType="com.yiyun.domain.LmRelease">
-		select `id`,`category`,`brief` from lm_release
-		<where>
-			<if test="id != null and id != ''"> and id = #{id} </if>
-			<if test="category != null and category != ''"> and category = #{category} </if>
-			<if test="brief != null and brief != ''"> and brief = #{brief} </if>
-		</where>
-		<choose>
-			<when test="sort != null and sort.trim() != ''">
-				order by ${sort} ${order}
-			</when>
-			<otherwise>
-				order by id desc
-			</otherwise>
-		</choose>
+		order by sort asc,create_time asc
 		<if test="offset != null and limit != null">
 			limit #{offset}, #{limit}
 		</if>
 	</select>
 
 	<select id="count" resultType="int">
-		select count(1) from lm_release
+		select count(*) from lm_release
 		<where>
 			<if test="id != null and id != ''"> and id = #{id} </if>
 			<if test="category != null and category != ''"> and category = #{category} </if>
-			<if test="brief != null and brief != ''"> and brief = #{brief} </if>
+			<if test="thumbnail != null and thumbnail != ''"> and thumbnail = #{thumbnail} </if>
 			<if test="title != null and title != ''"> and title = #{title} </if>
-			<if test="content != null and content != ''"> and content = #{content} </if>
+			<if test="brief != null and brief != ''"> and brief = #{brief} </if>
+			<if test="original != null and original != ''"> and original = #{original} </if>
+			<if test="stick != null and stick != ''"> and stick = #{stick} </if>
+			<if test="state != null and state != ''"> and state = #{state} </if>
+			<if test="outChain != null and outChain != ''"> and out_chain = #{outChain} </if>
+			<if test="terminal != null and terminal != ''"> and terminal = #{terminal} </if>
+			<if test="sort != null and sort != ''"> and sort = #{sort} </if>
+			<if test="releaseDate != null and releaseDate != ''"> and release_date = #{releaseDate} </if>
 			<if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
 			<if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
 		</where>
@@ -72,22 +55,32 @@
 		insert into lm_release
 		(
 		`category`,
-		`brief`,
+		`thumbnail`,
 		`title`,
-		`content`,
-		`logo`,
+		`brief`,
+		`original`,
+		`stick`,
+		`state`,
+		`out_chain`,
+		`terminal`,
 		`sort`,
+		`release_date`,
 		`create_time`,
 		`update_time`
 		)
 		values
 		(
 		#{category},
-		#{brief},
+		#{thumbnail},
 		#{title},
-		#{content},
-		#{logo},
+		#{brief},
+		#{original},
+		#{stick},
+		#{state},
+		#{outChain},
+		#{terminal},
 		#{sort},
+		#{releaseDate},
 		#{createTime},
 		#{updateTime}
 		)
@@ -97,11 +90,16 @@
 		update lm_release
 		<set>
 			<if test="category != null">`category` = #{category}, </if>
-			<if test="brief != null">`brief` = #{brief}, </if>
+			<if test="thumbnail != null">`thumbnail` = #{thumbnail}, </if>
 			<if test="title != null">`title` = #{title}, </if>
-			<if test="content != null">`content` = #{content}, </if>
-			<if test="logo != null">`logo` = #{logo}, </if>
+			<if test="brief != null">`brief` = #{brief}, </if>
+			<if test="original != null">`original` = #{original}, </if>
+			<if test="stick != null">`stick` = #{stick}, </if>
+			<if test="state != null">`state` = #{state}, </if>
+			<if test="outChain != null">`out_chain` = #{outChain}, </if>
+			<if test="terminal != null">`terminal` = #{terminal}, </if>
 			<if test="sort != null">`sort` = #{sort}, </if>
+			<if test="releaseDate != null">`release_date` = #{releaseDate}, </if>
 			<if test="createTime != null">`create_time` = #{createTime}, </if>
 			<if test="updateTime != null">`update_time` = #{updateTime}</if>
 		</set>
