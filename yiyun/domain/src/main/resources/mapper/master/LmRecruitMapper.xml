@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yiyun.dao.master.LmRecruitDao">
+
+	<select id="get" resultType="com.yiyun.domain.LmRecruit">
+		select `id`,`workplace`,`rec_type`,`category`,`job_title`,`job_nature`,`salary_range`,`hiring`,`job_duty`,`job_quality`,`state`,`rel_date`,`sort`,`create_time`,`update_time` from lm_recruit where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.yiyun.domain.LmRecruit">
+		select `id`,`workplace`,`rec_type`,`category`,`job_title`,`job_nature`,`salary_range`,`hiring`,`job_duty`,`job_quality`,`state`,`rel_date`,`sort`,`create_time`,`update_time` from lm_recruit
+		<where>
+			<if test="id != null and id != ''"> and id = #{id} </if>
+			<if test="workplace != null and workplace != ''"> and workplace = #{workplace} </if>
+			<if test="recType != null and recType != ''"> and rec_type = #{recType} </if>
+			<if test="category != null and category != ''"> and category = #{category} </if>
+			<if test="jobTitle != null and jobTitle != ''"> and job_title = #{jobTitle} </if>
+			<if test="jobNature != null and jobNature != ''"> and job_nature = #{jobNature} </if>
+			<if test="salaryRange != null and salaryRange != ''"> and salary_range = #{salaryRange} </if>
+			<if test="hiring != null and hiring != ''"> and hiring = #{hiring} </if>
+			<if test="jobDuty != null and jobDuty != ''"> and job_duty = #{jobDuty} </if>
+			<if test="jobQuality != null and jobQuality != ''"> and job_quality = #{jobQuality} </if>
+			<if test="state != null and state != ''"> and state = #{state} </if>
+			<if test="relDate != null and relDate != ''"> and rel_date = #{relDate} </if>
+			<if test="sort != null and sort != ''"> and sort = #{sort} </if>
+			<if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+			<if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		</where>
+		order by sort asc,rel_date desc
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+
+	<select id="count" resultType="int">
+		select count(*) from lm_recruit
+		<where>
+			<if test="id != null and id != ''"> and id = #{id} </if>
+			<if test="workplace != null and workplace != ''"> and workplace = #{workplace} </if>
+			<if test="recType != null and recType != ''"> and rec_type = #{recType} </if>
+			<if test="category != null and category != ''"> and category = #{category} </if>
+			<if test="jobTitle != null and jobTitle != ''"> and job_title = #{jobTitle} </if>
+			<if test="jobNature != null and jobNature != ''"> and job_nature = #{jobNature} </if>
+			<if test="salaryRange != null and salaryRange != ''"> and salary_range = #{salaryRange} </if>
+			<if test="hiring != null and hiring != ''"> and hiring = #{hiring} </if>
+			<if test="jobDuty != null and jobDuty != ''"> and job_duty = #{jobDuty} </if>
+			<if test="jobQuality != null and jobQuality != ''"> and job_quality = #{jobQuality} </if>
+			<if test="state != null and state != ''"> and state = #{state} </if>
+			<if test="relDate != null and relDate != ''"> and rel_date = #{relDate} </if>
+			<if test="sort != null and sort != ''"> and sort = #{sort} </if>
+			<if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+			<if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		</where>
+	</select>
+
+	<insert id="save" parameterType="com.yiyun.domain.LmRecruit" useGeneratedKeys="true" keyProperty="id">
+		insert into lm_recruit
+		(
+		`workplace`,
+		`rec_type`,
+		`category`,
+		`job_title`,
+		`job_nature`,
+		`salary_range`,
+		`hiring`,
+		`job_duty`,
+		`job_quality`,
+		`state`,
+		`rel_date`,
+		`sort`,
+		`create_time`,
+		`update_time`
+		)
+		values
+		(
+		#{workplace},
+		#{recType},
+		#{category},
+		#{jobTitle},
+		#{jobNature},
+		#{salaryRange},
+		#{hiring},
+		#{jobDuty},
+		#{jobQuality},
+		#{state},
+		#{relDate},
+		#{sort},
+		#{createTime},
+		#{updateTime}
+		)
+	</insert>
+
+	<update id="edit" parameterType="com.yiyun.domain.LmRecruit">
+		update lm_recruit
+		<set>
+			<if test="workplace != null">`workplace` = #{workplace}, </if>
+			<if test="recType != null">`rec_type` = #{recType}, </if>
+			<if test="category != null">`category` = #{category}, </if>
+			<if test="jobTitle != null">`job_title` = #{jobTitle}, </if>
+			<if test="jobNature != null">`job_nature` = #{jobNature}, </if>
+			<if test="salaryRange != null">`salary_range` = #{salaryRange}, </if>
+			<if test="hiring != null">`hiring` = #{hiring}, </if>
+			<if test="jobDuty != null">`job_duty` = #{jobDuty}, </if>
+			<if test="jobQuality != null">`job_quality` = #{jobQuality}, </if>
+			<if test="state != null">`state` = #{state}, </if>
+			<if test="relDate != null">`rel_date` = #{relDate}, </if>
+			<if test="sort != null">`sort` = #{sort}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}</if>
+		</set>
+		where id = #{id}
+	</update>
+
+	<delete id="remove">
+		delete from lm_recruit where id = #{value}
+	</delete>
+
+	<delete id="batchRemove">
+		delete from lm_recruit where id in
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

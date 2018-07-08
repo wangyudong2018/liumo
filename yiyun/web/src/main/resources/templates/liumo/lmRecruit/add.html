@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+							<div class="form-group">
+								<label class="col-sm-3 control-label">工作地点<span class="text-danger">*</span>：
+								</label>
+								<div class="col-sm-8">
+									<select id="workplace" name="workplace" class="form-control">
+										<option value="110000">北京市</option>
+										<option value="310000">上海市</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">招聘类型<span class="text-danger">*</span>：
+								</label>
+								<div class="col-sm-8">
+									<select id="recType" name="recType" class="form-control">
+										<option value="01">社会招聘</option>
+										<option value="02">校园招聘</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">职位分类<span class="text-danger">*</span>：
+								</label>
+								<div class="col-sm-8">
+									<select id="category" name="category" class="form-control">
+										<option value="01">研发类</option>
+										<option value="02">业务类</option>
+										<option value="03">人力资源类</option>
+										<option value="04">行政类</option>
+										<option value="05">财务类</option>
+										<option value="06">法务类</option>
+										<option value="07">大数据类</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">职位名称<span class="text-danger">*</span>：
+								</label>
+								<div class="col-sm-8">
+									<input id="jobTitle" name="jobTitle" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">工作性质<span class="text-danger">*</span>：
+								</label>
+								<div class="col-sm-8">
+									<input id="jobNature" name="jobNature" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">薪资范围<span class="text-danger">*</span>：
+								</label>
+								<div class="col-sm-8">
+									<input id="salaryRange" name="salaryRange" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">招聘人数<span class="text-danger">*</span>：
+								</label>
+								<div class="col-sm-8">
+									<input id="hiring" name="hiring" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">工作职责<span class="text-danger">*</span>：
+								</label>
+								<div class="col-sm-8">
+									<textarea id="jobDuty" name="jobDuty" class="form-control"></textarea>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">任职资格<span class="text-danger">*</span>：
+								</label>
+								<div class="col-sm-8">
+									<textarea id="jobQuality" name="jobQuality" class="form-control"></textarea>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">是否有效<span class="text-danger">*</span>：
+								</label>
+								<div class="col-sm-8">
+									<select id="state" name="state" class="form-control">
+										<option value="1">是</option>
+										<option value="0">否</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">排序<span class="text-danger">*</span>：
+								</label>
+								<div class="col-sm-8">
+									<input id="sort" name="sort" class="form-control" type="text" value="100">
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/liumo/lmRecruit/add.js"></script>
+</body>
+</html>

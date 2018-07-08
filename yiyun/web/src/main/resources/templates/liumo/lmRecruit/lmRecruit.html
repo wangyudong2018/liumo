@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="col-sm-12">
+			<div class="ibox">
+				<div class="ibox-body">
+					<div class="fixed-table-toolbar">
+						<div class="columns pull-left">
+							<button shiro:hasPermission="liumo:lmRecruit:add" type="button" class="btn  btn-primary" onclick="add()">
+								<i class="fa fa-plus" aria-hidden="true"></i>添加
+							</button>
+							<button shiro:hasPermission="liumo:lmRecruit:batchRemove" type="button" class="btn  btn-danger" onclick="batchRemove()">
+								<i class="fa fa-trash" aria-hidden="true"></i>删除
+							</button>
+						</div>
+						<div class="columns pull-right">
+							<button class="btn btn-success" onclick="reLoad(1)">查询</button>
+						</div>
+						<div class="columns pull-right col-md-2 nopadding">
+							<select id="category" name="category" class="form-control">
+								<option value="">职位分类</option>
+								<option value="01">研发类</option>
+								<option value="02">业务类</option>
+								<option value="03">人力资源类</option>
+								<option value="04">行政类</option>
+								<option value="05">财务类</option>
+								<option value="06">法务类</option>
+								<option value="07">大数据类</option>
+							</select>
+						</div>
+						<div class="columns pull-right col-md-2 nopadding">
+							<select id="recType" name="recType" class="form-control">
+								<option value="">招聘类型</option>
+								<option value="01">社会招聘</option>
+								<option value="02">校园招聘</option>
+							</select>
+						</div>
+						<div class="columns pull-right col-md-2 nopadding">
+							<select id="workplace" name="workplace" class="form-control">
+								<option value="">工作地点</option>
+								<option value="110000">北京市</option>
+								<option value="310000">上海市</option>
+							</select>
+						</div>
+					</div>
+					<table id="exampleTable" data-mobile-responsive="true">
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
+	<div>
+		<script type="text/javascript">
+			var s_edit_h = 'hidden';
+			var s_remove_h = 'hidden';
+			var s_resetPwd_h = 'hidden';
+		</script>
+	</div>
+	<div shiro:hasPermission="liumo:lmRecruit:edit">
+		<script type="text/javascript">
+			s_edit_h = '';
+		</script>
+	</div>
+	<div shiro:hasPermission="liumo:lmRecruit:remove">
+		<script type="text/javascript">
+			var s_remove_h = '';
+		</script>
+	</div>
+	<div shiro:hasPermission="liumo:lmRecruit:resetPwd">
+		<script type="text/javascript">
+			var s_resetPwd_h = '';
+		</script>
+	</div>
+	<div th:include="include :: footer"></div>
+	<script type="text/javascript" src="/js/appjs/liumo/lmRecruit/lmRecruit.js"></script>
+</body>
+</html>
