@@ -203,7 +203,7 @@ public class LmPublicController {
 	 * @return
 	 */
 	@GetMapping("/recruitList")
-	public List<Map<String, Object>> recruitList(@RequestParam Map<String, Object> params) {
+	public PageUtil recruitList(@RequestParam Map<String, Object> params) {
 		if (Integer.parseInt(params.get("limit").toString()) > 50) {
 			params.put("limit", 50);
 		}
@@ -227,12 +227,13 @@ public class LmPublicController {
 				map.put("jobDuty", record.getJobDuty());
 				map.put("jobQuality", record.getJobQuality());
 				map.put("relDate", sdf.format(record.getRelDate()));
-
 				list.add(map);
 			}
 		}
 
-		return list;
+		int total = lmRecruitService.count(query);
+		PageUtil pageUtil = new PageUtil(list, total);
+		return pageUtil;
 	}
 
 }
