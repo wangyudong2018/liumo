@@ -8,7 +8,7 @@ CREATE TABLE `lm_banner` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `channel` varchar(10) DEFAULT NULL COMMENT '渠道',
   `page` varchar(20) DEFAULT NULL COMMENT '属于哪个页面的banner',
-  `file_id` bigint(20) DEFAULT NULL COMMENT '文件表ID',
+  `file_id` varchar(32) DEFAULT NULL COMMENT '文件表ID',
   `sort` int(11) DEFAULT NULL COMMENT '排序',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
@@ -20,7 +20,7 @@ CREATE TABLE `lm_banner` (
 DROP TABLE IF EXISTS `lm_file`;
 
 CREATE TABLE `lm_file` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `id` varchar(32) NOT NULL COMMENT '主键',
   `lm_type` varchar(50) DEFAULT NULL COMMENT '类型',
   `lm_file` mediumblob COMMENT '文件',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
@@ -44,7 +44,7 @@ CREATE TABLE `lm_product` (
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='六漠产品介绍';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='六漠产品介绍';
 
 /*Table structure for table `lm_recruit` */
 
@@ -76,7 +76,7 @@ DROP TABLE IF EXISTS `lm_release`;
 CREATE TABLE `lm_release` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `category` varchar(10) DEFAULT NULL COMMENT '发布类型（01新闻发布；02媒体报道）',
-  `thumbnail` bigint(20) DEFAULT NULL COMMENT '缩略图ID',
+  `thumbnail` varchar(32) DEFAULT NULL COMMENT '缩略图ID',
   `title` varchar(150) DEFAULT NULL COMMENT '发布标题',
   `brief` varchar(300) DEFAULT NULL COMMENT '发布简介',
   `original` varchar(100) DEFAULT NULL COMMENT '原创者',
@@ -91,3 +91,4 @@ CREATE TABLE `lm_release` (
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='六漠新闻媒体发布';
+
