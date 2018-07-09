@@ -22,7 +22,7 @@ public class LmBanner implements Serializable {
 	// 属于哪个页面的banner
 	private String page;
 	// 文件表ID
-	private Long fileId;
+	private String fileId;
 	// 排序
 	private Integer sort;
 	// 创建时间

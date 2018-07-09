@@ -22,7 +22,7 @@ public class LmRelease implements Serializable {
 	// 发布类型（01新闻发布；02媒体报道）
 	private String category;
 	// 缩略图ID
-	private Long thumbnail;
+	private String thumbnail;
 	// 发布标题
 	private String title;
 	// 发布简介

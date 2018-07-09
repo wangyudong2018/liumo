@@ -17,7 +17,7 @@ public class LmFileServiceImpl implements LmFileService {
 	private LmFileDao lmFileDao;
 
 	@Override
-	public LmFile get(Long id) {
+	public LmFile get(String id) {
 		return lmFileDao.get(id);
 	}
 
@@ -42,12 +42,12 @@ public class LmFileServiceImpl implements LmFileService {
 	}
 
 	@Override
-	public int remove(Long id) {
+	public int remove(String id) {
 		return lmFileDao.remove(id);
 	}
 
 	@Override
-	public int batchRemove(Long[] ids) {
+	public int batchRemove(String[] ids) {
 		return lmFileDao.batchRemove(ids);
 	}
 

@@ -8,11 +8,11 @@ import java.util.Map;
 /**
  * @title 六漠文件表
  * @author WangYuDong
- * @date Thu Jul 05 22:19:09 CST 2018
+ * @date Mon Jul 09 19:45:18 CST 2018
  */
 public interface LmFileService {
 
-	LmFile get(Long id);
+	LmFile get(String id);
 
 	List<LmFile> list(Map<String, Object> map);
 
@@ -22,8 +22,8 @@ public interface LmFileService {
 
 	int edit(LmFile lmFile);
 
-	int remove(Long id);
+	int remove(String id);
 
-	int batchRemove(Long[] ids);
+	int batchRemove(String[] ids);
 
 }

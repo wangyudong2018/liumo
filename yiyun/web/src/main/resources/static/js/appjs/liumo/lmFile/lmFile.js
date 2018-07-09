@@ -1,4 +1,4 @@
-var prefix = "/liumo/lmRelease"
+var prefix = "/liumo/lmFile"
 $(function() {
 	load();
 });
@@ -29,10 +29,7 @@ function load() {
 			return {
 				// 说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 				limit : params.limit,
-				offset : params.offset,
-				category : $("#category").val(),
-				terminal : $("#terminal").val(),
-				state : $("#state").val()
+				offset : params.offset
 			// name:$('#searchName').val(),
 			// username:$('#searchName').val()
 			};
@@ -46,55 +43,20 @@ function load() {
 		columns : [ {
 			checkbox : true
 		}, {
-			field : 'thumbnail',
-			title : '缩略图',
-			formatter : function(value, row, index) {
-				return '<img src="/liumo/public/file/' + value + '"/>';
-			}
+			field : 'id',
+			title : '主键'
 		}, {
-			field : 'category',
-			title : '发布类型',
-			formatter : function(value, row, index) {
-				return value === '01' ? '新闻发布' : '媒体报道';
-			}
+			field : 'lmType',
+			title : '类型'
 		}, {
-			field : 'title',
-			title : '发布标题'
+			field : 'lmFile',
+			title : '文件'
 		}, {
-			field : 'brief',
-			title : '发布简介'
+			field : 'createTime',
+			title : '创建时间'
 		}, {
-			field : 'original',
-			title : '原创者'
-		}, {
-			field : 'stick',
-			title : '是否置顶',
-			formatter : function(value, row, index) {
-				return value === '1' ? '是' : '否';
-			}
-		}, {
-			field : 'state',
-			title : '是否有效',
-			formatter : function(value, row, index) {
-				return value === '1' ? '是' : '否';
-			}
-		}, {
-			field : 'terminal',
-			title : '发布终端',
-			formatter : function(value, row, index) {
-				if (value === '01') {
-					return 'PC';
-				} else if (value === '02') {
-					return 'APP';
-				}
-				return '全部';
-			}
-		}, {
-			field : 'sort',
-			title : '排序'
-		}, {
-			field : 'releaseDate',
-			title : '发布日期'
+			field : 'updateTime',
+			title : '更新时间'
 		}, {
 			title : '操作',
 			field : 'id',

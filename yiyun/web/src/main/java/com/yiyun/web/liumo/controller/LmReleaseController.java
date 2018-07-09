@@ -24,6 +24,7 @@ import com.yiyun.web.common.utils.Query;
 import com.yiyun.web.common.utils.R;
 import com.yiyun.web.liumo.service.LmFileService;
 import com.yiyun.web.liumo.service.LmReleaseService;
+import com.yiyun.web.liumo.util.UUIDGenerator;
 
 /**
  * @title 六漠新闻媒体发布
@@ -79,6 +80,7 @@ public class LmReleaseController {
 	@RequiresPermissions("liumo:lmRelease:add")
 	public R save(LmRelease lmRelease, @RequestParam("file") MultipartFile file) throws IOException {
 		LmFile lmFile = new LmFile();
+		lmFile.setId(UUIDGenerator.generate());
 		lmFile.setLmFile(file.getBytes());
 		lmFile.setLmType(file.getContentType());
 		lmFile.setCreateTime(new Date());
@@ -104,12 +106,17 @@ public class LmReleaseController {
 	public R edit(LmRelease lmRelease, @RequestParam("file") MultipartFile file) throws IOException {
 
 		if (!file.isEmpty()) {
+			lmFileService.remove(lmRelease.getThumbnail());
+
 			LmFile lmFile = new LmFile();
-			lmFile.setId(lmReleaseService.get(lmRelease.getId()).getThumbnail());
+			lmFile.setId(UUIDGenerator.generate());
 			lmFile.setLmFile(file.getBytes());
 			lmFile.setLmType(file.getContentType());
+			lmFile.setCreateTime(new Date());
 			lmFile.setUpdateTime(new Date());
-			lmFileService.edit(lmFile);
+			lmFileService.save(lmFile);
+
+			lmRelease.setThumbnail(lmFile.getId());
 		}
 
 		lmRelease.setUpdateTime(new Date());

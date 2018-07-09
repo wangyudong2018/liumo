@@ -22,16 +22,16 @@ import com.yiyun.utils.PageUtil;
 import com.yiyun.web.common.utils.Query;
 import com.yiyun.web.common.utils.R;
 import com.yiyun.web.liumo.service.LmFileService;
+import com.yiyun.web.liumo.util.UUIDGenerator;
 
 /**
  * @title 六漠文件表
  * @author WangYuDong
- * @date Thu Jul 05 22:19:09 CST 2018
+ * @date Mon Jul 09 19:45:18 CST 2018
  */
 @Controller
 @RequestMapping("/liumo/lmFile")
 public class LmFileController {
-
 	@Autowired
 	private LmFileService lmFileService;
 
@@ -61,7 +61,7 @@ public class LmFileController {
 
 	@GetMapping("/edit/{id}")
 	@RequiresPermissions("liumo:lmFile:edit")
-	public String edit(@PathVariable("id") Long id, Model model) {
+	public String edit(@PathVariable("id") String id, Model model) {
 		LmFile lmFile = lmFileService.get(id);
 		model.addAttribute("lmFile", lmFile);
 		return "liumo/lmFile/edit";
@@ -75,6 +75,7 @@ public class LmFileController {
 	// @RequiresPermissions("liumo:lmFile:add")
 	public String save(@RequestParam("file") MultipartFile file) throws IOException {
 		LmFile lmFile = new LmFile();
+		lmFile.setId(UUIDGenerator.generate());
 		lmFile.setLmFile(file.getBytes());
 		lmFile.setLmType(file.getContentType());
 		lmFile.setCreateTime(new Date());
@@ -103,7 +104,7 @@ public class LmFileController {
 	@PostMapping("/remove")
 	@ResponseBody
 	@RequiresPermissions("liumo:lmFile:remove")
-	public R remove(Long id) {
+	public R remove(String id) {
 		if (lmFileService.remove(id) > 0) {
 			return R.ok();
 		}
@@ -116,7 +117,7 @@ public class LmFileController {
 	@PostMapping("/batchRemove")
 	@ResponseBody
 	@RequiresPermissions("liumo:lmFile:batchRemove")
-	public R remove(@RequestParam("ids[]") Long[] ids) {
+	public R remove(@RequestParam("ids[]") String[] ids) {
 		lmFileService.batchRemove(ids);
 		return R.ok();
 	}

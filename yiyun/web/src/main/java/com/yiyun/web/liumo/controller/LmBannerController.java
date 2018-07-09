@@ -24,6 +24,7 @@ import com.yiyun.web.common.utils.Query;
 import com.yiyun.web.common.utils.R;
 import com.yiyun.web.liumo.service.LmBannerService;
 import com.yiyun.web.liumo.service.LmFileService;
+import com.yiyun.web.liumo.util.UUIDGenerator;
 
 /**
  * @title 六漠banner表
@@ -79,6 +80,7 @@ public class LmBannerController {
 	@RequiresPermissions("liumo:lmBanner:add")
 	public R save(LmBanner lmBanner, @RequestParam("file") MultipartFile file) throws IOException {
 		LmFile lmFile = new LmFile();
+		lmFile.setId(UUIDGenerator.generate());
 		lmFile.setLmFile(file.getBytes());
 		lmFile.setLmType(file.getContentType());
 		lmFile.setCreateTime(new Date());
@@ -103,12 +105,17 @@ public class LmBannerController {
 	public R edit(LmBanner lmBanner, @RequestParam("file") MultipartFile file) throws IOException {
 
 		if (!file.isEmpty()) {
+			lmFileService.remove(lmBanner.getFileId());
+
 			LmFile lmFile = new LmFile();
-			lmFile.setId(lmBannerService.get(lmBanner.getId()).getFileId());
+			lmFile.setId(UUIDGenerator.generate());
 			lmFile.setLmFile(file.getBytes());
 			lmFile.setLmType(file.getContentType());
+			lmFile.setCreateTime(new Date());
 			lmFile.setUpdateTime(new Date());
-			lmFileService.edit(lmFile);
+			lmFileService.save(lmFile);
+
+			lmBanner.setFileId(lmFile.getId());
 		}
 
 		lmBanner.setUpdateTime(new Date());
