@@ -3,6 +3,8 @@ package com.yiyun.domain;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Data;
 
 /**
@@ -38,14 +40,19 @@ public class LmUser implements Serializable {
 	// 手持证件照ID
 	private String certHand;
 	// 实名认证通过时间
+	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date certDate;
 	// 创建时间
+	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date createTime;
 	// 用户更新时间
+	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date usrUpdateTime;
 	// 操作员更新时间
+	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date oprUpdateTime;
 	// 最后更新时间
+	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date lastUpdateTime;
 
 }

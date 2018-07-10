@@ -5,13 +5,14 @@ import java.util.Map;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yiyun.domain.LmUser;
 import com.yiyun.utils.PageUtil;
@@ -24,7 +25,7 @@ import com.yiyun.web.liumo.service.LmUserService;
  * @author WangYuDong
  * @date Tue Jul 10 20:45:56 CST 2018
  */
-@RestController
+@Controller
 @RequestMapping("/liumo/lmUser")
 public class LmUserController {
 
@@ -37,6 +38,7 @@ public class LmUserController {
 		return "liumo/lmUser/lmUser";
 	}
 
+	@ResponseBody
 	@GetMapping("/list")
 	@RequiresPermissions("liumo:lmUser:lmUser")
 	public PageUtil list(@RequestParam Map<String, Object> params) {
@@ -48,12 +50,6 @@ public class LmUserController {
 		return pageUtil;
 	}
 
-	@GetMapping("/add")
-	@RequiresPermissions("liumo:lmUser:add")
-	public String add() {
-		return "liumo/lmUser/add";
-	}
-
 	@GetMapping("/edit/{id}")
 	@RequiresPermissions("liumo:lmUser:edit")
 	public String edit(@PathVariable("id") String id, Model model) {
@@ -63,46 +59,13 @@ public class LmUserController {
 	}
 
 	/**
-	 * 保存
-	 */
-	@PostMapping("/save")
-	@RequiresPermissions("liumo:lmUser:add")
-	public R save(LmUser lmUser) {
-		if (lmUserService.save(lmUser) > 0) {
-			return R.ok();
-		}
-		return R.error();
-	}
-
-	/**
 	 * 修改
 	 */
+	@ResponseBody
 	@PostMapping("/edit")
 	@RequiresPermissions("liumo:lmUser:edit")
 	public R edit(LmUser lmUser) {
 		lmUserService.edit(lmUser);
-		return R.ok();
-	}
-
-	/**
-	 * 删除
-	 */
-	@PostMapping("/remove")
-	@RequiresPermissions("liumo:lmUser:remove")
-	public R remove(String id) {
-		if (lmUserService.remove(id) > 0) {
-			return R.ok();
-		}
-		return R.error();
-	}
-
-	/**
-	 * 删除
-	 */
-	@PostMapping("/batchRemove")
-	@RequiresPermissions("liumo:lmUser:batchRemove")
-	public R remove(@RequestParam("ids[]") String[] ids) {
-		lmUserService.batchRemove(ids);
 		return R.ok();
 	}
 

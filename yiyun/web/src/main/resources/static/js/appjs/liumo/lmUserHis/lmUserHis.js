@@ -43,12 +43,6 @@ function load() {
 		columns : [ {
 			checkbox : true
 		}, {
-			field : 'id',
-			title : '主键'
-		}, {
-			field : 'userId',
-			title : '用户主键'
-		}, {
 			field : 'hisType',
 			title : '修改类型（01认证历史02手机号历史）'
 		}, {
@@ -58,9 +52,6 @@ function load() {
 			field : 'username',
 			title : '姓名'
 		}, {
-			field : 'password',
-			title : '密码'
-		}, {
 			field : 'certType',
 			title : '证件类型'
 		}, {
@@ -68,7 +59,10 @@ function load() {
 			title : '证件号码'
 		}, {
 			field : 'certSign',
-			title : '实名认证标志（1是0否）'
+			title : '实名认证标志',
+			formatter : function(value, row, index) {
+				return value === '0' ? '否' : '是';
+			}
 		}, {
 			field : 'certRemark',
 			title : '实名认证审核评语'
