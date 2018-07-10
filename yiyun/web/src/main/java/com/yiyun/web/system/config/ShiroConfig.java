@@ -87,6 +87,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/", "anon");
 		filterChainDefinitionMap.put("/swagger-ui.html", "anon");
 		filterChainDefinitionMap.put("/liumo/public/**", "anon");//六漠外部相关
+		filterChainDefinitionMap.put("/liumo/app/**", "anon");//六漠APP相关
 		filterChainDefinitionMap.put("/**", "authc");
 
 		shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);

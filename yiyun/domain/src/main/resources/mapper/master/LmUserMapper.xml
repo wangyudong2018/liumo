@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yiyun.dao.master.LmUserDao">
+
+	<select id="get" resultType="com.yiyun.domain.LmUser">
+		select `id`,`mobile`,`username`,`password`,`cert_type`,`cert_no`,`cert_sign`,`cert_remark`,`cert_positive`,`cert_reverse`,`cert_hand`,`cert_date`,`create_time`,`usr_update_time`,`opr_update_time`,`last_update_time` from lm_user where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.yiyun.domain.LmUser">
+		select `id`,`mobile`,`username`,`password`,`cert_type`,`cert_no`,`cert_sign`,`cert_remark`,`cert_positive`,`cert_reverse`,`cert_hand`,`cert_date`,`create_time`,`usr_update_time`,`opr_update_time`,`last_update_time` from lm_user
+		<where>
+			<if test="id != null and id != ''"> and id = #{id} </if>
+			<if test="mobile != null and mobile != ''"> and mobile = #{mobile} </if>
+			<if test="username != null and username != ''"> and username = #{username} </if>
+			<if test="password != null and password != ''"> and password = #{password} </if>
+			<if test="certType != null and certType != ''"> and cert_type = #{certType} </if>
+			<if test="certNo != null and certNo != ''"> and cert_no = #{certNo} </if>
+			<if test="certSign != null and certSign != ''"> and cert_sign = #{certSign} </if>
+			<if test="certRemark != null and certRemark != ''"> and cert_remark = #{certRemark} </if>
+			<if test="certPositive != null and certPositive != ''"> and cert_positive = #{certPositive} </if>
+			<if test="certReverse != null and certReverse != ''"> and cert_reverse = #{certReverse} </if>
+			<if test="certHand != null and certHand != ''"> and cert_hand = #{certHand} </if>
+			<if test="certDate != null and certDate != ''"> and cert_date = #{certDate} </if>
+			<if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+			<if test="usrUpdateTime != null and usrUpdateTime != ''"> and usr_update_time = #{usrUpdateTime} </if>
+			<if test="oprUpdateTime != null and oprUpdateTime != ''"> and opr_update_time = #{oprUpdateTime} </if>
+			<if test="lastUpdateTime != null and lastUpdateTime != ''"> and last_update_time = #{lastUpdateTime} </if>
+		</where>
+		<choose>
+			<when test="sort != null and sort.trim() != ''">
+				order by ${sort} ${order}
+			</when>
+			<otherwise>
+				order by id desc
+			</otherwise>
+		</choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+
+	<select id="count" resultType="int">
+		select count(*) from lm_user
+		<where>
+			<if test="id != null and id != ''"> and id = #{id} </if>
+			<if test="mobile != null and mobile != ''"> and mobile = #{mobile} </if>
+			<if test="username != null and username != ''"> and username = #{username} </if>
+			<if test="password != null and password != ''"> and password = #{password} </if>
+			<if test="certType != null and certType != ''"> and cert_type = #{certType} </if>
+			<if test="certNo != null and certNo != ''"> and cert_no = #{certNo} </if>
+			<if test="certSign != null and certSign != ''"> and cert_sign = #{certSign} </if>
+			<if test="certRemark != null and certRemark != ''"> and cert_remark = #{certRemark} </if>
+			<if test="certPositive != null and certPositive != ''"> and cert_positive = #{certPositive} </if>
+			<if test="certReverse != null and certReverse != ''"> and cert_reverse = #{certReverse} </if>
+			<if test="certHand != null and certHand != ''"> and cert_hand = #{certHand} </if>
+			<if test="certDate != null and certDate != ''"> and cert_date = #{certDate} </if>
+			<if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+			<if test="usrUpdateTime != null and usrUpdateTime != ''"> and usr_update_time = #{usrUpdateTime} </if>
+			<if test="oprUpdateTime != null and oprUpdateTime != ''"> and opr_update_time = #{oprUpdateTime} </if>
+			<if test="lastUpdateTime != null and lastUpdateTime != ''"> and last_update_time = #{lastUpdateTime} </if>
+		</where>
+	</select>
+
+	<insert id="save" parameterType="com.yiyun.domain.LmUser">
+		insert into lm_user
+		(
+		`id`,
+		`mobile`,
+		`username`,
+		`password`,
+		`cert_type`,
+		`cert_no`,
+		`cert_sign`,
+		`cert_remark`,
+		`cert_positive`,
+		`cert_reverse`,
+		`cert_hand`,
+		`cert_date`,
+		`create_time`,
+		`usr_update_time`,
+		`opr_update_time`,
+		`last_update_time`
+		)
+		values
+		(
+		#{id},
+		#{mobile},
+		#{username},
+		#{password},
+		#{certType},
+		#{certNo},
+		#{certSign},
+		#{certRemark},
+		#{certPositive},
+		#{certReverse},
+		#{certHand},
+		#{certDate},
+		#{createTime},
+		#{usrUpdateTime},
+		#{oprUpdateTime},
+		#{lastUpdateTime}
+		)
+	</insert>
+
+	<update id="edit" parameterType="com.yiyun.domain.LmUser">
+		update lm_user
+		<set>
+			<if test="mobile != null">`mobile` = #{mobile}, </if>
+			<if test="username != null">`username` = #{username}, </if>
+			<if test="password != null">`password` = #{password}, </if>
+			<if test="certType != null">`cert_type` = #{certType}, </if>
+			<if test="certNo != null">`cert_no` = #{certNo}, </if>
+			<if test="certSign != null">`cert_sign` = #{certSign}, </if>
+			<if test="certRemark != null">`cert_remark` = #{certRemark}, </if>
+			<if test="certPositive != null">`cert_positive` = #{certPositive}, </if>
+			<if test="certReverse != null">`cert_reverse` = #{certReverse}, </if>
+			<if test="certHand != null">`cert_hand` = #{certHand}, </if>
+			<if test="certDate != null">`cert_date` = #{certDate}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="usrUpdateTime != null">`usr_update_time` = #{usrUpdateTime}, </if>
+			<if test="oprUpdateTime != null">`opr_update_time` = #{oprUpdateTime}, </if>
+			<if test="lastUpdateTime != null">`last_update_time` = #{lastUpdateTime}</if>
+		</set>
+		where id = #{id}
+	</update>
+
+	<delete id="remove">
+		delete from lm_user where id = #{value}
+	</delete>
+
+	<delete id="batchRemove">
+		delete from lm_user where id in
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>
