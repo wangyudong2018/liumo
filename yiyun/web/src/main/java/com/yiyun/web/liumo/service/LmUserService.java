@@ -26,4 +26,6 @@ public interface LmUserService {
 
 	int batchRemove(String[] ids);
 
+	int edit(LmUser lmUser, String type);
+
 }

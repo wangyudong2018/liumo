@@ -65,8 +65,13 @@ public class LmUserController {
 	@PostMapping("/edit")
 	@RequiresPermissions("liumo:lmUser:edit")
 	public R edit(LmUser lmUser) {
-		lmUserService.edit(lmUser);
+		lmUserService.edit(lmUser, "01");
 		return R.ok();
+	}
+
+	@GetMapping("/img")
+	public String img() {
+		return "liumo/img";
 	}
 
 }

@@ -29,9 +29,11 @@ function load() {
 			return {
 				// 说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 				limit : params.limit,
-				offset : params.offset
-			// name:$('#searchName').val(),
-			// username:$('#searchName').val()
+				offset : params.offset,
+				username : $('#username').val(),
+				hisType : $('#hisType').val(),
+				sort : 'last_update_time',
+				order : 'desc'
 			};
 		},
 		// //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果
@@ -44,7 +46,19 @@ function load() {
 			checkbox : true
 		}, {
 			field : 'hisType',
-			title : '修改类型（01认证历史02手机号历史）'
+			title : '变更类型',
+			formatter : function(value, row, index) {
+				if (value === '01') {
+					return '实名认证';
+				}
+				if (value === '02') {
+					return '手机号';
+				}
+				if (value === '03') {
+					return '用户密码';
+				}
+				return value;
+			}
 		}, {
 			field : 'mobile',
 			title : '手机号'
@@ -53,7 +67,10 @@ function load() {
 			title : '姓名'
 		}, {
 			field : 'certType',
-			title : '证件类型'
+			title : '证件类型',
+			formatter : function(value, row, index) {
+				return value === '01' ? '身份证' : '其他';
+			}
 		}, {
 			field : 'certNo',
 			title : '证件号码'
@@ -68,13 +85,22 @@ function load() {
 			title : '实名认证审核评语'
 		}, {
 			field : 'certPositive',
-			title : '证件正面ID'
+			title : '证件正面',
+			formatter : function(value, row, index) {
+				return '<a href="#" onclick="img(\'' + value + '\');">查看图片</a>';
+			}
 		}, {
 			field : 'certReverse',
-			title : '证件反面ID'
+			title : '证件反面',
+			formatter : function(value, row, index) {
+				return '<a href="#" onclick="img(\'' + value + '\');">查看图片</a>';
+			}
 		}, {
 			field : 'certHand',
-			title : '手持证件照ID'
+			title : '手持证件照',
+			formatter : function(value, row, index) {
+				return '<a href="#" onclick="img(\'' + value + '\');">查看图片</a>';
+			}
 		}, {
 			field : 'certDate',
 			title : '实名认证通过时间'
@@ -90,17 +116,17 @@ function load() {
 		}, {
 			field : 'lastUpdateTime',
 			title : '最后更新时间'
-		}, {
-			title : '操作',
-			field : 'id',
-			align : 'center',
-			formatter : function(value, row, index) {
-				var e = '<a class="btn btn-primary btn-sm ' + s_edit_h + '" href="#" mce_href="#" title="编辑" onclick="edit(\'' + row.id + '\')"><i class="fa fa-edit"></i></a> ';
-				var d = '<a class="btn btn-warning btn-sm ' + s_remove_h + '" href="#" title="删除"  mce_href="#" onclick="remove(\'' + row.id + '\')"><i class="fa fa-remove"></i></a> ';
-				var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\'' + row.id + '\')"><i class="fa fa-key"></i></a> ';
-				return e + d;
-			}
 		} ]
+	});
+}
+function img(id) {
+	layer.open({
+		type : 2,
+		title : '展示',
+		maxmin : true,
+		shadeClose : false, // 点击遮罩关闭层
+		area : [ '800px', '520px' ],
+		content : prefix + '/img?id=' + id // iframe的url
 	});
 }
 function reLoad(type) {

@@ -47,3 +47,15 @@ function validateRule() {
 		}
 	})
 }
+
+function img(img) {
+	var id = $(img).next().val();
+	layer.open({
+		type : 2,
+		title : '展示',
+		maxmin : true,
+		shadeClose : false, // 点击遮罩关闭层
+		area : [ '800px', '520px' ],
+		content : '/liumo/lmUser/img?id=' + id // iframe的url
+	});
+}

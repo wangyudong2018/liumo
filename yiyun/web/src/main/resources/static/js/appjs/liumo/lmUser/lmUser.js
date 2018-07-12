@@ -29,9 +29,10 @@ function load() {
 			return {
 				// 说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 				limit : params.limit,
-				offset : params.offset
-			// name:$('#searchName').val(),
-			// username:$('#searchName').val()
+				offset : params.offset,
+				username : $('#username').val(),
+				sort : 'last_update_time',
+				order : 'desc'
 			};
 		},
 		// //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果
@@ -68,13 +69,22 @@ function load() {
 			title : '实名认证审核评语'
 		}, {
 			field : 'certPositive',
-			title : '证件正面ID'
+			title : '证件正面',
+			formatter : function(value, row, index) {
+				return '<a href="#" onclick="img(\'' + value + '\');">查看图片</a>';
+			}
 		}, {
 			field : 'certReverse',
-			title : '证件反面ID'
+			title : '证件反面',
+			formatter : function(value, row, index) {
+				return '<a href="#" onclick="img(\'' + value + '\');">查看图片</a>';
+			}
 		}, {
 			field : 'certHand',
-			title : '手持证件照ID'
+			title : '手持证件照',
+			formatter : function(value, row, index) {
+				return '<a href="#" onclick="img(\'' + value + '\');">查看图片</a>';
+			}
 		}, {
 			field : 'certDate',
 			title : '实名认证通过时间'
@@ -95,10 +105,23 @@ function load() {
 			field : 'id',
 			align : 'center',
 			formatter : function(value, row, index) {
+				if (row.certSign === '1') {
+					return '';
+				}
 				var e = '<a class="btn btn-primary btn-sm ' + s_edit_h + '" href="#" mce_href="#" title="编辑" onclick="edit(\'' + row.id + '\')"><i class="fa fa-edit"></i></a> ';
 				return e;
 			}
 		} ]
+	});
+}
+function img(id) {
+	layer.open({
+		type : 2,
+		title : '展示',
+		maxmin : true,
+		shadeClose : false, // 点击遮罩关闭层
+		area : [ '800px', '520px' ],
+		content : prefix + '/img?id=' + id // iframe的url
 	});
 }
 function reLoad(type) {
@@ -129,7 +152,7 @@ function edit(id) {
 		title : '编辑',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
-		area : [ '800px', '520px' ],
+		area : [ '1000px', '550px' ],
 		content : prefix + '/edit/' + id // iframe的url
 	});
 }

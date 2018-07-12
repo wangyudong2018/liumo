@@ -46,4 +46,9 @@ public class LmUserHisController {
 		return pageUtil;
 	}
 
+	@GetMapping("/img")
+	public String img() {
+		return "liumo/img";
+	}
+
 }
