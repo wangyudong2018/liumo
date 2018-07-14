@@ -29,8 +29,8 @@ function load() {
 			return {
 				// 说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 				limit : params.limit,
-				offset : params.offset
-			// name:$('#searchName').val(),
+				offset : params.offset,
+				mobile : $('#mobile').val()
 			// username:$('#searchName').val()
 			};
 		},
@@ -43,17 +43,26 @@ function load() {
 		columns : [ {
 			checkbox : true
 		}, {
-			field : 'id',
-			title : '主键'
-		}, {
-			field : 'userId',
-			title : '用户编号'
-		}, {
 			field : 'mobile',
 			title : '手机号'
 		}, {
 			field : 'smsType',
-			title : '短信类型'
+			title : '短信类型',
+			formatter : function(value, row, index) {
+				if (value === '01') {
+					return '登录或注册';
+				}
+				if (value === '02') {
+					return '忘记密码';
+				}
+				if (value === '03') {
+					return '修改手机号';
+				}
+				if (value === '04') {
+					return '设置新手机号';
+				}
+				return value;
+			}
 		}, {
 			field : 'content',
 			title : '短信内容'
@@ -63,16 +72,6 @@ function load() {
 		}, {
 			field : 'createTime',
 			title : '创建时间'
-		}, {
-			title : '操作',
-			field : 'id',
-			align : 'center',
-			formatter : function(value, row, index) {
-				var e = '<a class="btn btn-primary btn-sm ' + s_edit_h + '" href="#" mce_href="#" title="编辑" onclick="edit(\'' + row.id + '\')"><i class="fa fa-edit"></i></a> ';
-				var d = '<a class="btn btn-warning btn-sm ' + s_remove_h + '" href="#" title="删除"  mce_href="#" onclick="remove(\'' + row.id + '\')"><i class="fa fa-remove"></i></a> ';
-				var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\'' + row.id + '\')"><i class="fa fa-key"></i></a> ';
-				return e + d;
-			}
 		} ]
 	});
 }

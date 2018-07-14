@@ -3,6 +3,8 @@ package com.yiyun.domain;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Data;
 
 /**
@@ -26,8 +28,10 @@ public class LmSmsLog implements Serializable {
 	// 短信内容
 	private String content;
 	// 发送日期
+	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd")
 	private Date sendDate;
 	// 创建时间
+	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date createTime;
 
 }
