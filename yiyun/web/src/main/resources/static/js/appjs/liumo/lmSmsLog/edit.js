@@ -9,12 +9,10 @@ $.validator.setDefaults({
 });
 function edit() {
 	$.ajax({
+		cache : true,
 		type : "POST",
-		url : "/liumo/lmBanner/edit",
-		cache : false,
-		contentType : false,
-		processData : false,
-		data : new FormData($('#signupForm')[0]),
+		url : "/liumo/lmSmsLog/edit",
+		data : $('#signupForm').serialize(),// 你的formid
 		async : false,
 		error : function(request) {
 			parent.layer.alert("Connection error");
@@ -38,22 +36,14 @@ function validateRule() {
 	var icon = "<i class='fa fa-times-circle'></i> ";
 	$("#signupForm").validate({
 		rules : {
-			file : {
+			name : {
 				required : true
-			},
-			sort : {
-				required : true,
-				number : true
 			}
 		},
 		messages : {
-			file : {
-				required : icon + "请选择文件"
-			},
-			sort : {
-				required : icon + "请输入排序",
-				number : icon + "请输入数字"
+			name : {
+				required : icon + "请输入名字"
 			}
 		}
-	});
+	})
 }

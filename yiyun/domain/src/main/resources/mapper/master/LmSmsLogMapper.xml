@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yiyun.dao.master.LmSmsLogDao">
+
+	<select id="get" resultType="com.yiyun.domain.LmSmsLog">
+		select `id`,`user_id`,`mobile`,`sms_type`,`content`,`send_date`,`create_time` from lm_sms_log where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.yiyun.domain.LmSmsLog">
+		select `id`,`user_id`,`mobile`,`sms_type`,`content`,`send_date`,`create_time` from lm_sms_log
+		<where>
+			<if test="id != null and id != ''"> and id = #{id} </if>
+			<if test="userId != null and userId != ''"> and user_id = #{userId} </if>
+			<if test="mobile != null and mobile != ''"> and mobile = #{mobile} </if>
+			<if test="smsType != null and smsType != ''"> and sms_type = #{smsType} </if>
+			<if test="content != null and content != ''"> and content = #{content} </if>
+			<if test="sendDate != null"> and send_date = #{sendDate} and #{sendDate} </if>
+			<if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		</where>
+		<choose>
+			<when test="sort != null and sort.trim() != ''">
+				order by ${sort} ${order}
+			</when>
+			<otherwise>
+				order by id desc
+			</otherwise>
+		</choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+
+	<select id="count" resultType="int">
+		select count(*) from lm_sms_log
+		<where>
+			<if test="id != null and id != ''"> and id = #{id} </if>
+			<if test="userId != null and userId != ''"> and user_id = #{userId} </if>
+			<if test="mobile != null and mobile != ''"> and mobile = #{mobile} </if>
+			<if test="smsType != null and smsType != ''"> and sms_type = #{smsType} </if>
+			<if test="content != null and content != ''"> and content = #{content} </if>
+			<if test="sendDate != null"> and send_date between #{sendDate} and #{sendDate} </if>
+			<if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		</where>
+	</select>
+
+	<insert id="save" parameterType="com.yiyun.domain.LmSmsLog" useGeneratedKeys="true" keyProperty="id">
+		insert into lm_sms_log
+		(
+		`user_id`,
+		`mobile`,
+		`sms_type`,
+		`content`,
+		`send_date`,
+		`create_time`
+		)
+		values
+		(
+		#{userId},
+		#{mobile},
+		#{smsType},
+		#{content},
+		#{sendDate},
+		#{createTime}
+		)
+	</insert>
+
+	<update id="edit" parameterType="com.yiyun.domain.LmSmsLog">
+		update lm_sms_log
+		<set>
+			<if test="userId != null">`user_id` = #{userId}, </if>
+			<if test="mobile != null">`mobile` = #{mobile}, </if>
+			<if test="smsType != null">`sms_type` = #{smsType}, </if>
+			<if test="content != null">`content` = #{content}, </if>
+			<if test="sendDate != null">`send_date` = #{sendDate}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}</if>
+		</set>
+		where id = #{id}
+	</update>
+
+	<delete id="remove">
+		delete from lm_sms_log where id = #{value}
+	</delete>
+
+	<delete id="batchRemove">
+		delete from lm_sms_log where id in
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

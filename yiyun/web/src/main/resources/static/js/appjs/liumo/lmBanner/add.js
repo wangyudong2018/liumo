@@ -9,7 +9,6 @@ $.validator.setDefaults({
 });
 function save() {
 	$.ajax({
-		cache : true,
 		type : "POST",
 		url : "/liumo/lmBanner/save",
 		cache : false,

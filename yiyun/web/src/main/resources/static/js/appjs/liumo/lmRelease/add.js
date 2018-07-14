@@ -102,7 +102,6 @@ $.validator.setDefaults({
 });
 function save() {
 	$.ajax({
-		cache : true,
 		type : "POST",
 		url : "/liumo/lmRelease/save",
 		cache : false,

@@ -41,7 +41,11 @@ public class LmUserServiceImpl implements LmUserService {
 
 	@Override
 	public int save(LmUser lmUser) {
-		return lmUserDao.save(lmUser);
+
+		int reuslt = lmUserDao.save(lmUser);
+		insertHis(lmUserDao.get(lmUser.getId()), "00");
+
+		return reuslt;
 	}
 
 	@Override
@@ -63,7 +67,7 @@ public class LmUserServiceImpl implements LmUserService {
 	public int edit(LmUser lmUser, String type) {
 		lmUser.setLastUpdateTime(new Date());
 
-		// type（01认证历史02手机号历史03忘记密码）
+		// type（00注册01认证历史02手机号历史03设置密码）
 		if (StringUtils.equals("01", type)) {
 			lmUser.setOprUpdateTime(new Date());
 			// 实名认证标志（1是0否）
@@ -72,13 +76,16 @@ public class LmUserServiceImpl implements LmUserService {
 			}
 		} else if (StringUtils.equals("02", type)) {
 			lmUser.setUsrUpdateTime(new Date());
+		} else if (StringUtils.equals("03", type)) {
+			lmUser.setUsrUpdateTime(new Date());
 		}
+
 		int reuslt = lmUserDao.edit(lmUser);
 
 		// 手机号变更需要存历史
-		if (StringUtils.equals("02", type)) {
-			insertHis(lmUserDao.get(lmUser.getId()), type);
-		}
+		// if (StringUtils.equals("02", type)) {
+		insertHis(lmUserDao.get(lmUser.getId()), type);
+		// }
 
 		return reuslt;
 	}
