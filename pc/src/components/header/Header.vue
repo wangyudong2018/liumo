@@ -48,15 +48,14 @@ export default {
     // 还可以再进行优化
     let interval = setInterval(() => {
       if (this.loadedAMapJS) {
-        let timer = setInterval(() => {
-          if ($('script[src="' + loadUrl + '"]').length > 0) {
-            $.getScript(loadUrl, () => {
-              clearInterval(timer)
+        if ($('script[src="' + loadUrl + '"]').length > 0) {
+          $.getScript(loadUrl, (data, textStatus, xhr) => {
+            if (textStatus === 'success') {
               clearInterval(interval)
               this.getCurrentLocation()
-            })
-          }
-        }, 30)
+            }
+          })
+        }
       }
     }, 300)
   },
@@ -76,6 +75,7 @@ export default {
 .nav-wrapper {
   height: 120px;
   background: #ffffff;
+  border-bottom: 2px solid #f2f2f2;
 }
 
 .nav-content {

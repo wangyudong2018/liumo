@@ -3,9 +3,9 @@
     <div class="banner-wrapper">
       <div
         v-for="banner of bannerList"
-        :key="banner.id"
+        :key="banner.fileId"
       >
-        <img :src="loadBannersImg + banner.id" alt="六漠科技">
+        <img :src="loadBannersImg + banner.fileId" alt="六漠科技">
       </div>
     </div>
     <div class="contranct-wrapper">
@@ -47,51 +47,28 @@
       </div>
     </div>
     <div class="begins-wrapper">
-      <div class="begins-content">
-        <div class="begins-title">
-          <spread-head :spreadHead="begins.spreadHead"></spread-head>
-        </div>
-        <div class="begins-box">
-          <div class="begins-container">
-            <div class="begins-phone">
-              <img src="./imgs/begins_phone.png" alt="">
-            </div>
-            <div class="begins-other">
-              <div class="begins-other-top clearfix">
-                <div class="begins-other-tl">
-                  <div class="begins-logo"></div>
-                  <div class="begins-name"></div>
-                </div>
-                <div class="begins-other-tr"></div>
-              </div>
-              <div class="begins-other-bottom clearfix">
-                <div class="begins-other-bl">
-                  <div class="begins-btn-ios"></div>
-                  <div class="begins-btn-and"></div>
-                </div>
-                <div class="begins-other-br">
-                  <img src="./imgs/begins_code.png" alt="">
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div class="begins-title">
+        <spread-head :spreadHead="begins.spreadHead"></spread-head>
+      </div>
+      <div class="begins-box">
+        <begins-here></begins-here>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import api, { LOAD_BANNERS_IMG } from '../../api/api'
+import api, { LOAD_FILE } from '../../api/api'
 
-import spreadHead from '../../components/spreadHead/spreadHead'
-import newsTitle from '../../components/newsTitle/newsTitle'
-import Specialty from '../../components/specialty/specialty'
-import bankShow from '../../components/bankShow/bankShow'
+import spreadHead from '@/components/spreadHead/spreadHead'
+import newsTitle from '@/components/newsTitle/newsTitle'
+import Specialty from '@/components/specialty/specialty'
+import bankShow from '@/components/bankShow/bankShow'
+import beginsHere from '@/components/beginsHere/beginsHere'
 export default {
   data () {
     return {
-      loadBannersImg: LOAD_BANNERS_IMG,
+      loadBannersImg: LOAD_FILE,
       bannerList: [],
       constract: {
         spreadHead: {
@@ -231,7 +208,7 @@ export default {
     }
   },
   created () {
-    this.$http.get(api.bannerList(), {lmType: '01'}, (res) => {
+    this.$http.get(api.bannerList(), {channel: 'pc', page: 'index'}, (res) => {
       this.bannerList = res.data
     })
   },
@@ -239,7 +216,8 @@ export default {
     spreadHead,
     newsTitle,
     Specialty,
-    bankShow
+    bankShow,
+    beginsHere
   }
 }
 </script>
@@ -293,106 +271,12 @@ export default {
   cursor: pointer;
 }
 
-.specialty-wrapper, .bank-show-wrapper, .begins-container {
+.specialty-wrapper, .bank-show-wrapper {
   width: 1205px;
   margin: 0 auto;
 }
 
 .specialty-box, .bank-show-box, .begins-box {
   margin-top: 120px;
-}
-
-.begins-box {
-  width: 100%;
-  height: 560px;
-  background: url("./imgs/begins_bg.png") no-repeat;
-  background-size: cover;
-}
-
-.begins-container {
-  position: relative;
-}
-
-.begins-phone {
-  position: absolute;
-  top: -100px;
-  left: 80px;
-  width: 280px;
-  height: 566px;
-  overflow: hidden;
-}
-
-.begins-phone img {
-  width: 100%;
-  height: auto;
-}
-
-.begins-other {
-  padding-top: 60px;
-  padding-left: 530px;
-}
-
-.begins-other-tl {
-  float: left;
-  width: 110px;
-}
-
-.begins-logo {
-  width: 110px;
-  height: 110px;
-  background: url("./imgs/begins_logo.png") no-repeat;
-  background-size: cover;
-}
-
-.begins-name {
-  width: 110px;
-  height: 24px;
-  margin-top: 16px;
-  background: url("./imgs/begins_name.png") no-repeat;
-  background-size: cover;
-}
-
-.begins-other-tr {
-  float: left;
-  width: 407px;
-  height: 108px;
-  margin: 33px 108px 9px 50px;
-  background: url("./imgs/begins-des.png") no-repeat;
-  background-size: cover;
-}
-
-.begins-other-bottom {
-  padding: 80px 0 0 18px;
-}
-
-.begins-other-bl {
-  float: left;
-  width: 330px;
-}
-
-.begins-btn-ios, .begins-btn-and {
-  height: 60px;
-  background-size: cover;
-}
-
-.begins-btn-ios {
-  margin-bottom: 16px;
-  background: url("./imgs/begins_btn_ios.png") no-repeat;
-}
-
-.begins-btn-and {
-  background: url("./imgs/begins_btn_and.png") no-repeat;
-}
-
-.begins-other-br {
-  float: left;
-  width: 136px;
-  height: 136px;
-  margin-left: 55px;
-}
-
-.begins-other-br img{
-  width: 100%;
-  height: auto;
 }
 </style>

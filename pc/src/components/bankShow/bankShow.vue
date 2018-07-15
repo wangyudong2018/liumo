@@ -62,8 +62,8 @@ export default {
     width: 442px;
     height: 310px;
     padding: 80px 0 0 60px;
-    background: #2d86e7;
-    opacity: .6;
+    background-color: #2d86e7;
+    background: rgba(45, 134, 231, .6);
     color: #ffffff;
   }
 

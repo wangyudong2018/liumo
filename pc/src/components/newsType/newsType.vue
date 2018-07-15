@@ -6,10 +6,11 @@
         v-for="newsItem of newsType.newsList"
         :key="newsItem.newsId"
         :newsItem="newsItem"
+        :newsTypeId="newsType.newsTypeId"
         ></news-item>
     </div>
     <div class="loading-more-wrapper">
-      <button class="loading-more-btn">查看更多</button>
+      <button class="loading-more-btn" @click="loadMore(newsType.newsTypeId)">查看更多</button>
     </div>
   </div>
 </template>
@@ -27,6 +28,13 @@ export default {
   components: {
     newsTitle,
     newsItem
+  },
+  methods: {
+    loadMore (newsTypeId) {
+      // 以下两种方式都可以控制路由跳转，第一种需要导入 router
+      // router.push({path: '/news/newsItemList'})
+      this.$router.push({path: '/news/newsItemList/' + newsTypeId})
+    }
   }
 }
 </script>

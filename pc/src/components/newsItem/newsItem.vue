@@ -1,29 +1,35 @@
 <template>
-  <div class="news-item-box fl">
-    <img :src="loadImgUrl + newsItem.id">
-    <p class="news-item-des">{{newsItem.brief}}</p>
+  <div class="news-item-box fl" @click="goDetail(newsItem.id)">
+    <img :src="loadImgUrl + newsItem.thumbnail">
+    <p class="news-item-des">{{newsItem.brief | addLabel}}</p>
   </div>
 </template>
 
 <script>
-import { LOAD_NEWS_IMG } from '../../api/api'
+import { LOAD_FILE } from '@/api/api'
 export default {
   data () {
     return {
-      loadImgUrl: LOAD_NEWS_IMG
+      loadImgUrl: LOAD_FILE
     }
   },
   props: {
     newsItem: {
       type: Object,
       required: true
+    },
+    newsTypeId: {
+      type: String,
+      required: true
     }
   },
-  computed: {
-    newsTopic: function () {
-      return {
-        // 注意加载图片路径时必须使用require()方法，否则不能正确识别图片的路径
-        // backgroundImage: 'url(' + require('./imgs/news0' + this.newsItem.id + '.png') + ')'
+  methods: {
+    goDetail (newsId) {
+      if (this.newsTypeId === '01') {
+        this.$router.push({ path: '/news/newsDetail/' + newsId })
+      } else {
+        // window.location.href = this.newsItem.outChain
+        window.open(this.newsItem.outChain, '_blank')
       }
     }
   },
@@ -44,11 +50,12 @@ export default {
     height: 260px;
     margin: 0 30px 54px 30px;
     overflow: hidden;
+    cursor: pointer;
   }
 
   .news-item-box img {
     width: 100%;
-    height: auto;
+    height: 100%;
   }
 
   .news-item-des {
@@ -60,5 +67,10 @@ export default {
     font-size: 16px;
     font-weight: 700;
     color: #ffffff;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
   }
 </style>

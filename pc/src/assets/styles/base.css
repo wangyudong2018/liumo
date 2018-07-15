@@ -40,3 +40,11 @@ a {
 .fr {
 	float: right;
 }
+
+.layout-width {
+	width: 1225px;
+}
+
+.layout-center {
+	margin: 0 auto;
+}

@@ -12,13 +12,13 @@
         <p class="pro-des">{{productType.people}}</p>
       </div>
       <div class="pro-btn-wrapper">
-        <button class="pro-btn">立刻申请</button>
+        <button class="layout-center pro-btn" @click="applyNow">立刻申请</button>
       </div>
     </div>
     <div class="pro-topic" :style="topicBg">
       <p class="topic-type">{{productType.title}}</p>
-      <p class="topic-des">{{productType.agreemt}}</p>
-      <p class="service-rate">服务费率：<span>{{productType.rate | percent}}</span></p>
+      <!-- <p class="topic-des">{{productType.agreemt}}</p> -->
+      <p class="service-rate">{{productType.agreemt}}</p>
     </div>
   </div>
 </template>
@@ -29,14 +29,24 @@ export default {
     productType: {
       type: Object,
       required: true
+    },
+    index: {
+      type: Number,
+      required: true
     }
   },
   computed: {
     topicBg: function () {
+      let str = (this.index + 1) - 9 > 0 ? '' + (this.index + 1) : '0' + (this.index + 1)
       return {
         // 注意加载图片路径时必须使用require()方法，否则不能正确识别图片的路径
-        backgroundImage: 'url(' + require('./imgs/pro_topic_bg0' + this.productType.id + '.png') + ')'
+        backgroundImage: 'url(' + require('./imgs/pro_topic_bg' + str + '.png') + ')'
       }
+    }
+  },
+  methods: {
+    applyNow () {
+      this.$emit('maskEvent')
     }
   },
   filters: {
@@ -87,8 +97,8 @@ export default {
     width: 300px;
     height: 50px;
     line-height: 50px;
-    margin: 0 auto;
     border: none;
+    outline: none;
     border-radius: 20px;
     font-size: 26px;
     background: #1c84ef;

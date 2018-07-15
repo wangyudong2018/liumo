@@ -8,8 +8,8 @@
           </div>
           <ul class="footer-links">
             <li><a href="#">关于六漠</a></li>
-            <li><a href="#">服务协议</a></li>
-            <li><a href="#">诚聘英才</a></li>
+            <li><router-link to="/protocol">服务协议</router-link></li>
+            <li><router-link to="/joinus">诚聘英才</router-link></li>
             <li><a href="#">联系我们</a></li>
           </ul>
         </div>
