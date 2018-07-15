@@ -25,6 +25,7 @@ import com.yiyun.web.common.utils.R;
 import com.yiyun.web.liumo.service.LmFileService;
 import com.yiyun.web.liumo.service.LmSmsLogService;
 import com.yiyun.web.liumo.service.LmUserService;
+import com.yiyun.web.liumo.util.SecretUtils;
 import com.yiyun.web.liumo.util.SessionUtil;
 import com.yiyun.web.liumo.util.UUIDGenerator;
 
@@ -36,8 +37,6 @@ import com.yiyun.web.liumo.util.UUIDGenerator;
 @RestController
 @RequestMapping("/liumo/app/user")
 public class LmAppUserController {
-
-	private static final Boolean BAFFLE = Boolean.TRUE;
 
 	@Autowired
 	private LmUserService lmUserService;
@@ -85,11 +84,9 @@ public class LmAppUserController {
 			return R.error("短信类型录入错误");
 		}
 
-		if (!BAFFLE) {
-			SendMessageResp resp = SmsManager.sendMessage(mobile, content);
-			if (!resp.isFlag()) {
-				return R.error("短信发送失败，请稍候再试");
-			}
+		SendMessageResp resp = SmsManager.sendMessage(mobile, content);
+		if (!resp.isFlag()) {
+			return R.error("短信发送失败，请稍候再试");
 		}
 
 		// 记录短信历史
@@ -119,6 +116,7 @@ public class LmAppUserController {
 		Map<String, Object> map = new HashMap<String, Object>(3);
 		map.put("mobile", mobile);
 		List<LmUser> users = lmUserService.list(map);
+		LmUser lmUser = null;
 
 		// 验证短信验证码并登录
 		if (StringUtils.isNotBlank(code)) {
@@ -128,7 +126,6 @@ public class LmAppUserController {
 			}
 
 			// 判断用户是否存在（不存在则注册）
-			LmUser lmUser = null;
 			if (CollectionUtils.isEmpty(users)) {
 				lmUser = new LmUser();
 				lmUser.setId(UUIDGenerator.generate());
@@ -153,7 +150,7 @@ public class LmAppUserController {
 				return R.error("请先注册后再登录");
 			}
 
-			LmUser lmUser = users.get(0);
+			lmUser = users.get(0);
 			if (!StringUtils.equals(lmUser.getPassword(), password)) {
 				return R.error("手机号或密码输入错误");
 			}
@@ -163,7 +160,31 @@ public class LmAppUserController {
 
 		}
 
-		return R.ok();
+		return R.ok().put("token", SecretUtils.getToken());
+	}
+
+	/**
+	 * 刷新Token
+	 * 
+	 * @param params
+	 * @return
+	 */
+	@PostMapping("/refreshToken")
+	public R refreshToken(@RequestParam Map<String, String> params) {
+		String token = params.get("token");
+		String userId = SecretUtils.getTokenUserId(token);
+		if (StringUtils.isBlank(userId)) {
+			return R.error();
+		}
+
+		LmUser lmUser = lmUserService.get(userId);
+		if (null == lmUser) {
+			return R.error();
+		}
+
+		SessionUtil.saveLmUser(lmUser);
+
+		return R.ok().put("token", SecretUtils.getToken());
 	}
 
 	/**
@@ -211,7 +232,6 @@ public class LmAppUserController {
 	@PostMapping("/updateMobile")
 	public R updateMobile(@RequestParam Map<String, String> params) {
 		String newMobile = params.get("newMobile");
-		String smsType = params.get("smsType");
 		String code = params.get("code");
 
 		LmUser lmUser = SessionUtil.getLmUser();
@@ -219,7 +239,7 @@ public class LmAppUserController {
 			return R.error("用户未登录，请返回后重试");
 		}
 
-		if (!SessionUtil.verifyCode(newMobile, smsType, code)) {
+		if (!SessionUtil.verifyCode(newMobile, "04", code)) {
 			return R.error("动态码验证错误，请重新获取");
 		}
 
