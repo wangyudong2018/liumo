@@ -17,7 +17,7 @@
           <news-title :newsTitle="constract.newsTitle"></news-title>
         </div>
         <div class="contranct-btn-box">
-          <button class="contranct-btn">立即咨询</button>
+          <button class="contranct-btn" @click="modal = true">立即咨询</button>
         </div>
       </div>
     </div>
@@ -54,6 +54,34 @@
         <begins-here></begins-here>
       </div>
     </div>
+    <Modal v-model="modal" width="860" :mask-closable="false">
+      <div class="mask-content">
+        <div class="mask-ct-top clearfix">
+          <div class="mask-left fl">
+            <div class="mask-logo">
+              <img src="./imgs/mask_logo.png">
+            </div>
+            <div class="mask-title">
+              <img src="./imgs/mask_title.png" alt="六漠科技">
+            </div>
+          </div>
+          <div class="mask-right fl">
+            <img src="./imgs/mask_slogan.png" alt="选银行，就走六漠科技">
+          </div>
+          <div class="mask-iphone">
+            <img src="./imgs/mask_iphone.png">
+          </div>
+        </div>
+        <div class="mask-ct-bottom">
+          <div class="mask-code">
+            <img src="./imgs/begins_code.png" alt="扫码下载六漠科技APP">
+          </div>
+          <p class="mask-des">扫码下载六漠科技APP,即刻申请流程</p>
+        </div>
+        <div class="close-mask" @click="hideMask"></div>
+      </div>
+      <div slot="footer" style="height: 0;"></div>
+    </Modal>
   </div>
 </template>
 
@@ -68,6 +96,7 @@ import beginsHere from '@/components/beginsHere/beginsHere'
 export default {
   data () {
     return {
+      modal: false,
       loadBannersImg: LOAD_FILE,
       bannerList: [],
       constract: {
@@ -212,6 +241,11 @@ export default {
       this.bannerList = res.data
     })
   },
+  methods: {
+    hideMask () {
+      this.modal = false
+    }
+  },
   components: {
     spreadHead,
     newsTitle,
@@ -221,6 +255,11 @@ export default {
   }
 }
 </script>
+<style>
+  .ivu-modal-body {
+    padding: 0;
+  }
+</style>
 
 <style scoped>
 .banner-wrapper {
@@ -278,5 +317,88 @@ export default {
 
 .specialty-box, .bank-show-box, .begins-box {
   margin-top: 120px;
+}
+
+.mask-content {
+  position: relative;
+  width: 860px;
+  height: 700px;
+  background-color: #ffffff;
+}
+
+.mask-ct-top {
+  position: relative;
+  height: 160px;
+  padding: 28px 0 28px 70px;
+  background: url("./imgs/mask_ct_bg.png") no-repeat;
+  background-size: 100% 100%;
+}
+
+.mask-logo, .mask-title {
+  width: 80px;
+  height: 80px;
+  overflow: hidden;
+}
+
+.mask-title {
+  height: 19px;
+  margin-top: 5px;
+}
+
+.mask-right {
+  width: 710px;
+  height: 104px;
+  padding: 22px 374px 7px 36px;
+}
+
+.mask-iphone {
+  position: absolute;
+  right: 60px;
+  bottom: 0px;
+  width: 280px;
+  height: 247px;
+  overflow: hidden;
+}
+
+.mask-logo img, .mask-title img, .mask-right img, .mask-iphone img {
+  width: 100%;
+  height: auto;
+}
+
+.mask-ct-bottom {
+  height: 540px;
+  padding-bottom: 70px;
+}
+
+.mask-code {
+  width: 320px;
+  height: 320px;
+  margin: 54px auto;
+  overflow: hidden;
+}
+
+.mask-code img {
+  width: 100%;
+  height: auto;
+}
+
+.mask-des {
+  height: 32px;
+  line-height: 32px;
+  text-align: center;
+  font-size: 32px;
+  font-weight: 700;
+  color: #000000;
+}
+
+.close-mask {
+  position: absolute;
+  top: -70px;
+  right: -100px;
+  width: 60px;
+  height: 60px;
+  background: url("./imgs/close_mask.png") no-repeat;
+  background-size: contain;
+  cursor: pointer;
 }
 </style>

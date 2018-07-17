@@ -6,13 +6,12 @@
           <div class="footer-logo">
             <img src="./imgs/footer-logo.png" alt="六漠科技">
           </div>
-          <ul class="footer-links">
-            <li><a href="#">关于六漠</a></li>
-            <li><router-link to="/protocol">服务协议</router-link></li>
-            <li><router-link to="/joinus">诚聘英才</router-link></li>
-            <li><a href="#">联系我们</a></li>
-          </ul>
         </div>
+        <ul class="footer-links fl">
+            <li><router-link to="/protocol">服务协议</router-link></li>
+            <li class="split-line"></li>
+            <li><router-link to="/joinus">诚聘英才</router-link></li>
+          </ul>
         <div class="footer-top-rt fr">
           <div class="hot-tel">400-9999-715</div>
           <p class="hot-tel-des">唯一官方热线</p>
@@ -39,14 +38,14 @@ export default {}
 
 .footer-content {
   width: 925px;
-  height: 150px;
+  height: 100px;
   margin: 0 auto;
   padding-top: 24px;
   color: #ffffff;
 }
 
 .footer-top-lt {
-  width: 700px;
+  width: 396px;
 }
 
 .footer-logo {
@@ -55,51 +54,56 @@ export default {}
 }
 
 .footer-links {
-  height: 22px;
-  padding-bottom: 8px;
-  margin: 18px 0 22px 42px;
+  width: 262px;
+  height: 26px;
+  line-height: 26px;
 }
 
 .footer-links li {
   float: left;
-  margin-left: 54px;
+  padding: 0 20px;
+}
+
+.footer-links .split-line {
+  height: 16px;
+  padding: 0;
+  margin-top: 5px;
+  border-left: 1px solid #ffffff;
 }
 
 .footer-links li a {
   display: inline-block;
-  height: 22px;
-  line-height: 14px;
-  font-size: 14px;
+  height: 26px;
+  line-height: 26px;
+  font-size: 18px;
   color: #ffffff;
 }
 
 .footer-top-rt {
-  width: 225px;
-  text-align: right;
+  width: 267px;
 }
 
-.footer-top-rt .hot-tel {
+.footer-top-rt .hot-tel, .footer-top-rt .hot-tel-des {
+  float: left;
   height: 26px;
   line-height: 26px;
-  font-size: 26px;
-}
-
-.footer-top-rt .hot-tel-des {
-  height: 18px;
-  line-height: 18px;
-  margin-top: 18px;
-  padding-right: 10px;
+  text-align: left;
   font-size: 18px;
 }
 
+.footer-top-rt .hot-tel-des {
+  padding-left: 10px;
+}
+
 .footer-bottom {
+  padding-top: 15px;
   text-align: center;
   font-size: 0;
 }
 
 .footer-bottom p {
   display: inline-block;
-  font-size: 10px;
+  font-size: 14px;
 }
 
 .footer-company {

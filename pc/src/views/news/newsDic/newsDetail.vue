@@ -5,13 +5,10 @@
         <h2 class="detail-title">{{newsDetail.title}}</h2>
         <p class="detail-label">
           <span class="label">{{newsDetail.original}}</span>
-          <span class="label">{{'2天前'}}</span>
+          <span class="label">{{''}}</span>
           <span class="label">{{newsDetail.releaseDate}}</span>
         </p>
       </div>
-      <!-- <div class="detail-img-box">
-        <img src="./topic.png">
-      </div> -->
       <div class="detail-content" v-html="newsDetail.content"></div>
     </div>
     <div class="begins-wrapper">
@@ -83,5 +80,12 @@ export default {
   .detail-content-pragraph {
     line-height: 38px;
     font-size: 18px;
+  }
+</style>
+
+<style>
+  .detail-content p {
+    line-height: 28px;
+    font-size: 16px!important;
   }
 </style>

@@ -54,46 +54,44 @@
         </div>
       </div>
     </div>
-    <div class="mask-wrapper" v-show="isShowMask">
-      <mask-wrapper>
-        <div class="mask-content">
-          <div class="mask-ct-top clearfix">
-            <div class="mask-left fl">
-              <div class="mask-logo">
-                <img src="./imgs/mask_logo.png">
-              </div>
-              <div class="mask-title">
-                <img src="./imgs/mask_title.png" alt="六漠科技">
-              </div>
+    <Modal v-model="modal" width="860" :mask-closable="false">
+      <div class="mask-content">
+        <div class="mask-ct-top clearfix">
+          <div class="mask-left fl">
+            <div class="mask-logo">
+              <img src="./imgs/mask_logo.png">
             </div>
-            <div class="mask-right fl">
-              <img src="./imgs/mask_slogan.png" alt="选银行，就走六漠科技">
-            </div>
-            <div class="mask-iphone">
-              <img src="./imgs/mask_iphone.png">
+            <div class="mask-title">
+              <img src="./imgs/mask_title.png" alt="六漠科技">
             </div>
           </div>
-          <div class="mask-ct-bottom">
-            <div class="mask-code">
-              <img src="./imgs/begins_code.png" alt="扫码下载六漠科技APP">
-            </div>
-            <p class="mask-des">扫码下载六漠科技APP,即刻申请流程</p>
+          <div class="mask-right fl">
+            <img src="./imgs/mask_slogan.png" alt="选银行，就走六漠科技">
           </div>
-          <div class="close-mask" @click="hideMask"></div>
+          <div class="mask-iphone">
+            <img src="./imgs/mask_iphone.png">
+          </div>
         </div>
-      </mask-wrapper>
-    </div>
+        <div class="mask-ct-bottom">
+          <div class="mask-code">
+            <img src="./imgs/begins_code.png" alt="扫码下载六漠科技APP">
+          </div>
+          <p class="mask-des">扫码下载六漠科技APP,即刻申请流程</p>
+        </div>
+        <div class="close-mask" @click="hideMask"></div>
+      </div>
+      <div slot="footer" style="height: 0;"></div>
+    </Modal>
   </div>
 </template>
 
 <script>
 import api, { LOAD_FILE } from '../../api/api'
 import propductType from '../../components/product/productType'
-import Mask from '../../components/mask/mask'
 export default {
   data () {
     return {
-      isShowMask: false,
+      modal: false,
       loadBannersImg: LOAD_FILE,
       bannerList: [],
       productTypeList: []
@@ -108,15 +106,14 @@ export default {
     })
   },
   components: {
-    'propduct-type': propductType,
-    'mask-wrapper': Mask
+    'propduct-type': propductType
   },
   methods: {
-    showMask () {
-      this.isShowMask = true
-    },
     hideMask () {
-      this.isShowMask = false
+      this.modal = false
+    },
+    showMask () {
+      this.modal = true
     }
   }
 }
@@ -194,15 +191,9 @@ export default {
 }
 
 .mask-content {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  position: relative;
   width: 860px;
   height: 700px;
-  margin: auto;
-  z-index: 101;
   background-color: #ffffff;
 }
 
