@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yiyun.dao.master.LmOrderDao">
+
+	<select id="get" resultType="com.yiyun.domain.LmOrder">
+		select `id`,`user_id`,`mobile`,`username`,`cert_type`,`cert_no`,`order_type`,`order_amt`,`state`,`remark`,`order_date01`,`order_date02`,`order_date03`,`order_date04`,`order_date05`,`order_date06`,`create_time`,`opr_update_time`,`last_update_time` from lm_order where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.yiyun.domain.LmOrder">
+		select `id`,`user_id`,`mobile`,`username`,`cert_type`,`cert_no`,`order_type`,`order_amt`,`state`,`remark`,`order_date01`,`order_date02`,`order_date03`,`order_date04`,`order_date05`,`order_date06`,`create_time`,`opr_update_time`,`last_update_time` from lm_order
+		<where>
+			<if test="id != null and id != ''"> and id = #{id} </if>
+			<if test="userId != null and userId != ''"> and user_id = #{userId} </if>
+			<if test="mobile != null and mobile != ''"> and mobile = #{mobile} </if>
+			<if test="username != null and username != ''"> and username = #{username} </if>
+			<if test="certType != null and certType != ''"> and cert_type = #{certType} </if>
+			<if test="certNo != null and certNo != ''"> and cert_no = #{certNo} </if>
+			<if test="orderType != null and orderType != ''"> and order_type = #{orderType} </if>
+			<if test="orderAmt != null and orderAmt != ''"> and order_amt = #{orderAmt} </if>
+			<if test="state != null and state != ''"> and state in (${state}) </if>
+			<if test="remark != null and remark != ''"> and remark = #{remark} </if>
+			<if test="orderDate01 != null and orderDate01 != ''"> and order_date01 = #{orderDate01} </if>
+			<if test="orderDate02 != null and orderDate02 != ''"> and order_date02 = #{orderDate02} </if>
+			<if test="orderDate03 != null and orderDate03 != ''"> and order_date03 = #{orderDate03} </if>
+			<if test="orderDate04 != null and orderDate04 != ''"> and order_date04 = #{orderDate04} </if>
+			<if test="orderDate05 != null and orderDate05 != ''"> and order_date05 = #{orderDate05} </if>
+			<if test="orderDate06 != null and orderDate06 != ''"> and order_date06 = #{orderDate06} </if>
+			<if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+			<if test="oprUpdateTime != null and oprUpdateTime != ''"> and opr_update_time = #{oprUpdateTime} </if>
+			<if test="lastUpdateTime != null and lastUpdateTime != ''"> and last_update_time = #{lastUpdateTime} </if>
+		</where>
+		<choose>
+			<when test="sort != null and sort.trim() != ''">
+				order by ${sort} ${order}
+			</when>
+			<otherwise>
+				order by id desc
+			</otherwise>
+		</choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+
+	<select id="count" resultType="int">
+		select count(*) from lm_order
+		<where>
+			<if test="id != null and id != ''"> and id = #{id} </if>
+			<if test="userId != null and userId != ''"> and user_id = #{userId} </if>
+			<if test="mobile != null and mobile != ''"> and mobile = #{mobile} </if>
+			<if test="username != null and username != ''"> and username = #{username} </if>
+			<if test="certType != null and certType != ''"> and cert_type = #{certType} </if>
+			<if test="certNo != null and certNo != ''"> and cert_no = #{certNo} </if>
+			<if test="orderType != null and orderType != ''"> and order_type = #{orderType} </if>
+			<if test="orderAmt != null and orderAmt != ''"> and order_amt = #{orderAmt} </if>
+			<if test="state != null and state != ''"> and state in (${state}) </if>
+			<if test="remark != null and remark != ''"> and remark = #{remark} </if>
+			<if test="orderDate01 != null and orderDate01 != ''"> and order_date01 = #{orderDate01} </if>
+			<if test="orderDate02 != null and orderDate02 != ''"> and order_date02 = #{orderDate02} </if>
+			<if test="orderDate03 != null and orderDate03 != ''"> and order_date03 = #{orderDate03} </if>
+			<if test="orderDate04 != null and orderDate04 != ''"> and order_date04 = #{orderDate04} </if>
+			<if test="orderDate05 != null and orderDate05 != ''"> and order_date05 = #{orderDate05} </if>
+			<if test="orderDate06 != null and orderDate06 != ''"> and order_date06 = #{orderDate06} </if>
+			<if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+			<if test="oprUpdateTime != null and oprUpdateTime != ''"> and opr_update_time = #{oprUpdateTime} </if>
+			<if test="lastUpdateTime != null and lastUpdateTime != ''"> and last_update_time = #{lastUpdateTime} </if>
+		</where>
+	</select>
+
+	<insert id="save" parameterType="com.yiyun.domain.LmOrder">
+		insert into lm_order
+		(
+		`id`,
+		`user_id`,
+		`mobile`,
+		`username`,
+		`cert_type`,
+		`cert_no`,
+		`order_type`,
+		`order_amt`,
+		`state`,
+		`remark`,
+		`order_date01`,
+		`order_date02`,
+		`order_date03`,
+		`order_date04`,
+		`order_date05`,
+		`order_date06`,
+		`create_time`,
+		`opr_update_time`,
+		`last_update_time`
+		)
+		values
+		(
+		#{id},
+		#{userId},
+		#{mobile},
+		#{username},
+		#{certType},
+		#{certNo},
+		#{orderType},
+		#{orderAmt},
+		#{state},
+		#{remark},
+		#{orderDate01},
+		#{orderDate02},
+		#{orderDate03},
+		#{orderDate04},
+		#{orderDate05},
+		#{orderDate06},
+		#{createTime},
+		#{oprUpdateTime},
+		#{lastUpdateTime}
+		)
+	</insert>
+
+	<update id="edit" parameterType="com.yiyun.domain.LmOrder">
+		update lm_order
+		<set>
+			<if test="userId != null">`user_id` = #{userId}, </if>
+			<if test="mobile != null">`mobile` = #{mobile}, </if>
+			<if test="username != null">`username` = #{username}, </if>
+			<if test="certType != null">`cert_type` = #{certType}, </if>
+			<if test="certNo != null">`cert_no` = #{certNo}, </if>
+			<if test="orderType != null">`order_type` = #{orderType}, </if>
+			<if test="orderAmt != null">`order_amt` = #{orderAmt}, </if>
+			<if test="state != null">`state` = #{state}, </if>
+			<if test="remark != null">`remark` = #{remark}, </if>
+			<if test="orderDate01 != null">`order_date01` = #{orderDate01}, </if>
+			<if test="orderDate02 != null">`order_date02` = #{orderDate02}, </if>
+			<if test="orderDate03 != null">`order_date03` = #{orderDate03}, </if>
+			<if test="orderDate04 != null">`order_date04` = #{orderDate04}, </if>
+			<if test="orderDate05 != null">`order_date05` = #{orderDate05}, </if>
+			<if test="orderDate06 != null">`order_date06` = #{orderDate06}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="oprUpdateTime != null">`opr_update_time` = #{oprUpdateTime}, </if>
+			<if test="lastUpdateTime != null">`last_update_time` = #{lastUpdateTime}</if>
+		</set>
+		where id = #{id}
+	</update>
+
+	<delete id="remove">
+		delete from lm_order where id = #{value}
+	</delete>
+
+	<delete id="batchRemove">
+		delete from lm_order where id in
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

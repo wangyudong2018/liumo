@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+							<div class="form-group">
+								<label class="col-sm-3 control-label">用户编号：</label>
+								<div class="col-sm-8">
+									<input id="userId" name="userId" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">手机号：</label>
+								<div class="col-sm-8">
+									<input id="mobile" name="mobile" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">借款人姓名：</label>
+								<div class="col-sm-8">
+									<input id="username" name="username" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">证件类型：</label>
+								<div class="col-sm-8">
+									<input id="certType" name="certType" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">证件号码：</label>
+								<div class="col-sm-8">
+									<input id="certNo" name="certNo" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">订单类型：</label>
+								<div class="col-sm-8">
+									<input id="orderType" name="orderType" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">订单金额：</label>
+								<div class="col-sm-8">
+									<input id="orderAmt" name="orderAmt" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">状态01在线咨询02门店申请03匹配最优银行04银行审批放款05已放款06失败：</label>
+								<div class="col-sm-8">
+									<input id="state" name="state" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">备注：</label>
+								<div class="col-sm-8">
+									<input id="remark" name="remark" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">状态更新时间：</label>
+								<div class="col-sm-8">
+									<input id="orderDate01" name="orderDate01" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">状态更新时间：</label>
+								<div class="col-sm-8">
+									<input id="orderDate02" name="orderDate02" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">状态更新时间：</label>
+								<div class="col-sm-8">
+									<input id="orderDate03" name="orderDate03" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">状态更新时间：</label>
+								<div class="col-sm-8">
+									<input id="orderDate04" name="orderDate04" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">状态更新时间：</label>
+								<div class="col-sm-8">
+									<input id="orderDate05" name="orderDate05" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">状态更新时间：</label>
+								<div class="col-sm-8">
+									<input id="orderDate06" name="orderDate06" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">创建时间：</label>
+								<div class="col-sm-8">
+									<input id="createTime" name="createTime" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">操作员更新时间：</label>
+								<div class="col-sm-8">
+									<input id="oprUpdateTime" name="oprUpdateTime" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">最后更新时间：</label>
+								<div class="col-sm-8">
+									<input id="lastUpdateTime" name="lastUpdateTime" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/liumo/lmOrder/add.js"></script>
+</body>
+</html>
