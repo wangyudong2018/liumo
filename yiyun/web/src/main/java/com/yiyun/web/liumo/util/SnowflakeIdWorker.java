@@ -16,7 +16,7 @@ package com.yiyun.web.liumo.util;
  */
 public class SnowflakeIdWorker {
 
-	public static final SnowflakeIdWorker idWorker = new SnowflakeIdWorker(0, 0);
+	public static final SnowflakeIdWorker ID_WORKER = new SnowflakeIdWorker(0, 0);
 
 	// ==============================Fields===========================================
 	/** 开始时间截 (2015-01-01) */
