@@ -69,17 +69,17 @@ public class LmAppUserController {
 		map.put("sendDate", new java.sql.Date(System.currentTimeMillis()));
 		int count = lmSmsLogService.count(map);
 		if (count > 10) {
-			return R.error("该手机号当日发送短信次数过多，不允许发送短信");
+			return R.error("短信发送失败，请稍候再试");
 		}
 
 		if (StringUtils.equals("01", smsType)) { // 登录或注册短信验证码
-			content = "您好，您的登录验证码是" + code;
+			content = "【六漠】您正在登录验证，验证码" + code + "，请在15分钟内按页面提示提交验证码，切勿将验证码泄露于他人。";
 		} else if (StringUtils.equals("02", smsType)) { // 忘记密码验证码
-			content = "您好，您的忘记密码验证码是" + code;
+			content = "【六漠】您正在忘记密码验证，验证码" + code + "，请在15分钟内按页面提示提交验证码，切勿将验证码泄露于他人。";
 		} else if (StringUtils.equals("03", smsType)) { // 修改手机号验证码
-			content = "您好，您的修改手机号验证码是" + code;
+			content = "【六漠】您正在修改手机号验证，验证码" + code + "，请在15分钟内按页面提示提交验证码，切勿将验证码泄露于他人。";
 		} else if (StringUtils.equals("04", smsType)) { // 设置新手机号验证码
-			content = "您好，您的设置新手机号验证码是" + code;
+			content = "【六漠】您正在设置新手机号验证，验证码" + code + "，请在15分钟内按页面提示提交验证码，切勿将验证码泄露于他人。";
 		} else {
 			return R.error("短信类型录入错误");
 		}
