@@ -20,7 +20,7 @@ public interface LmSmsLogService {
 
 	int save(LmSmsLog lmSmsLog);
 
-	int save(String mobile, String type, String content);
+	int save(String usrId, String mobile, String type, String content);
 
 	int edit(LmSmsLog lmSmsLog);
 

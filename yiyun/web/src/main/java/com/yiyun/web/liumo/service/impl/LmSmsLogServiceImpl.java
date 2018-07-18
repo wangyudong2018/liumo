@@ -9,9 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.yiyun.dao.master.LmSmsLogDao;
 import com.yiyun.domain.LmSmsLog;
-import com.yiyun.domain.LmUser;
 import com.yiyun.web.liumo.service.LmSmsLogService;
-import com.yiyun.web.liumo.util.SessionUtil;
 
 @Service
 public class LmSmsLogServiceImpl implements LmSmsLogService {
@@ -40,11 +38,9 @@ public class LmSmsLogServiceImpl implements LmSmsLogService {
 	}
 
 	@Override
-	public int save(String mobile, String type, String content) {
-		LmUser lmUser = SessionUtil.getLmUser();
-
+	public int save(String usrId, String mobile, String type, String content) {
 		LmSmsLog lmSmsLog = new LmSmsLog();
-		lmSmsLog.setUserId(lmUser == null ? null : lmUser.getId());
+		lmSmsLog.setUserId(usrId);
 		lmSmsLog.setMobile(mobile);
 		lmSmsLog.setSmsType(type);
 		lmSmsLog.setContent(content);

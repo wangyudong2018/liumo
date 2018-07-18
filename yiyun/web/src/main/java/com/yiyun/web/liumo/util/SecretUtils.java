@@ -22,7 +22,6 @@ import javax.crypto.Cipher;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 
-import com.yiyun.domain.LmUser;
 import com.yiyun.exceptions.AuthenticationException;
 import com.yiyun.utils.Base64Util;
 import com.yiyun.utils.StreamUtil;
@@ -321,14 +320,11 @@ public class SecretUtils {
 		return content.toString();
 	}
 
-	public static String getToken() {
+	public static String getToken(String id) {
 		String token = null;
 		try {
-			LmUser lmUser = SessionUtil.getLmUser();
-			if (null != lmUser) {
-				String content = lmUser.getId() + "#" + System.currentTimeMillis();
-				token = rsaEncrypt(content, PUBLIC_KEY, "UTF-8");
-			}
+			String content = id + "#" + System.currentTimeMillis();
+			token = rsaEncrypt(content, PUBLIC_KEY, "UTF-8");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
