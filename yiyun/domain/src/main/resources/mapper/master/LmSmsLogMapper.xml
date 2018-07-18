@@ -15,7 +15,7 @@
 			<if test="mobile != null and mobile != ''"> and mobile = #{mobile} </if>
 			<if test="smsType != null and smsType != ''"> and sms_type = #{smsType} </if>
 			<if test="content != null and content != ''"> and content = #{content} </if>
-			<if test="sendDate != null"> and send_date = #{sendDate} and #{sendDate} </if>
+			<if test="sendDate != null"> and send_date between #{sendDate} and #{sendDate} </if>
 			<if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
 		</where>
 		<choose>
