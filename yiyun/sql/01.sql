@@ -1,4 +1,19 @@
-USE `yiyun`;
+
+/*Table structure for table `lm_app` */
+
+DROP TABLE IF EXISTS `lm_app`;
+
+CREATE TABLE `lm_app` (
+  `id` varchar(32) NOT NULL COMMENT '主键',
+  `version` varchar(32) DEFAULT NULL COMMENT '版本号',
+  `file_url` varchar(500) DEFAULT NULL COMMENT '文件地址',
+  `log` varchar(1000) DEFAULT NULL COMMENT '更新日志',
+  `size` bigint(20) DEFAULT NULL COMMENT '文件大小',
+  `md5` varchar(32) DEFAULT NULL COMMENT '文件的MD5',
+  `constraint` char(1) DEFAULT NULL COMMENT '是否强制更新(1是0否)',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Table structure for table `lm_banner` */
 
@@ -13,7 +28,7 @@ CREATE TABLE `lm_banner` (
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='六漠banner表';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='六漠banner表';
 
 /*Table structure for table `lm_file` */
 
@@ -27,6 +42,33 @@ CREATE TABLE `lm_file` (
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='六漠文件表';
+
+/*Table structure for table `lm_order` */
+
+DROP TABLE IF EXISTS `lm_order`;
+
+CREATE TABLE `lm_order` (
+  `id` varchar(32) NOT NULL COMMENT '订单编号',
+  `user_id` varchar(32) DEFAULT NULL COMMENT '用户编号',
+  `mobile` varchar(11) DEFAULT NULL COMMENT '手机号',
+  `username` varchar(100) DEFAULT NULL COMMENT '借款人姓名',
+  `cert_type` varchar(10) DEFAULT NULL COMMENT '证件类型',
+  `cert_no` varchar(50) DEFAULT NULL COMMENT '证件号码',
+  `order_type` varchar(10) DEFAULT NULL COMMENT '订单类型',
+  `order_amt` decimal(18,2) DEFAULT NULL COMMENT '订单金额',
+  `state` varchar(2) DEFAULT NULL COMMENT '状态01在线咨询02门店申请03匹配最优银行04银行审批放款05已放款06失败',
+  `remark` varchar(500) DEFAULT NULL COMMENT '备注',
+  `order_date01` datetime DEFAULT NULL COMMENT '状态更新时间',
+  `order_date02` datetime DEFAULT NULL COMMENT '状态更新时间',
+  `order_date03` datetime DEFAULT NULL COMMENT '状态更新时间',
+  `order_date04` datetime DEFAULT NULL COMMENT '状态更新时间',
+  `order_date05` datetime DEFAULT NULL COMMENT '状态更新时间',
+  `order_date06` datetime DEFAULT NULL COMMENT '状态更新时间',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `opr_update_time` datetime DEFAULT NULL COMMENT '操作员更新时间',
+  `last_update_time` datetime DEFAULT NULL COMMENT '最后更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='六漠订单表';
 
 /*Table structure for table `lm_product` */
 
@@ -44,7 +86,7 @@ CREATE TABLE `lm_product` (
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='六漠产品介绍';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='六漠产品介绍';
 
 /*Table structure for table `lm_recruit` */
 
@@ -91,4 +133,69 @@ CREATE TABLE `lm_release` (
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='六漠新闻媒体发布';
+
+/*Table structure for table `lm_sms_log` */
+
+DROP TABLE IF EXISTS `lm_sms_log`;
+
+CREATE TABLE `lm_sms_log` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `user_id` varchar(32) DEFAULT NULL COMMENT '用户编号',
+  `mobile` varchar(11) DEFAULT NULL COMMENT '手机号',
+  `sms_type` varchar(2) DEFAULT NULL COMMENT '短信类型',
+  `content` varchar(500) DEFAULT NULL COMMENT '短信内容',
+  `send_date` date DEFAULT NULL COMMENT '发送日期',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='六漠短信流水表';
+
+/*Table structure for table `lm_user` */
+
+DROP TABLE IF EXISTS `lm_user`;
+
+CREATE TABLE `lm_user` (
+  `id` varchar(32) NOT NULL COMMENT '主键',
+  `mobile` varchar(11) DEFAULT NULL COMMENT '手机号',
+  `username` varchar(100) DEFAULT NULL COMMENT '姓名',
+  `password` varchar(200) DEFAULT NULL COMMENT '密码',
+  `cert_type` varchar(10) DEFAULT NULL COMMENT '证件类型',
+  `cert_no` varchar(50) DEFAULT NULL COMMENT '证件号码',
+  `cert_sign` char(1) DEFAULT NULL COMMENT '实名认证标志（1是0否）',
+  `cert_remark` varchar(500) DEFAULT NULL COMMENT '实名认证审核评语',
+  `cert_positive` varchar(32) DEFAULT NULL COMMENT '证件正面ID',
+  `cert_reverse` varchar(32) DEFAULT NULL COMMENT '证件反面ID',
+  `cert_hand` varchar(32) DEFAULT NULL COMMENT '手持证件照ID',
+  `cert_date` datetime DEFAULT NULL COMMENT '实名认证通过时间',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `usr_update_time` datetime DEFAULT NULL COMMENT '用户更新时间',
+  `opr_update_time` datetime DEFAULT NULL COMMENT '操作员更新时间',
+  `last_update_time` datetime DEFAULT NULL COMMENT '最后更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='六漠用户信息表';
+
+/*Table structure for table `lm_user_his` */
+
+DROP TABLE IF EXISTS `lm_user_his`;
+
+CREATE TABLE `lm_user_his` (
+  `id` varchar(32) NOT NULL COMMENT '主键',
+  `user_id` varchar(32) NOT NULL COMMENT '用户主键',
+  `his_type` varchar(10) NOT NULL COMMENT '修改类型（01认证历史02手机号历史）',
+  `mobile` varchar(11) DEFAULT NULL COMMENT '手机号',
+  `username` varchar(100) DEFAULT NULL COMMENT '姓名',
+  `password` varchar(200) DEFAULT NULL COMMENT '密码',
+  `cert_type` varchar(10) DEFAULT NULL COMMENT '证件类型',
+  `cert_no` varchar(50) DEFAULT NULL COMMENT '证件号码',
+  `cert_sign` char(1) DEFAULT NULL COMMENT '实名认证标志（1是0否）',
+  `cert_remark` varchar(500) DEFAULT NULL COMMENT '实名认证审核评语',
+  `cert_positive` varchar(32) DEFAULT NULL COMMENT '证件正面ID',
+  `cert_reverse` varchar(32) DEFAULT NULL COMMENT '证件反面ID',
+  `cert_hand` varchar(32) DEFAULT NULL COMMENT '手持证件照ID',
+  `cert_date` datetime DEFAULT NULL COMMENT '实名认证通过时间',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `usr_update_time` datetime DEFAULT NULL COMMENT '用户更新时间',
+  `opr_update_time` datetime DEFAULT NULL COMMENT '操作员更新时间',
+  `last_update_time` datetime DEFAULT NULL COMMENT '最后更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='六漠用户信息历史表';
 
