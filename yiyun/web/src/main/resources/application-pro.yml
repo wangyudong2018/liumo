@@ -76,6 +76,10 @@ spring:
       min-idle: 1
       max-active: 600
       max-wait: 1000
+  http:
+    multipart:
+      maxFileSize: 104857600
+      maxRequestSize: 104857600 
 
 system:
   uploadPath: /var/uploaded_files/

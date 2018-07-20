@@ -11,8 +11,8 @@
 		select `id`,`mobile`,`username`,`password`,`cert_type`,`cert_no`,`cert_sign`,`cert_remark`,`cert_positive`,`cert_reverse`,`cert_hand`,`cert_date`,`create_time`,`usr_update_time`,`opr_update_time`,`last_update_time` from lm_user
 		<where>
 			<if test="id != null and id != ''"> and id = #{id} </if>
-			<if test="mobile != null and mobile != ''"> and mobile = #{mobile} </if>
-			<if test="username != null and username != ''"> and username = #{username} </if>
+			<if test="mobile != null and mobile != ''"> and mobile LIKE CONCAT('%', #{mobile}, '%') </if>
+			<if test="username != null and username != ''"> and username LIKE CONCAT('%', #{username}, '%') </if>
 			<if test="password != null and password != ''"> and password = #{password} </if>
 			<if test="certType != null and certType != ''"> and cert_type = #{certType} </if>
 			<if test="certNo != null and certNo != ''"> and cert_no = #{certNo} </if>
@@ -44,8 +44,8 @@
 		select count(*) from lm_user
 		<where>
 			<if test="id != null and id != ''"> and id = #{id} </if>
-			<if test="mobile != null and mobile != ''"> and mobile = #{mobile} </if>
-			<if test="username != null and username != ''"> and username = #{username} </if>
+			<if test="mobile != null and mobile != ''"> and mobile LIKE CONCAT('%', #{mobile}, '%') </if>
+			<if test="username != null and username != ''"> and username LIKE CONCAT('%', #{username}, '%') </if>
 			<if test="password != null and password != ''"> and password = #{password} </if>
 			<if test="certType != null and certType != ''"> and cert_type = #{certType} </if>
 			<if test="certNo != null and certNo != ''"> and cert_no = #{certNo} </if>

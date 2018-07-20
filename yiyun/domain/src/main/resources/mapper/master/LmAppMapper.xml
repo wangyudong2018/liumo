@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yiyun.dao.master.LmAppDao">
+
+	<select id="get" resultType="com.yiyun.domain.LmApp">
+		select `id`,`version`,`file_url`,`log`,`size`,`md5`,`constraint`,`update_time` from lm_app where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.yiyun.domain.LmApp">
+		select `id`,`version`,`file_url`,`log`,`size`,`md5`,`constraint`,`update_time` from lm_app
+		<where>
+			<if test="id != null and id != ''"> and id = #{id} </if>
+			<if test="version != null and version != ''"> and version = #{version} </if>
+			<if test="fileUrl != null and fileUrl != ''"> and file_url = #{fileUrl} </if>
+			<if test="log != null and log != ''"> and log = #{log} </if>
+			<if test="size != null and size != ''"> and size = #{size} </if>
+			<if test="md5 != null and md5 != ''"> and md5 = #{md5} </if>
+			<if test="constraint != null and constraint != ''"> and constraint = #{constraint} </if>
+			<if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		</where>
+		<choose>
+			<when test="sort != null and sort.trim() != ''">
+				order by ${sort} ${order}
+			</when>
+			<otherwise>
+				order by id desc
+			</otherwise>
+		</choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+
+	<select id="count" resultType="int">
+		select count(*) from lm_app
+		<where>
+			<if test="id != null and id != ''"> and id = #{id} </if>
+			<if test="version != null and version != ''"> and version = #{version} </if>
+			<if test="fileUrl != null and fileUrl != ''"> and file_url = #{fileUrl} </if>
+			<if test="log != null and log != ''"> and log = #{log} </if>
+			<if test="size != null and size != ''"> and size = #{size} </if>
+			<if test="md5 != null and md5 != ''"> and md5 = #{md5} </if>
+			<if test="constraint != null and constraint != ''"> and constraint = #{constraint} </if>
+			<if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		</where>
+	</select>
+
+	<insert id="save" parameterType="com.yiyun.domain.LmApp">
+		insert into lm_app
+		(
+		`id`,
+		`version`,
+		`file_url`,
+		`log`,
+		`size`,
+		`md5`,
+		`constraint`,
+		`update_time`
+		)
+		values
+		(
+		#{id},
+		#{version},
+		#{fileUrl},
+		#{log},
+		#{size},
+		#{md5},
+		#{constraint},
+		#{updateTime}
+		)
+	</insert>
+
+	<update id="edit" parameterType="com.yiyun.domain.LmApp">
+		update lm_app
+		<set>
+			<if test="version != null">`version` = #{version}, </if>
+			<if test="fileUrl != null">`file_url` = #{fileUrl}, </if>
+			<if test="log != null">`log` = #{log}, </if>
+			<if test="size != null">`size` = #{size}, </if>
+			<if test="md5 != null">`md5` = #{md5}, </if>
+			<if test="constraint != null">`constraint` = #{constraint}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}</if>
+		</set>
+		where id = #{id}
+	</update>
+
+	<delete id="remove">
+		delete from lm_app where id = #{value}
+	</delete>
+
+	<delete id="batchRemove">
+		delete from lm_app where id in
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

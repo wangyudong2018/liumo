@@ -13,8 +13,8 @@
 			<if test="id != null and id != ''"> and id = #{id} </if>
 			<if test="userId != null and userId != ''"> and user_id = #{userId} </if>
 			<if test="hisType != null and hisType != ''"> and his_type = #{hisType} </if>
-			<if test="mobile != null and mobile != ''"> and mobile = #{mobile} </if>
-			<if test="username != null and username != ''"> and username = #{username} </if>
+			<if test="mobile != null and mobile != ''"> and mobile LIKE CONCAT('%', #{mobile}, '%') </if>
+			<if test="username != null and username != ''"> and username LIKE CONCAT('%', #{username}, '%') </if>
 			<if test="password != null and password != ''"> and password = #{password} </if>
 			<if test="certType != null and certType != ''"> and cert_type = #{certType} </if>
 			<if test="certNo != null and certNo != ''"> and cert_no = #{certNo} </if>
@@ -48,8 +48,8 @@
 			<if test="id != null and id != ''"> and id = #{id} </if>
 			<if test="userId != null and userId != ''"> and user_id = #{userId} </if>
 			<if test="hisType != null and hisType != ''"> and his_type = #{hisType} </if>
-			<if test="mobile != null and mobile != ''"> and mobile = #{mobile} </if>
-			<if test="username != null and username != ''"> and username = #{username} </if>
+			<if test="mobile != null and mobile != ''"> and mobile LIKE CONCAT('%', #{mobile}, '%') </if>
+			<if test="username != null and username != ''"> and username LIKE CONCAT('%', #{username}, '%') </if>
 			<if test="password != null and password != ''"> and password = #{password} </if>
 			<if test="certType != null and certType != ''"> and cert_type = #{certType} </if>
 			<if test="certNo != null and certNo != ''"> and cert_no = #{certNo} </if>

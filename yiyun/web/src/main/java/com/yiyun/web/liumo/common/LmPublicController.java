@@ -10,6 +10,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.DateFormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.yiyun.domain.LmApp;
 import com.yiyun.domain.LmBanner;
 import com.yiyun.domain.LmFile;
 import com.yiyun.domain.LmProduct;
@@ -25,17 +27,22 @@ import com.yiyun.domain.LmRecruit;
 import com.yiyun.domain.LmRelease;
 import com.yiyun.utils.PageUtil;
 import com.yiyun.web.common.utils.Query;
+import com.yiyun.web.common.utils.R;
+import com.yiyun.web.liumo.service.LmAppService;
 import com.yiyun.web.liumo.service.LmBannerService;
 import com.yiyun.web.liumo.service.LmFileService;
 import com.yiyun.web.liumo.service.LmProductService;
 import com.yiyun.web.liumo.service.LmRecruitService;
 import com.yiyun.web.liumo.service.LmReleaseService;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * @title 六漠公共
  * @author wangyudong
  * @date Fri Jun 22 23:28:52 CST 2018
  */
+@Slf4j
 @RestController
 @RequestMapping("/liumo/public")
 public class LmPublicController {
@@ -50,6 +57,8 @@ public class LmPublicController {
 	private LmFileService lmFileService;
 	@Autowired
 	private LmRecruitService lmRecruitService;
+	@Autowired
+	private LmAppService lmAppService;
 
 	/**
 	 * banner列表
@@ -234,6 +243,31 @@ public class LmPublicController {
 		int total = lmRecruitService.count(query);
 		PageUtil pageUtil = new PageUtil(list, total);
 		return pageUtil;
+	}
+
+	@GetMapping("/version")
+	public R version(@RequestParam Map<String, Object> params) {
+		try {
+			List<LmApp> list = lmAppService.list(params);
+			if (CollectionUtils.isEmpty(list)) {
+				return R.error();
+			}
+
+			LmApp record = list.get(0);
+			Map<String, Object> map = new HashMap<String, Object>(8);
+			map.put("version", record.getVersion());
+			map.put("fileUrl", record.getFileUrl());
+			map.put("log", record.getLog());
+			map.put("size", (record.getSize() / 1024 / 1024) + "M");
+			map.put("md5", record.getMd5());
+			map.put("constraint", StringUtils.equals("1", record.getConstraint()) ? Boolean.TRUE : Boolean.FALSE);
+			map.put("updateTime", DateFormatUtils.format(record.getUpdateTime(), "yyyy-MM-dd"));
+
+			return R.ok(map);
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+			return R.error();
+		}
 	}
 
 }

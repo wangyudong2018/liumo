@@ -32,6 +32,8 @@ function load() {
 				offset : params.offset,
 				username : $('#username').val(),
 				hisType : $('#hisType').val(),
+				certSign : $('#certSign').val(),
+				mobile : $('#mobile').val(),
 				sort : 'last_update_time',
 				order : 'desc'
 			};
