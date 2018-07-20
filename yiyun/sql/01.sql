@@ -13,7 +13,7 @@ CREATE TABLE `lm_app` (
   `constraint` char(1) DEFAULT NULL COMMENT '是否强制更新(1是0否)',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='六漠APP表';
 
 /*Table structure for table `lm_banner` */
 
