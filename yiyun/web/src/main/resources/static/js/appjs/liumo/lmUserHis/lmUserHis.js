@@ -50,6 +50,9 @@ function load() {
 			field : 'hisType',
 			title : '变更类型',
 			formatter : function(value, row, index) {
+				if (value === '00') {
+					return '用户注册';
+				}
 				if (value === '01') {
 					return '实名认证';
 				}
