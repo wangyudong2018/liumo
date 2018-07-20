@@ -246,6 +246,11 @@ export default {
     overflow: hidden;
   }
 
+  .team-img-box img {
+    width: 100%;
+    height: 100%;
+  }
+
   .team-intro {
     position: absolute;
     right: 0;

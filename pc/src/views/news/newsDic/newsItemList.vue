@@ -4,8 +4,8 @@
       <news-title :newsTitle="newsTypeId === '01' ? newsPublic : mediaPublic"></news-title>
     </div>
     <div class="new-list-box">
-      <div class="layout-width layout-center news-banner" @click="goDetail(newsStickItem.id)">
-        <img :src="loadImgUrl + newsItemList.thumbnail">
+      <div class="layout-width layout-center news-banner" v-show="isShow" @click="goDetail(newsStickItem.id)">
+        <img :src="loadImgUrl + newsStickItem.thumbnail">
         <div class="topic-text">{{newsStickItem.title}}</div>
       </div>
       <div class="layout-width layout-center news-list-box">
@@ -45,6 +45,7 @@ export default {
       newsTypeId: '01',
       loadImgUrl: LOAD_FILE,
       newsStickItem: {},
+      isShow: false,
       newsItemList: [],
       newsPublic: {
         newsTitleZh: '新闻发布',
@@ -67,7 +68,7 @@ export default {
     this.newsTypeId = this.$route.params.newsTypeId // 获取媒体类型（新闻发布、媒体报道）
     this.$http.get(api.releaseList(), {channel: 'pc', category: this.newsTypeId, stick: '1', limit: '1', offset: '0'}, (res) => {
       if (res.data.rows && res.data.rows.length > 0) {
-        // 这个函数执行太晚了
+        this.isShow = true
         this.newsStickItem = Object.assign({}, this.newsStickItem, res.data.rows[0])
       }
     })

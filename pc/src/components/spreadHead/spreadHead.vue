@@ -33,8 +33,8 @@ export default {
   }
 
   .spread-head-en {
+    width: 100%;
     height: 44px;
-    transform: scale(1.5, 1);
     font-size: 44px;
     font-weight: 700;
     color: #dadada;
