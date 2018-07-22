@@ -26,47 +26,17 @@
 </template>
 
 <script>
-import $ from 'jQuery'
-import { loadAMapJS } from '../../utils/asyncLoadJS'
-const loadUrl = 'http://api.map.baidu.com/getscript?v=3.0&ak=DTvpddNZXw3opkwd9bt7sd9RZLash8yk&services=&t=20180626110404'
+import api from '@/api/api'
 export default {
   data () {
     return {
-      currentPosition: '',
-      loadedAMapJS: false
-    }
-  },
-  created () {
-    // 判断是否加载过
-    if (!this.loadedAMapJS) {
-      loadAMapJS().then(() => {
-        this.loadedAMapJS = true
-      })
+      currentPosition: ''
     }
   },
   mounted () {
-    // 还可以再进行优化
-    let interval = setInterval(() => {
-      if (this.loadedAMapJS) {
-        if ($('script[src="' + loadUrl + '"]').length > 0) {
-          $.getScript(loadUrl, (data, textStatus, xhr) => {
-            if (textStatus === 'success') {
-              clearInterval(interval)
-              this.getCurrentLocation()
-            }
-          })
-        }
-      }
-    }, 300)
-  },
-  methods: {
-    getCurrentLocation () {
-      /* global BMap,BMAP_STATUS_SUCCESS */
-      let self = this
-      new BMap.Geolocation().getCurrentPosition(function (r) {
-        this.getStatus() === BMAP_STATUS_SUCCESS ? self.currentPosition = r.address.city : self.currentPosition = ''
-      })
-    }
+    this.$http.get(api.address(), {}, (res) => {
+      this.currentPosition = res.data.data.city
+    })
   }
 }
 </script>

@@ -16,6 +16,9 @@ export default {
   },
   recruitList () {
     return '/public/recruitList'
+  },
+  address () {
+    return '/public/address'
   }
 }
 
