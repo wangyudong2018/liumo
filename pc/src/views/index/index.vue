@@ -255,12 +255,6 @@ export default {
   }
 }
 </script>
-<style>
-  .ivu-modal-body {
-    padding: 0;
-  }
-</style>
-
 <style scoped>
 .banner-wrapper {
   width: 100%;

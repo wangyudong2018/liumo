@@ -48,3 +48,7 @@ a {
 .layout-center {
 	margin: 0 auto;
 }
+
+.ivu-modal-body {
+	padding: 0;
+}
