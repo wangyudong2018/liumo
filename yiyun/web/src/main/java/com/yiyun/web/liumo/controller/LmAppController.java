@@ -42,7 +42,7 @@ public class LmAppController {
 	@Autowired
 	private SystemConfig systemConfig;
 
-	private static final String FILE_URL_PRE = "http://rmwangyudong:8000/upload/";
+	private static final String FILE_URL_PRE = "http://47.100.58.147/uploaded_files/";
 
 	@GetMapping()
 	@RequiresPermissions("liumo:lmApp:lmApp")

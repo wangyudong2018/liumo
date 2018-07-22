@@ -7,24 +7,31 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import com.alibaba.fastjson.JSON;
 import com.yiyun.domain.LmApp;
 import com.yiyun.domain.LmBanner;
 import com.yiyun.domain.LmFile;
 import com.yiyun.domain.LmProduct;
 import com.yiyun.domain.LmRecruit;
 import com.yiyun.domain.LmRelease;
+import com.yiyun.utils.IPUtil;
 import com.yiyun.utils.PageUtil;
 import com.yiyun.web.common.utils.Query;
 import com.yiyun.web.common.utils.R;
@@ -243,6 +250,18 @@ public class LmPublicController {
 		int total = lmRecruitService.count(query);
 		PageUtil pageUtil = new PageUtil(list, total);
 		return pageUtil;
+	}
+
+	@SuppressWarnings("rawtypes")
+	@GetMapping("/address")
+	public Map address() {
+		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+
+		String ip = IPUtil.getIpAddr(request);
+
+		String url = "http://ip.taobao.com/service/getIpInfo.php?ip=" + ip;
+		ResponseEntity<String> responseEntity = new RestTemplate().getForEntity(url, String.class);
+		return JSON.parseObject(responseEntity.getBody());
 	}
 
 	@GetMapping("/version")
