@@ -31,7 +31,6 @@ import com.yiyun.domain.LmFile;
 import com.yiyun.domain.LmProduct;
 import com.yiyun.domain.LmRecruit;
 import com.yiyun.domain.LmRelease;
-import com.yiyun.utils.IPUtil;
 import com.yiyun.utils.PageUtil;
 import com.yiyun.web.common.utils.Query;
 import com.yiyun.web.common.utils.R;
@@ -41,6 +40,7 @@ import com.yiyun.web.liumo.service.LmFileService;
 import com.yiyun.web.liumo.service.LmProductService;
 import com.yiyun.web.liumo.service.LmRecruitService;
 import com.yiyun.web.liumo.service.LmReleaseService;
+import com.yiyun.web.liumo.util.IPUtils;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -257,7 +257,7 @@ public class LmPublicController {
 	public Map address() {
 		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
 
-		String ip = IPUtil.getIpAddr(request);
+		String ip = IPUtils.getIpFromRequest(request);
 
 		String url = "http://ip.taobao.com/service/getIpInfo.php?ip=" + ip;
 		ResponseEntity<String> responseEntity = new RestTemplate().getForEntity(url, String.class);
