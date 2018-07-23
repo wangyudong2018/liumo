@@ -79,8 +79,8 @@ spring:
       max-wait: 1000
   http:
     multipart:
-      maxFileSize: 104857600
-      maxRequestSize: 104857600 
+      maxFileSize: 1048576000
+      maxRequestSize: 1048576000 
 
 system:
   uploadPath: D:/var/uploaded_files/
