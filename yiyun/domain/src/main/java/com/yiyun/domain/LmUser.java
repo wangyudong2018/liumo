@@ -31,14 +31,18 @@ public class LmUser implements Serializable {
 	private String certNo;
 	// 实名认证标志（1是0否）
 	private String certSign;
-	// 实名认证审核评语
-	private String certRemark;
 	// 证件正面ID
 	private String certPositive;
 	// 证件反面ID
 	private String certReverse;
 	// 手持证件照ID
 	private String certHand;
+	// 证件正面审核评语
+	private String positiveRemark;
+	// 证件反面审核评语
+	private String reverseRemark;
+	// 手持证件照审核评语
+	private String handRemark;
 	// 实名认证通过时间
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date certDate;

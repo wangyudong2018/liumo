@@ -4,23 +4,25 @@
 <mapper namespace="com.yiyun.dao.master.LmUserDao">
 
 	<select id="get" resultType="com.yiyun.domain.LmUser">
-		select `id`,`mobile`,`username`,`password`,`cert_type`,`cert_no`,`cert_sign`,`cert_remark`,`cert_positive`,`cert_reverse`,`cert_hand`,`cert_date`,`create_time`,`usr_update_time`,`opr_update_time`,`last_update_time` from lm_user where id = #{value}
+		select `id`,`mobile`,`username`,`password`,`cert_type`,`cert_no`,`cert_sign`,`cert_positive`,`cert_reverse`,`cert_hand`,`positive_remark`,`reverse_remark`,`hand_remark`,`cert_date`,`create_time`,`usr_update_time`,`opr_update_time`,`last_update_time` from lm_user where id = #{value}
 	</select>
 
 	<select id="list" resultType="com.yiyun.domain.LmUser">
-		select `id`,`mobile`,`username`,`password`,`cert_type`,`cert_no`,`cert_sign`,`cert_remark`,`cert_positive`,`cert_reverse`,`cert_hand`,`cert_date`,`create_time`,`usr_update_time`,`opr_update_time`,`last_update_time` from lm_user
+		select `id`,`mobile`,`username`,`password`,`cert_type`,`cert_no`,`cert_sign`,`cert_positive`,`cert_reverse`,`cert_hand`,`positive_remark`,`reverse_remark`,`hand_remark`,`cert_date`,`create_time`,`usr_update_time`,`opr_update_time`,`last_update_time` from lm_user
 		<where>
 			<if test="id != null and id != ''"> and id = #{id} </if>
-			<if test="mobile != null and mobile != ''"> and mobile LIKE CONCAT('%', #{mobile}, '%') </if>
-			<if test="username != null and username != ''"> and username LIKE CONCAT('%', #{username}, '%') </if>
+			<if test="mobile != null and mobile != ''"> and mobile = #{mobile} </if>
+			<if test="username != null and username != ''"> and username = #{username} </if>
 			<if test="password != null and password != ''"> and password = #{password} </if>
 			<if test="certType != null and certType != ''"> and cert_type = #{certType} </if>
 			<if test="certNo != null and certNo != ''"> and cert_no = #{certNo} </if>
 			<if test="certSign != null and certSign != ''"> and cert_sign = #{certSign} </if>
-			<if test="certRemark != null and certRemark != ''"> and cert_remark = #{certRemark} </if>
 			<if test="certPositive != null and certPositive != ''"> and cert_positive = #{certPositive} </if>
 			<if test="certReverse != null and certReverse != ''"> and cert_reverse = #{certReverse} </if>
 			<if test="certHand != null and certHand != ''"> and cert_hand = #{certHand} </if>
+			<if test="positiveRemark != null and positiveRemark != ''"> and positive_remark = #{positiveRemark} </if>
+			<if test="reverseRemark != null and reverseRemark != ''"> and reverse_remark = #{reverseRemark} </if>
+			<if test="handRemark != null and handRemark != ''"> and hand_remark = #{handRemark} </if>
 			<if test="certDate != null and certDate != ''"> and cert_date = #{certDate} </if>
 			<if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
 			<if test="usrUpdateTime != null and usrUpdateTime != ''"> and usr_update_time = #{usrUpdateTime} </if>
@@ -44,16 +46,18 @@
 		select count(*) from lm_user
 		<where>
 			<if test="id != null and id != ''"> and id = #{id} </if>
-			<if test="mobile != null and mobile != ''"> and mobile LIKE CONCAT('%', #{mobile}, '%') </if>
-			<if test="username != null and username != ''"> and username LIKE CONCAT('%', #{username}, '%') </if>
+			<if test="mobile != null and mobile != ''"> and mobile = #{mobile} </if>
+			<if test="username != null and username != ''"> and username = #{username} </if>
 			<if test="password != null and password != ''"> and password = #{password} </if>
 			<if test="certType != null and certType != ''"> and cert_type = #{certType} </if>
 			<if test="certNo != null and certNo != ''"> and cert_no = #{certNo} </if>
 			<if test="certSign != null and certSign != ''"> and cert_sign = #{certSign} </if>
-			<if test="certRemark != null and certRemark != ''"> and cert_remark = #{certRemark} </if>
 			<if test="certPositive != null and certPositive != ''"> and cert_positive = #{certPositive} </if>
 			<if test="certReverse != null and certReverse != ''"> and cert_reverse = #{certReverse} </if>
 			<if test="certHand != null and certHand != ''"> and cert_hand = #{certHand} </if>
+			<if test="positiveRemark != null and positiveRemark != ''"> and positive_remark = #{positiveRemark} </if>
+			<if test="reverseRemark != null and reverseRemark != ''"> and reverse_remark = #{reverseRemark} </if>
+			<if test="handRemark != null and handRemark != ''"> and hand_remark = #{handRemark} </if>
 			<if test="certDate != null and certDate != ''"> and cert_date = #{certDate} </if>
 			<if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
 			<if test="usrUpdateTime != null and usrUpdateTime != ''"> and usr_update_time = #{usrUpdateTime} </if>
@@ -72,10 +76,12 @@
 		`cert_type`,
 		`cert_no`,
 		`cert_sign`,
-		`cert_remark`,
 		`cert_positive`,
 		`cert_reverse`,
 		`cert_hand`,
+		`positive_remark`,
+		`reverse_remark`,
+		`hand_remark`,
 		`cert_date`,
 		`create_time`,
 		`usr_update_time`,
@@ -91,10 +97,12 @@
 		#{certType},
 		#{certNo},
 		#{certSign},
-		#{certRemark},
 		#{certPositive},
 		#{certReverse},
 		#{certHand},
+		#{positiveRemark},
+		#{reverseRemark},
+		#{handRemark},
 		#{certDate},
 		#{createTime},
 		#{usrUpdateTime},
@@ -112,10 +120,12 @@
 			<if test="certType != null">`cert_type` = #{certType}, </if>
 			<if test="certNo != null">`cert_no` = #{certNo}, </if>
 			<if test="certSign != null">`cert_sign` = #{certSign}, </if>
-			<if test="certRemark != null">`cert_remark` = #{certRemark}, </if>
 			<if test="certPositive != null">`cert_positive` = #{certPositive}, </if>
 			<if test="certReverse != null">`cert_reverse` = #{certReverse}, </if>
 			<if test="certHand != null">`cert_hand` = #{certHand}, </if>
+			<if test="positiveRemark != null">`positive_remark` = #{positiveRemark}, </if>
+			<if test="reverseRemark != null">`reverse_remark` = #{reverseRemark}, </if>
+			<if test="handRemark != null">`hand_remark` = #{handRemark}, </if>
 			<if test="certDate != null">`cert_date` = #{certDate}, </if>
 			<if test="createTime != null">`create_time` = #{createTime}, </if>
 			<if test="usrUpdateTime != null">`usr_update_time` = #{usrUpdateTime}, </if>

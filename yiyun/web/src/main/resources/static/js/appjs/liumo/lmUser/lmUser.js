@@ -76,9 +76,6 @@ function load() {
 				return value;
 			}
 		}, {
-			field : 'certRemark',
-			title : '实名认证审核评语'
-		}, {
 			field : 'certPositive',
 			title : '证件正面',
 			formatter : function(value, row, index) {

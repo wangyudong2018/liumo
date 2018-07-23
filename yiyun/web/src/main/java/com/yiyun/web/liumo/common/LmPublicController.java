@@ -101,7 +101,9 @@ public class LmPublicController {
 	public void banner(@PathVariable("id") String id, HttpServletResponse response) throws IOException {
 		response.setHeader("Cache-Control", "max-age=604800"); // 设置缓存
 		LmFile lmFile = lmFileService.get(id);
-		response.getOutputStream().write(lmFile.getLmFile());
+		if (null != lmFile) {
+			response.getOutputStream().write(lmFile.getLmFile());
+		}
 	}
 
 	/**

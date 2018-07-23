@@ -82,10 +82,11 @@ public class LmUserServiceImpl implements LmUserService {
 
 		int reuslt = lmUserDao.edit(lmUser);
 
-		// 手机号变更需要存历史
-		// if (StringUtils.equals("02", type)) {
-		insertHis(lmUserDao.get(lmUser.getId()), type);
-		// }
+		if (StringUtils.equals("00", type)) { // 注册存历史
+			insertHis(lmUserDao.get(lmUser.getId()), type);
+		} else if (StringUtils.equals("02", type)) { // 手机号变更需要存历史
+			insertHis(lmUserDao.get(lmUser.getId()), type);
+		}
 
 		return reuslt;
 	}

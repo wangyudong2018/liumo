@@ -386,6 +386,10 @@ public class LmAppUserController {
 
 			// 用户上传实名信息不存历史
 			lmUser = lmUserService.get(lmUser.getId());
+			lmFileService.remove(lmUser.getCertPositive());
+			lmFileService.remove(lmUser.getCertReverse());
+			lmFileService.remove(lmUser.getCertHand());
+
 			lmUser.setCertSign("2");
 			lmUser.setCertPositive(saveFile(certPositive));
 			lmUser.setCertReverse(saveFile(certReverse));
@@ -428,7 +432,12 @@ public class LmAppUserController {
 			user.put("certType", "身份证");
 			user.put("certNo", certNo);
 			user.put("certSign", lmUser.getCertSign()); // 实名认证标志（1是0否2认证中）
-			user.put("certRemark", lmUser.getCertRemark()); // 评语
+			user.put("certPositive", lmUser.getCertPositive()); // 证件正面ID
+			user.put("certReverse", lmUser.getCertReverse()); // 证件反面ID
+			user.put("certHand", lmUser.getCertHand()); // 手持证件照ID
+			user.put("certPositiveRemark", lmUser.getPositiveRemark()); // 评语证件正面评语
+			user.put("certReverseRemark", lmUser.getReverseRemark()); // 评语证件反面评语
+			user.put("certHandRemark", lmUser.getHandRemark()); // 评语手持证件照评语
 
 			return R.ok(user);
 		} catch (Exception e) {
