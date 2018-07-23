@@ -5,7 +5,7 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://rm-uf6fja0qw38l5i5pg.mysql.rds.aliyuncs.com:3306/yy_assist?allowMultiQueries=true
+    url: jdbc:mysql://rm-uf6fja0qw38l5i5pg.mysql.rds.aliyuncs.com:3306/yy_assist?useUnicode=true&characterEncoding=utf8&serverTimezone=Hongkong&allowMultiQueries=true
     username: bluekitty
     password: hfgs%3Wd^
     initialSize: 1
