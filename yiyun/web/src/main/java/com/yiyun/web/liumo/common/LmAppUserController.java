@@ -423,6 +423,10 @@ public class LmAppUserController {
 				return R.error("用户未登录，请返回后重试");
 			}
 
+			// 更新session中的用户
+			lmUser = lmUserService.get(lmUser.getId());
+			RedisUtil.saveLmUser(token, lmUser);
+
 			Map<String, Object> user = new HashMap<String, Object>(8);
 
 			String username = "*" + StringUtils.substring(lmUser.getUsername(), 1, StringUtils.length(lmUser.getUsername()));
@@ -460,6 +464,10 @@ public class LmAppUserController {
 			if (null == lmUser) {
 				return R.error("用户未登录，请返回后重试");
 			}
+
+			// 更新session中的用户
+			lmUser = lmUserService.get(lmUser.getId());
+			RedisUtil.saveLmUser(token, lmUser);
 
 			if (StringUtils.isNotBlank(lmUser.getUsername())) {
 				return R.ok(lmUser.getUsername());
