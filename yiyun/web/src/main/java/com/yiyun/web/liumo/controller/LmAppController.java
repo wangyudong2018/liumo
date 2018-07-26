@@ -42,8 +42,6 @@ public class LmAppController {
 	@Autowired
 	private SystemConfig systemConfig;
 
-	private static final String FILE_URL_PRE = "http://47.100.58.147/uploaded_files/";
-
 	@GetMapping()
 	@RequiresPermissions("liumo:lmApp:lmApp")
 	public String LmApp() {
@@ -146,7 +144,7 @@ public class LmAppController {
 
 			lmApp.setSize(file.getSize());
 			lmApp.setMd5(DigestUtils.md5Hex(data));
-			lmApp.setFileUrl(FILE_URL_PRE + file.getOriginalFilename());
+			lmApp.setFileUrl(systemConfig.getExternalPath() + file.getOriginalFilename());
 		}
 	}
 

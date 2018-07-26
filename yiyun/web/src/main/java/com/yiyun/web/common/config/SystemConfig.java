@@ -3,17 +3,18 @@ package com.yiyun.web.common.config;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
 @Component
-@ConfigurationProperties(prefix="system")
+@ConfigurationProperties(prefix = "system")
 public class SystemConfig {
-    //上传路径
-    private String uploadPath;
 
-	public String getUploadPath() {
-		return uploadPath;
-	}
+	// 上传路径
+	private String uploadPath;
+	// 对外发布路径
+	private String externalPath;
 
-	public void setUploadPath(String uploadPath) {
-		this.uploadPath = uploadPath;
-	}
 }

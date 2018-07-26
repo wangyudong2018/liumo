@@ -84,6 +84,8 @@ spring:
 
 system:
   uploadPath: D:/var/uploaded_files/
+  externalPath: http://rmwangyudong.top/uploaded_files/
+
 #sms
 sms:
   smsSwitch: false

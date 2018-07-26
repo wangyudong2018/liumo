@@ -83,6 +83,7 @@ spring:
 
 system:
   uploadPath: /var/uploaded_files/
+  externalPath: http://47.100.58.147/uploaded_files/
 
 #sms
 sms:
