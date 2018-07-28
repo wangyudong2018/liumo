@@ -167,6 +167,9 @@ public class LmAppOrderController {
 				return R.error("用户未登录，请返回后重试");
 			}
 			// 实名认证标志（1是0否2认证中）
+			if (StringUtils.isBlank(lmUser.getCertSign())) {
+				return R.error("用户未实名认证，请实名认证后重试");
+			}
 			if (StringUtils.equals(lmUser.getCertSign(), "0")) {
 				return R.error("用户未实名认证，请实名认证后重试");
 			}
