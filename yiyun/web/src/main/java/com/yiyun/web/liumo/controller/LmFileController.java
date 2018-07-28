@@ -80,7 +80,7 @@ public class LmFileController {
 		lmFile.setLmType(file.getContentType());
 		lmFile.setCreateTime(new Date());
 		lmFile.setUpdateTime(new Date());
-		lmFileService.save(lmFile);
+		// lmFileService.save(lmFile);
 		if (lmFileService.save(lmFile) > 0) {
 			return "{\"success\": true,\"msg\": \"上传成功\", \"file_path\": \"/liumo/public/file/" + lmFile.getId() + "\"}";
 		}

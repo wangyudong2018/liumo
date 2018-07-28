@@ -39,7 +39,8 @@
 							<div class="form-group">
 								<label class="col-sm-3 control-label">订单类型：</label>
 								<div class="col-sm-8">
-									<select id="orderType" name="orderType" class="form-control" disabled="disabled">
+									<select id="orderType" name="orderType" class="form-control">
+										<option th:field="*{lmOrder.orderType}" value="">请选择</option>
 										<option th:field="*{lmOrder.orderType}" value="A">银行抵押贷款</option>
 										<option th:field="*{lmOrder.orderType}" value="B">银行信用贷款</option>
 										<option th:field="*{lmOrder.orderType}" value="C">银行按揭贷款</option>

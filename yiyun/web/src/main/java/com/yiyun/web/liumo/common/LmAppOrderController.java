@@ -23,6 +23,7 @@ import com.yiyun.web.common.utils.Query;
 import com.yiyun.web.common.utils.R;
 import com.yiyun.web.liumo.service.LmOrderService;
 import com.yiyun.web.liumo.service.LmProductService;
+import com.yiyun.web.liumo.service.LmUserService;
 import com.yiyun.web.liumo.util.RedisUtil;
 import com.yiyun.web.liumo.util.SnowflakeIdWorker;
 
@@ -42,6 +43,8 @@ public class LmAppOrderController {
 	private LmOrderService lmOrderService;
 	@Autowired
 	private LmProductService lmProductService;
+	@Autowired
+	private LmUserService lmUserService;
 
 	/**
 	 * 查询订单列表
@@ -159,16 +162,27 @@ public class LmAppOrderController {
 			if (null == lmUser) {
 				return R.error("用户未登录，请返回后重试");
 			}
-			if (StringUtils.isBlank(orderType)) {
-				return R.error("请选择产品类型");
+			lmUser = lmUserService.get(lmUser.getId());
+			if (null == lmUser) {
+				return R.error("用户未登录，请返回后重试");
 			}
+			// 实名认证标志（1是0否2认证中）
+			if (StringUtils.equals(lmUser.getCertSign(), "0")) {
+				return R.error("用户未实名认证，请实名认证后重试");
+			}
+			if (StringUtils.equals(lmUser.getCertSign(), "2")) {
+				return R.error("用户正在实名认证中，请实名认证通过后重试");
+			}
+			// if (StringUtils.isBlank(orderType)) {
+			// return R.error("请选择产品类型");
+			// }
 
 			Map<String, Object> params = new HashMap<String, Object>(3);
 			params.put("userId", lmUser.getId());
 			params.put("state", "'01','02','03','04'");
 			List<LmOrder> lmOrderList = lmOrderService.list(params);
 			if (!CollectionUtils.isEmpty(lmOrderList)) {
-				return R.error("该用户已经有在途订单");
+				return R.error("用户已经有在途订单");
 			}
 
 			LmOrder lmOrder = new LmOrder();
