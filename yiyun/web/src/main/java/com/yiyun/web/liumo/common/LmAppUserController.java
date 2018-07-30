@@ -164,7 +164,7 @@ public class LmAppUserController {
 				}
 
 				lmUser = users.get(0);
-				if (!StringUtils.equals(lmUser.getPassword(), password)) {
+				if (!SecretUtils.verifyPwd(password, lmUser.getPassword())) {
 					return R.error("手机号或密码输入错误");
 				}
 			}
@@ -310,7 +310,7 @@ public class LmAppUserController {
 				return R.error("用户未登录，请返回后重试");
 			}
 
-			if (!StringUtils.equals(lmUser.getPassword(), oldPassword)) {
+			if (!SecretUtils.verifyPwd(oldPassword, lmUser.getPassword())) {
 				return R.error("原密码录入错误");
 			}
 
@@ -344,7 +344,7 @@ public class LmAppUserController {
 			RedisUtil.delete(RedisConstants.PROJECT_NAME_PRE + "LM_UPDATE_PWD_" + lmUser.getMobile());
 
 			lmUser = lmUserService.get(lmUser.getId());
-			lmUser.setPassword(newPassword);
+			lmUser.setPassword(SecretUtils.enPassword(newPassword));
 			lmUserService.edit(lmUser, "03");
 
 			// 更新session中的用户

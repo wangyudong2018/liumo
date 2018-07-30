@@ -1,5 +1,6 @@
 package com.yiyun.web.liumo.common;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +34,10 @@ import com.yiyun.domain.LmProduct;
 import com.yiyun.domain.LmRecruit;
 import com.yiyun.domain.LmRelease;
 import com.yiyun.utils.PageUtil;
+import com.yiyun.web.common.config.SystemConfig;
 import com.yiyun.web.common.utils.Query;
 import com.yiyun.web.common.utils.R;
+import com.yiyun.web.liumo.constants.LiumoConstants;
 import com.yiyun.web.liumo.service.LmAppService;
 import com.yiyun.web.liumo.service.LmBannerService;
 import com.yiyun.web.liumo.service.LmFileService;
@@ -66,6 +70,8 @@ public class LmPublicController {
 	private LmRecruitService lmRecruitService;
 	@Autowired
 	private LmAppService lmAppService;
+	@Autowired
+	private SystemConfig systemConfig;
 
 	/**
 	 * banner列表
@@ -101,7 +107,13 @@ public class LmPublicController {
 	public void banner(@PathVariable("id") String id, HttpServletResponse response) throws IOException {
 		response.setHeader("Cache-Control", "max-age=604800"); // 设置缓存
 		LmFile lmFile = lmFileService.get(id);
-		if (null != lmFile) {
+		if (null == lmFile) {
+			String path = systemConfig.getUploadPath() + LiumoConstants.FILE_DIRECTORY + id;
+			File file = new File(path);
+			if (file.exists()) {
+				response.getOutputStream().write(FileUtils.readFileToByteArray(file));
+			}
+		} else {
 			response.getOutputStream().write(lmFile.getLmFile());
 		}
 	}

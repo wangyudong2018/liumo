@@ -19,6 +19,7 @@ import java.util.Map;
 
 import javax.crypto.Cipher;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 
@@ -356,6 +357,26 @@ public class SecretUtils {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	/**
+	 * 验证密码
+	 * 
+	 * @param password
+	 *            原密码
+	 * @param enPassword
+	 *            加密后密码
+	 * @return
+	 */
+	public static boolean verifyPwd(String password, String enPassword) {
+		return StringUtils.equals(enPassword(password), enPassword);
+	}
+
+	public static String enPassword(String password) {
+		if (StringUtils.isBlank(password)) {
+			return password;
+		}
+		return DigestUtils.md5Hex("liumo" + password).toUpperCase();
 	}
 
 }
