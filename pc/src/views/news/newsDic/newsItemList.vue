@@ -127,6 +127,7 @@ export default {
   position: absolute;
   top: 50%;
   left: 0;
+  width: 100%;
   height: 48px;
   line-height: 48px;
   margin-top: -24px;
