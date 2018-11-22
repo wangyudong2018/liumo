@@ -90,7 +90,7 @@ public class RedisUtil {
 			return false;
 		}
 
-		delete(key);
+		// delete(key);
 
 		if (!StringUtils.equals(cacheCode, code)) {
 			return false;

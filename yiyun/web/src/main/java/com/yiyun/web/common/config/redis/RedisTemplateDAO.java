@@ -14,9 +14,12 @@ import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.stereotype.Repository;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.List;
 import java.util.Set;
 
+@Slf4j
 @Repository
 public class RedisTemplateDAO {
 
@@ -70,6 +73,7 @@ public class RedisTemplateDAO {
 			});
 			return result;
 		} catch (RedisConnectionFailureException e) {
+			log.error("", e);
 			return false;
 		}
 	}
@@ -95,6 +99,7 @@ public class RedisTemplateDAO {
 			});
 			return result;
 		} catch (RedisConnectionFailureException e) {
+			log.error("", e);
 			return false;
 		}
 	}
@@ -132,6 +137,7 @@ public class RedisTemplateDAO {
 			});
 			return result;
 		} catch (RedisConnectionFailureException e) {
+			log.error("", e);
 			return false;
 		}
 	}
@@ -185,6 +191,7 @@ public class RedisTemplateDAO {
 			});
 			return result;
 		} catch (RedisConnectionFailureException e) {
+			log.error("", e);
 			return null;
 		}
 	}
@@ -222,6 +229,7 @@ public class RedisTemplateDAO {
 			});
 			return result;
 		} catch (RedisConnectionFailureException e) {
+			log.error("", e);
 			return null;
 		}
 	}
@@ -262,6 +270,7 @@ public class RedisTemplateDAO {
 				}
 			});
 		} catch (RedisConnectionFailureException e) {
+			log.error("", e);
 		}
 	}
 
@@ -320,6 +329,7 @@ public class RedisTemplateDAO {
 			});
 			return result;
 		} catch (RedisConnectionFailureException e) {
+			log.error("", e);
 			return false;
 		}
 	}
@@ -377,6 +387,7 @@ public class RedisTemplateDAO {
 			});
 			return result;
 		} catch (RedisConnectionFailureException e) {
+			log.error("", e);
 			return false;
 		}
 	}
@@ -419,6 +430,7 @@ public class RedisTemplateDAO {
 			});
 			return result;
 		} catch (RedisConnectionFailureException e) {
+			log.error("", e);
 			return false;
 		}
 	}
@@ -457,6 +469,7 @@ public class RedisTemplateDAO {
 			});
 			return result == null ? null : (Long)result;
 		} catch (RedisConnectionFailureException e) {
+			log.error("", e);
 			return null;
 		}
 	}
@@ -485,6 +498,7 @@ public class RedisTemplateDAO {
 		try {
 			return redisTemplate.opsForList().size(key);
 		} catch (Exception e) {
+			log.error("", e);
 			return 0;
 		}
 	}
@@ -500,6 +514,7 @@ public class RedisTemplateDAO {
 		try {
 			redisTemplate.opsForList().rightPush(key, value);
 		} catch (RedisConnectionFailureException e) {
+			log.error("", e);
 		}
 	}
 
@@ -523,6 +538,7 @@ public class RedisTemplateDAO {
 			});
 			return results;
 		} catch (RedisConnectionFailureException e) {
+			log.error("", e);
 			return null;
 		}
 	}
@@ -550,6 +566,7 @@ public class RedisTemplateDAO {
 			});
 			return results;
 		} catch (RedisConnectionFailureException e) {
+			log.error("", e);
 			return null;
 		}
 	}
@@ -574,6 +591,7 @@ public class RedisTemplateDAO {
 			});
 			return results;
 		} catch (RedisConnectionFailureException e) {
+			log.error("", e);
 			return null;
 		}
 	}
